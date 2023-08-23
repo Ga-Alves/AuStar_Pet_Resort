@@ -31,25 +31,37 @@ MVP do aplicativo mobile para agendamento de horários para banho de cães da em
 
 ## Backlog do produto
 
- ✍️ Eu, como *cliente*, gostaria de *cadastrar meu pet* no sistema.
+ ✍️ Eu, como *cliente*, quero *cadastrar meu pet* no sistema.
 </br>
- ✍️ Eu, como *cliente*, gostaria de *agendar um horário para o banho* do meu pet.
+ ✍️ Eu, como *cliente*, quero *agendar um horário para o banho* do meu pet.
 </br>
- ✍️ Eu, como *cliente*, gostaria de *adicionar uma finalização para o banho* do meu pet.
+ ✍️ Eu, como *cliente*, quero *agendar um horário de banho igual para todos os meus pets* do meu pet.
 </br>
- ✍️ Eu, como *administrador*, gostaria de *visualizar os banhos* do dia.
+ ✍️ Eu, como *cliente*, quero *adicionar uma finalização para o banho* do meu pet.
 </br>
- ✍️ Eu, como *administrador*, gostaria de *notificar o cliente sobre o término do banho* do pet.
+ ✍️ Eu, como *cliente*, quero *ver o histórico de banho* do meu pet.
 </br>
- ✍️ Eu, como *administrador*, gostaria de *sugerir serviços extras (Up-Selling)* para meu cliente.
+ ✍️ Eu, como *cliente*, quero *acompanhar o timeline de serviços* do meu pet.
 </br>
- ✍️ Eu, como *administrador*, gostaria de *gerenciar os horários dos banhistas*.
+ ✍️ Eu, como *administrador*, quero *visualizar os banhos* do dia.
 </br>
- ✍️ Eu, como *administrador*, gostaria de *lembrar o tutor sobre o banho*, para evitar atrasos.
+ ✍️ Eu, como *administrador*, quero *notificar o cliente sobre o término do banho* do pet.
+</br>
+ ✍️ Eu, como *administrador*, quero *sugerir serviços extras (Up-Selling)* para meu cliente.
+</br>
+ ✍️ Eu, como *administrador*, quero *gerenciar os horários dos banhistas*.
+</br>
+ ✍️ Eu, como *administrador*, quero *lembrar o tutor sobre o banho*, para evitar atrasos.
+</br>
+ ✍️ Eu, como *administrador*, quero *realizar um check-in do pet* quando chegar no local para aceitar ou rejeitar o pet para banho.
+</br>
+ ✍️ Eu, como *administrador*, quero *enviar atualizações do pet para seu tutor*.
+</br>
+ ✍️ Eu, como *administrador*, quero *obter informações acerca da frequência e serviços de um determinado cliente*.
+</br>
+ ✍️ Eu, como *administrador*, quero *editar a ordem de serviço manualmente*.
 </br>
 ----
- ✍️ Eu, como *administrador*, gostaria de *gerenciar os horários dos banhistas*.
-</br>
 
 
 ## Backlog da Sprint
@@ -73,7 +85,7 @@ MVP do aplicativo mobile para agendamento de horários para banho de cães da em
 </br>
 <details>
     <summary>
-        ✍️ 01 - Eu, como *cliente*, gostaria de *cadastrar meu pet* no sistema.
+        ✍️ 01 - Eu, como *cliente*, quero *cadastrar meu pet* no sistema.
     </summary>
 
 ### Front
@@ -92,7 +104,7 @@ MVP do aplicativo mobile para agendamento de horários para banho de cães da em
 </br>
 <details>
     <summary>
-        ✍️ 02 - Eu, como *cliente*, gostaria de *agendar um horário para o banho* do meu pet.
+        ✍️ 02 - Eu, como *cliente*, quero *agendar um horário para o banho* do meu pet.
     </summary>
 
 ### Front
@@ -127,7 +139,7 @@ Status (concluído ou não)
 
 <details>
     <summary>
-        ✍️ 03 - Eu, como *cliente*, gostaria de *adicionar uma finalização para o banho* do meu pet.
+        ✍️ 03 - Eu, como *cliente*, quero *adicionar uma finalização para o banho* do meu pet.
     </summary>
 
 ### Front
@@ -138,7 +150,7 @@ Status (concluído ou não)
 
 <details>
     <summary>
-        ✍️ 04 - Eu, como *administrador*, gostaria de *visualizar os banhos* do dia.
+        ✍️ 04 - Eu, como *administrador*, quero *visualizar os banhos* do dia.
 </summary>
 
 ### Front
@@ -154,7 +166,7 @@ Status (concluído ou não)
 
 <details>
     <summary>
-        ✍️ 05 - Eu, como *administrador*, gostaria de *notificar o cliente sobre o término do banho* do pet.
+        ✍️ 05 - Eu, como *administrador*, quero *notificar o cliente sobre o término do banho* do pet.
 </summary>
 
 ### Front
@@ -169,7 +181,7 @@ Status (concluído ou não)
 
 <details>
     <summary>
-        ✍️ 06 - Eu, como *administrador*, gostaria de *sugerir serviços extras (Up-Selling)* para meu cliente.
+        ✍️ 06 - Eu, como *administrador*, quero *sugerir serviços extras (Up-Selling)* para meu cliente.
 </summary>
 
 ### Front
@@ -186,7 +198,7 @@ Status (concluído ou não)
 
 <details>
     <summary>
-        ✍️ 07 - Eu, como *administrador*, gostaria de *gerenciar os horários dos banhistas*.
+        ✍️ 07 - Eu, como *administrador*, quero *gerenciar os horários dos banhistas*.
 </summary>
 
 ### Front
@@ -204,7 +216,7 @@ Status (concluído ou não)
 
 <details>
     <summary>    
- 	✍️ 08 - Eu, como *administrador*, gostaria de *lembrar o tutor sobre o banho*, para evitar atrasos.
+ 	✍️ 08 - Eu, como *administrador*, quero *lembrar o tutor sobre o banho*, para evitar atrasos.
 </br>
 
 </summary>
