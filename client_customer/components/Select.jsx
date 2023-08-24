@@ -2,14 +2,32 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
-function Select() {
+/**
+ * props: 
+ *  title <string>
+ *  options <array>
+ *  setOption callback that recieves the selected option by parameters
+ * Example: 
+ *  <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
+ */
+
+function Select(props) {
+
     const [isOptionsEnable, setIsOptionsEnable] = useState(false)
+    const [showOption, setShowOption] = useState(props.title)
+
+    function handleSelect(option){
+        setShowOption(option);
+        setIsOptionsEnable(false);
+        props.setOption(option);
+    }
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => setIsOptionsEnable(!isOptionsEnable)}>
                 <View style={isOptionsEnable ? styles.selectEnable : styles.selectDisable}>
                     <Text>
-                        Raça
+                        {showOption || 'passe props.title'}
                     </Text>
                     {isOptionsEnable ? 
                     <AntDesign name="up" size={24} color="black" />:
@@ -18,21 +36,13 @@ function Select() {
                 </View>
             </TouchableOpacity>
             <View style={isOptionsEnable ? styles.optionsEnable : styles.optionsDisable}>
-                <TouchableOpacity>
-                    <View style={styles.option}>
-                        <Text>Opção 1</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={styles.option}>
-                        <Text>Opção 2</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={styles.option}>
-                        <Text>Opção 3</Text>
-                    </View>
-                </TouchableOpacity>
+                {props.options.map((option) => {
+                    return <TouchableOpacity onPress={() => handleSelect(option)}>
+                        <View style={styles.option}>
+                            <Text>{option}</Text>
+                        </View>
+                    </TouchableOpacity>
+                })}
             </View>
         </View>
     )
@@ -72,7 +82,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         top: 40,
-        zIndex: 1
+        zIndex: 1,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        overflow: "hidden"
     },
     optionsDisable: {
         display: 'none'

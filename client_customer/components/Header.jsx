@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image } from 'react-native';
 
 function Header(props) {
-  console.log(props.headProps);
+  // console.log(props.headProps);
     return (
         <View style={styles.header}>
             <Image source={require('../assets/Logo.png')} style={styles.logo}/>
