@@ -1,8 +1,8 @@
 # AuStar_Pet_Resort
-MVP do aplicativo mobile para agendamento de horários para banho de cães da empresa AuStar Pet Resort. Este aplicativo foi desenvolvido durante a disciplina de Práticas em Desenvolvimento de Software da UFMG.
+Versão 1 do aplicativo mobile para agendamento de horários para banho de cães da empresa <a href="https://www.instagram.com/austarpet/" target="_blank">AuStar Pet Resort</a>. Este aplicativo foi desenvolvido durante a disciplina de Práticas em Desenvolvimento de Software da UFMG.
 
 ## Escopo do Sistema
-MVP do aplicativo mobile para agendamento de horários para banho de cães da empresa AuStar Pet Resort.
+Versão 1 do aplicativo mobile para agendamento de horários para banho de cães da empresa AuStar Pet Resort.
 
 ## Principais Features
 
