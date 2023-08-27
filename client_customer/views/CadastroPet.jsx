@@ -1,5 +1,4 @@
-import { Text, View, StyleSheet, TextInput } from "react-native"
-
+import { View, StyleSheet, TextInput } from "react-native"
 // components
 import { Footer } from "../components/Footer"
 import { Select } from "../components/Select";
@@ -10,7 +9,7 @@ function CadastroPet() {
         <View style={styles.container}>
             <View style={styles.body}>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
-                <Select/>
+                <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
