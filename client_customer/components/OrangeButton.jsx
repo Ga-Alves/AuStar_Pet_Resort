@@ -1,16 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native"
-import { AntDesign } from '@expo/vector-icons';
-import { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { LinearGradient } from "expo-linear-gradient";
 
 /**
  * props: 
  *  text <string>
  *  onPress <console.log()>
- * Example: 
- *  <Text>
- *      props.text
- *  </Text> 
+ * Example: <OrangeButton text='Cadastrar' onPress={() => console.log("Botão foi pressionado")}></OrangeButton>
  */
 
 
@@ -43,7 +38,7 @@ const styles = StyleSheet.create({
     container: {
         width: 276,
         height: 33,
-        borderRadius: '20px'
+        borderRadius: 20
     },
 
     text: {

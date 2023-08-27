@@ -36,8 +36,8 @@ function Select(props) {
                 </View>
             </TouchableOpacity>
             <View style={isOptionsEnable ? styles.optionsEnable : styles.optionsDisable}>
-                {props.options.map((option) => {
-                    return <TouchableOpacity onPress={() => handleSelect(option)}>
+                {props.options.map((option, idx) => {
+                    return <TouchableOpacity onPress={() => handleSelect(option)} key={idx}>
                         <View style={styles.option}>
                             <Text>{option}</Text>
                         </View>
