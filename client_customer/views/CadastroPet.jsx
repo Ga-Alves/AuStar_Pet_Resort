@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput } from "react-native"
 import { Footer } from "../components/Footer"
 import { Select } from "../components/Select";
 import { OrangeButton } from '../components/OrangeButton' 
+import { CheckBox } from "../components/CheckBox";
 
 function CadastroPet() {
     return (
@@ -10,6 +11,10 @@ function CadastroPet() {
             <View style={styles.body}>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
+                <View style={styles.rowSection}>
+                  <CheckBox label='Macho'/>
+                  <CheckBox label='Fêmea'/>
+                </View>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
@@ -40,6 +45,13 @@ const styles = StyleSheet.create({
         borderColor: "#603913",
         color: "#603913"
       },
+
+    rowSection: {
+      width: '65%',
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'space-around',
+    },
   });
 
 export {CadastroPet}
