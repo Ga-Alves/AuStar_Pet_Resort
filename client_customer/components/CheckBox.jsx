@@ -7,10 +7,7 @@ function CheckBox(props) {
         <View style={styles.section}>
             <Checkbox 
                 style={styles.checkbox} 
-                // isChecked is a vector 
-                // The index 0 represents the male option
-                // The index 1 represents the female option  
-                value={props.id == 0 ? props.isChecked[0] : props.isChecked[1]} 
+                value={props.isChecked}
                 onValueChange={props.setChecked} 
                 color={props.isChecked ? '#603913' : undefined} />
             <Text style={styles.text}>{props.label}</Text>

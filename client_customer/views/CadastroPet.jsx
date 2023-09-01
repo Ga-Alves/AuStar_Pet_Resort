@@ -19,9 +19,12 @@ function CadastroPet() {
                 <View style={styles.rowSection}>
                     {/* On the CheckBox component each of the two components has a different setCheck function
                         The CheckBox with id == 0 set its self to checked and dismark the other
+                        // isChecked is a vector 
+                        // The index 0 represents the male option
+                        // The index 1 represents the female option  
                     */}
-                  <CheckBox id={0} label='Macho' isChecked={isCheck} setChecked={() => setCheck([true, false])}/>
-                  <CheckBox id={1} label='Fêmea' isChecked={isCheck} setChecked={() => setCheck([false, true])}/>
+                  <CheckBox id={0} label='Macho' isChecked={isCheck[0]} setChecked={() => setCheck([true, false])}/>
+                  <CheckBox id={1} label='Fêmea' isChecked={isCheck[1]} setChecked={() => setCheck([false, true])}/>
                 </View>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
