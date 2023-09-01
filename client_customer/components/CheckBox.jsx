@@ -1,18 +1,18 @@
 import { View, Text, StyleSheet } from "react-native"
-import { useState } from "react";
 import Checkbox from 'expo-checkbox'
 
 
 function CheckBox(props) {
-    const [isChecked, setChecked] = useState(false);
-
     return (
         <View style={styles.section}>
             <Checkbox 
                 style={styles.checkbox} 
-                value={isChecked} 
-                onValueChange={setChecked} 
-                color={isChecked ? '#603913' : undefined} />
+                // isChecked is a vector 
+                // The index 0 represents the male option
+                // The index 1 represents the female option  
+                value={props.id == 0 ? props.isChecked[0] : props.isChecked[1]} 
+                onValueChange={props.setChecked} 
+                color={props.isChecked ? '#603913' : undefined} />
             <Text style={styles.text}>{props.label}</Text>
         </View>
     )
