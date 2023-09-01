@@ -1,4 +1,4 @@
-import { View, StyleSheet, TextInput } from "react-native"
+import { View, StyleSheet, TextInput, Text } from "react-native"
 import { useState } from "react";
 
 // components
@@ -7,6 +7,8 @@ import { Select } from "../components/Select";
 import { OrangeButton } from '../components/OrangeButton' 
 import { CheckBox } from "../components/CheckBox";
 
+// Styles
+import { textStyle } from "../utils/textStyles";
 function CadastroPet() {
     // Hoock used to implement the checkbox to select if the dog is male or female
     const [isCheck, setCheck] = useState([false, false]);
@@ -14,8 +16,10 @@ function CadastroPet() {
     return (
         <View style={styles.container}>
             <View style={styles.body}>
+                <Text style={[textStyle.title, textStyle.textColor]}>Cadastre seu Pet</Text>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
+                <Text style={[textStyle.regularText, textStyle.textColor, styles.itemLeftAlign]}>Sexo</Text>
                 <View style={styles.rowSection}>
                     {/* On the CheckBox component each of the two components has a different setCheck function
                         The CheckBox with id == 0 set its self to checked and dismark the other
@@ -63,6 +67,12 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       justifyContent: 'space-around',
     },
+
+    // Ganbiarra
+    itemLeftAlign: {
+        width: '65%',
+        marginBottom: -20,
+    }
   });
 
 export {CadastroPet}
