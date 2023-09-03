@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { StyleSheet } from "react-native"
 
 const textStyle = StyleSheet.create({
     textColor: {
