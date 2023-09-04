@@ -1,15 +1,34 @@
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native"
-import { AntDesign } from '@expo/vector-icons';
-import { useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, StyleSheet } from "react-native"
+import Checkbox from 'expo-checkbox'
 
 
-function CheckBox() {
-    const [isOptionsEnable, setIsOptionsEnable] = useState(false)
-    
+function CheckBox(props) {
     return (
-        <View>
-            
+        <View style={styles.section}>
+            <Checkbox 
+                style={styles.checkbox} 
+                value={props.isChecked}
+                onValueChange={props.setChecked} 
+                color={props.isChecked ? '#603913' : undefined} />
+            <Text style={styles.text}>{props.label}</Text>
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    section: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    
+    checkbox: {
+        marginHorizontal: 8
+    },
+
+    text: {
+        color: '#603913'
+    }
+})
+
+export {CheckBox}
