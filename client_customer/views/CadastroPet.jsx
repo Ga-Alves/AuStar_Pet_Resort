@@ -10,8 +10,7 @@ import { CheckBox } from "../components/CheckBox";
 // Styles
 import { textStyle } from "../utils/textStyles";
 function CadastroPet() {
-    // Hoock used to implement the checkbox to select if the dog is male or female
-    const [isCheck, setCheck] = useState([false, false]);
+    const [dogSex, setDogSex] = useState('');
 
     return (
         <View style={styles.container}>
@@ -21,14 +20,8 @@ function CadastroPet() {
                 <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
                 <Text style={[textStyle.regularText, textStyle.textColor, styles.itemLeftAlign]}>Sexo</Text>
                 <View style={styles.rowSection}>
-                    {/* On the CheckBox component each of the two components has a different setCheck function
-                        The CheckBox with id == 0 set its self to checked and dismark the other
-                        // isChecked is a vector 
-                        // The index 0 represents the male option
-                        // The index 1 represents the female option  
-                    */}
-                  <CheckBox id={0} label='Macho' isChecked={isCheck[0]} setChecked={() => setCheck([true, false])}/>
-                  <CheckBox id={1} label='Fêmea' isChecked={isCheck[1]} setChecked={() => setCheck([false, true])}/>
+                  <CheckBox label='Macho' isChecked={dogSex == 'Macho'} setChecked={() => setDogSex('Macho')}/>
+                  <CheckBox label='Fêmea' isChecked={dogSex == 'Fêmea'} setChecked={() => setDogSex('Fêmea')}/>
                 </View>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
