@@ -1,4 +1,4 @@
-import { View, StyleSheet, TextInput, Text } from "react-native"
+import { View, StyleSheet, TextInput, Text, ScrollView } from "react-native"
 import { useState } from "react";
 
 // components
@@ -13,7 +13,7 @@ function CadastroPet() {
     const [dogSex, setDogSex] = useState('');
 
     return (
-        <View style={styles.container}>
+        <ScrollView>
             <View style={styles.body}>
                 <Text style={[textStyle.title, textStyle.textColor]}>Cadastre seu Pet</Text>
                 <TextInput style={styles.input} placeholder="Nome do Pet"/>
@@ -23,25 +23,20 @@ function CadastroPet() {
                   <CheckBox label='Macho' isChecked={dogSex == 'Macho'} setChecked={() => setDogSex('Macho')}/>
                   <CheckBox label='Fêmea' isChecked={dogSex == 'Fêmea'} setChecked={() => setDogSex('Fêmea')}/>
                 </View>
-                <TextInput style={styles.input} placeholder="Nome do Pet"/>
-                <TextInput style={styles.input} placeholder="Nome do Pet"/>
-                <TextInput style={styles.input} placeholder="Nome do Pet"/>
-                <TextInput style={styles.input} placeholder="Nome do Pet"/>
+                <Select title='Cor' options={['Branco', 'Preto', 'Amarelo']} setOption={console.log}/>
+                <Select title='Porte' options={['P', 'M', 'G', 'XL']} setOption={console.log}/>
                 <OrangeButton text='Cadastrar' onPress={() => console.log("Botão foi pressionado")}></OrangeButton>
+                <Footer background={1} img={1}/>
             </View>
-            <Footer background={1} img={1}/>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1
-    },
     body: {
-      justifyContent: 'space-around',
-      flex: 1,
-      alignItems: 'center'
+      justifyContent: 'space-between',
+      height: 710,
+      alignItems: 'center',
     },
     input: {
         height: 40,
