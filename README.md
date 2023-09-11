@@ -11,7 +11,7 @@ Versão 1 do aplicativo mobile para agendamento de horários para banho de cães
 - Gerenciamento de agenda dos banhistas ( funcionários ).
 
 ## Tecnologias
-- Linguagem de Programação: JavaScript
+- Linguagem de Programação: JavaScript (Front), TypeScript (Back)
 - React Native
 - Expo
 - axios
