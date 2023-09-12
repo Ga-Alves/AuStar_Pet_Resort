@@ -11,15 +11,69 @@ import { useState } from "react";
  *  <Select title='Raça' options={['Pincher', 'Bulldog', 'Cavalier King']} setOption={console.log}/>
  */
 
-function Select(props) {
+function Select({title, setOption, width, options}) {
+
+    
+    const styles = StyleSheet.create({
+        container: {
+            width: width || 270,
+            borderRadius: 20,
+        },
+        selectEnable: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingLeft: 20,
+            paddingRight: 20,
+            
+            backgroundColor: 'rgba(96, 57, 19, 0.31)',
+            height: 40,
+            width: width || 270,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+        },
+        selectDisable: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingLeft: 20,
+            paddingRight: 20,
+            
+            backgroundColor: 'rgba(96, 57, 19, 0.31)',
+            height: 40,
+            width: width || 270,
+            borderRadius: 20,
+        },
+        optionsEnable: {
+            position: 'absolute',
+            width: width || 270,
+            top: 40,
+            zIndex: 1,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+            overflow: "hidden"
+        },
+        optionsDisable: {
+            display: 'none'
+        },
+        option: {
+            backgroundColor: '#D9D2CA',
+            height: 40,
+            width: width || 270,
+            justifyContent: 'center',
+            paddingLeft: 20,
+            position: 'relative'
+
+        }
+    })
 
     const [isOptionsEnable, setIsOptionsEnable] = useState(false)
-    const [showOption, setShowOption] = useState(props.title)
+    const [showOption, setShowOption] = useState(title)
 
     function handleSelect(option){
         setShowOption(option);
         setIsOptionsEnable(false);
-        props.setOption(option);
+        setOption && setOption(option);
     }
 
     return (
@@ -27,16 +81,16 @@ function Select(props) {
             <TouchableOpacity onPress={() => setIsOptionsEnable(!isOptionsEnable)}>
                 <View style={isOptionsEnable ? styles.selectEnable : styles.selectDisable}>
                     <Text>
-                        {showOption || 'passe props.title'}
+                        {showOption || 'pass title as props'}
                     </Text>
                     {isOptionsEnable ? 
-                    <AntDesign name="up" size={24} color="black" />:
-                    <AntDesign name="down" size={24} color="black" />
+                    <AntDesign name="up" size={20} color="black" />:
+                    <AntDesign name="down" size={20} color="black" />
                     }
                 </View>
             </TouchableOpacity>
             <View style={isOptionsEnable ? styles.optionsEnable : styles.optionsDisable}>
-                {props.options.map((option, idx) => {
+                {options && options.map((option, idx) => {
                     return <TouchableOpacity onPress={() => handleSelect(option)} key={idx}>
                         <View style={styles.option}>
                             <Text>{option}</Text>
@@ -48,57 +102,5 @@ function Select(props) {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        width: '65%',
-        borderRadius: 10,
-    },
-    selectEnable: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 20,
-        paddingRight: 20,
-        
-        backgroundColor: 'rgba(96, 57, 19, 0.31)',
-        height: 40,
-        width: '100%',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-    },
-    selectDisable: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 20,
-        paddingRight: 20,
-        
-        backgroundColor: 'rgba(96, 57, 19, 0.31)',
-        height: 40,
-        width: '100%',
-        borderRadius: 10,
-    },
-    optionsEnable: {
-        position: 'absolute',
-        width: '100%',
-        top: 40,
-        zIndex: 1,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        overflow: "hidden"
-    },
-    optionsDisable: {
-        display: 'none'
-    },
-    option: {
-        backgroundColor: '#D9D2CA',
-        height: 40,
-        width: '100%',
-        justifyContent: 'center',
-        paddingLeft: 20,
-        position: 'relative'
-
-      }
-})
 
 export {Select}
