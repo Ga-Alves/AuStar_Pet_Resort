@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from "../views/Home";
 import { CadastroPet } from "../views/CadastroPet"
 import { AgendaBanhoPasso1 } from '../views/AgendaBanhoPasso1'
+import { AgendaBanhoPasso5 } from '../views/AgendaBanhoPasso5'
 
 // Componentes
 import { Header } from "../components/Header";
@@ -21,6 +22,7 @@ export default function Routes() {
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="Cadastro" component={CadastroPet}/>
         <Stack.Screen name="AgendaBanhoPasso1" component={AgendaBanhoPasso1}/>
+        <Stack.Screen name="AgendaBanhoPasso5" component={AgendaBanhoPasso5}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

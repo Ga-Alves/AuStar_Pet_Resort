@@ -1,20 +1,21 @@
 import { StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-function GradientBorder(props) {
+// width e height devem ser do tipo number.
+function GradientBorder({width, height, borderRadius, ...props}) {
     const styles = StyleSheet.create({  
         border: {
-            width: props.width || 150,
-            height: props.height || 150,
+            width: width || 150,
+            height: height || 150,
             margin: 10,
-            borderRadius: props.borderRadius || 20,
+            borderRadius: borderRadius || 20,
             justifyContent: 'center',
             alignItems: 'center',
         },
         card: {
-            borderRadius: props.borderRadius || 20,
-            width: '98%',
-            height: '98%',
+            borderRadius: borderRadius || 20,
+            width: width ? width - 2 : 148,
+            height: height ? height - 2 : 148,
             overflow: 'hidden',
             backgroundColor: 'white'
         },
