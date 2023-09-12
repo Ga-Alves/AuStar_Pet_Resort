@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native"
 
 // components
@@ -12,14 +12,18 @@ import { textStyle } from "../utils/textStyles";
 // icon
 import { MaterialIcons } from '@expo/vector-icons';
 
+//context
+import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
+
 function AgendaBanhoPasso1(props) {
 
+    const {setPetID} = useContext(AgendaBanhoContext)
     const [tutorPets, setTutorPets] = useState([])
     const [pet, setPet] = useState('')
 
     function handleSubmit(){
         // context.setPet(pet);
-        console.log(pet);
+        setPetID(555);
         if (pet != '') {
             props.navigation.push('AgendaBanhoPasso5')
         }

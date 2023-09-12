@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import React from "react";
 // views
 import { Home } from "../views/Home";
 import { CadastroPet } from "../views/CadastroPet"
@@ -13,7 +13,6 @@ import { Header } from "../components/Header";
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
-
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native"
 
 // components
@@ -12,23 +12,30 @@ import { textStyle } from "../utils/textStyles";
 // icon
 import { MaterialIcons } from '@expo/vector-icons';
 
+//context
+import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
+
 function AgendaBanhoPasso5  (props) {
     const windowWidth = Dimensions.get('window').width;
 
-    const line = (serviceName, value) => {
+    const line = (serviceName, value, indx) => {
         return(
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View key={indx} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={[textStyle.regularText, textStyle.textColor]}>{serviceName}</Text>
                 <Text style={[textStyle.regularText, textStyle.textColor]}>R$ {value}</Text>
             </View>
         )
     }
 
+    const {form} = useContext(AgendaBanhoContext)
+
     const [services, setServices] = useState([])
     const [totalValue, setTotalValue] = useState(0)
 
     function handleSubmit(){
         props.navigation.push('Home')
+        console.log(form.id_pet);
+        
     }
 
     useEffect(() => {
@@ -71,8 +78,8 @@ function AgendaBanhoPasso5  (props) {
                             <Text style={[textStyle.subtitle, textStyle.textColor, styles.text]}>Valor</Text>
                             <View style={styles.divider}/>
 
-                            {services && services.map((obj) => {
-                                return line(obj.service, obj.value)
+                            {services && services.map((obj, indx) => {
+                                return line(obj.service, obj.value, indx)
                             })}
                             
                             <View style={styles.divider}/>
