@@ -20,7 +20,9 @@ function AgendaBanhoPasso1(props) {
     function handleSubmit(){
         // context.setPet(pet);
         console.log(pet);
-        props.navigation.push('Home')
+        if (pet != '') {
+            props.navigation.push('Home')
+        }
     }
 
     useEffect(() => {
