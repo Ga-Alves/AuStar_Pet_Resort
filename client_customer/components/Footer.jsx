@@ -8,6 +8,7 @@ function Footer({background, img}) {
     const image = [
         <Image source={require('../assets/dog.png')} style={styles.dog}/>,
         <Image source={require('../assets/family.png')} style={styles.family}/>,
+        <Image source={require('../assets/womanWithDog.png')} style={styles.dog}/>,
     ]
     
     return (

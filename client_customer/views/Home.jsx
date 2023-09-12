@@ -5,23 +5,11 @@ import * as Notifications from 'expo-notifications'
 import { Footer } from '../components/Footer';
 import { Card } from '../components/Card';
 
-async function scheduleNotification() {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Tchau Fedô! 🐶⭐",
-        body: 'Amanhã é dia de banho, ebaa.',
-        data: { data: 'goes here' },
-      },
-      trigger: { seconds: 3 },
-    });
-    Vibration.vibrate(500)
-  }
-
 function Home(props) {
     return (
         <View style={styles.container}>
             <View style={styles.body}>
-                <Card title='Agendar Banho' onPress={scheduleNotification}>
+                <Card title='Agendar Banho' onPress={() => props.navigation.push('AgendaBanhoPasso1')}>
                     <Image source={require('../assets/dogWash.png')}/>
                 </Card>
                 <Card title='Cadastrar Pet' onPress={() => props.navigation.push('Cadastro')}>

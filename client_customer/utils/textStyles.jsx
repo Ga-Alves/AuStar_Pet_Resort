@@ -10,11 +10,14 @@ const textStyle = StyleSheet.create({
     },
 
     subtitle: {
-        fontSize: 20,
+        fontSize: 17,
     },
 
     regularText: {
         fontSize: 15,
+    },
+    sublime:{
+        textDecorationLine: 'underline',
     }
 })
 
