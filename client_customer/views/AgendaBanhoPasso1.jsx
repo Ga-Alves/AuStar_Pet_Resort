@@ -25,7 +25,7 @@ function AgendaBanhoPasso1(props) {
         // context.setPet(pet);
         setPetID(555);
         if (pet != '') {
-            props.navigation.push('AgendaBanhoPasso5')
+            props.navigation.push('AgendaBanhoPasso3')
         }
     }
 

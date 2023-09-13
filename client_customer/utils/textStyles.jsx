@@ -10,7 +10,7 @@ const textStyle = StyleSheet.create({
     },
 
     subtitle: {
-        fontSize: 17,
+        fontSize:23,
     },
 
     regularText: {
