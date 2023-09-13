@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, StyleSheet } from 'react-native'
+import { ScrollView, Text, View, StyleSheet, Button } from 'react-native'
 
 // components
 import { Footer } from '../components/Footer'
@@ -25,7 +25,7 @@ function AgendaBanhoPasso3(props) {
                     <MaterialIcons name="date-range" size={30} color={textStyle.textColor.color} />
                     <Text style={[textStyle.title, textStyle.textColor]}>Agendar Banho</Text>
                 </View>
-                <GradientBorder width={350} height={600}>
+                <GradientBorder width={350} height={700}>
                     <View style={styles.gradientBody}>
                         <View style={styles.subtitle}>
                             <MaterialIcons name="date-range" size={23} color={textStyle.textColor.color} />
@@ -37,6 +37,16 @@ function AgendaBanhoPasso3(props) {
                         <View style={styles.subtitle}>
                             <AntDesign name="clockcircle" size={23} color={textStyle.textColor.color} />
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Horário</Text>
+                        </View>
+
+                        <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
+                            <Button title='1:00'/>
+                            <Button title='1:00'/>
+                            <Button title='1:00'/>
+                            <Button disabled title='1:00'/>
+                            <Button disabled title='1:00'/>
+                            <Button title='1:00'/>
+                            <Button title='1:00'/>
                         </View>
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
                     </View>
@@ -52,8 +62,10 @@ function AgendaBanhoPasso3(props) {
 
 const styles = StyleSheet.create({
     gradientBody:{
+        height: '100%',
         padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     subtitle: {
         flexDirection: 'row',
