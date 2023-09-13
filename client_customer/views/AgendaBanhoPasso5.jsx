@@ -34,7 +34,7 @@ function AgendaBanhoPasso5  (props) {
 
     function handleSubmit(){
         props.navigation.push('Home')
-        console.log(form.id_pet);
+        console.log(form);
         
     }
 
@@ -59,7 +59,7 @@ function AgendaBanhoPasso5  (props) {
                 total += e.value;
             })
             setTotalValue(total)
-        }, 3000)
+        }, 1500)
 
         
 

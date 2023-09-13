@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { textStyle } from "../utils/textStyles";
 
-function Calendar() {
+function Calendar({setSelectedDate}) {
 
     const today = new Date()
     const firstMondayOfThisWeek = new Date(today)
@@ -52,9 +52,7 @@ function Calendar() {
         const selectedDay =  new Date()
         selectedDay.setDate(firstMondayOfThisWeek.getDate() + calendarIndx + Math.floor(calendarIndx / 6))
         
-
-        const verifyDay = [selectedDay.getDate(), selectedDay.getMonth(), selectedDay.getFullYear()]
-        console.log(verifyDay);
+        setSelectedDate(selectedDay.getDate()+'/'+selectedDay.getMonth()+'/'+selectedDay.getFullYear())
         
     }, [calendarIndx])
 
@@ -95,7 +93,8 @@ const styles = StyleSheet.create({
     },
     month: {
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        justifyContent: 'center'
     },
     labelContainer: {
         flexDirection: 'row'

@@ -22,7 +22,6 @@ function AgendaBanhoPasso1(props) {
     const [pet, setPet] = useState('')
 
     function handleSubmit(){
-        // context.setPet(pet);
         setPetID(555);
         if (pet != '') {
             props.navigation.push('AgendaBanhoPasso3')
@@ -34,7 +33,7 @@ function AgendaBanhoPasso1(props) {
         // requisição para pegar os pets do usuario.
         setTimeout(() => {
             setTutorPets(['Pipoca', 'Rex'])
-        }, 3000)
+        }, 1500)
     }, [])
 
     return (

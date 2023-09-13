@@ -18,7 +18,8 @@ function Context(props) {
     return (
         <AgendaBanhoContext.Provider value={{
             form: form,
-            setPetID: (id) => setForm({...form, id_pet: id})
+            setPetID: (id) => setForm({...form, id_pet: id}),
+            setDate: (dateStr) => setForm({...form, dia: dateStr}),
         }}>
             {props.children}
         </AgendaBanhoContext.Provider>

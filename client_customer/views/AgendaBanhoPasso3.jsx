@@ -12,7 +12,12 @@ import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { OrangeButton } from '../components/OrangeButton';
 import { Calendar } from '../components/Calendar';
 
+// context
+import { useContext } from 'react';
+import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
+
 function AgendaBanhoPasso3(props) {
+    const { setDate } = useContext(AgendaBanhoContext)
     return (
         <ScrollView>
             <View style={{alignItems: 'center'}}>
@@ -22,13 +27,14 @@ function AgendaBanhoPasso3(props) {
                 </View>
                 <GradientBorder width={350} height={600}>
                     <View style={styles.gradientBody}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={styles.subtitle}>
                             <MaterialIcons name="date-range" size={23} color={textStyle.textColor.color} />
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Dia</Text>
                         </View>
-                        <Calendar/>
 
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <Calendar setSelectedDate={setDate}/>
+
+                        <View style={styles.subtitle}>
                             <AntDesign name="clockcircle" size={23} color={textStyle.textColor.color} />
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Horário</Text>
                         </View>
@@ -46,7 +52,13 @@ function AgendaBanhoPasso3(props) {
 
 const styles = StyleSheet.create({
     gradientBody:{
-        padding: 10
+        padding: 10,
+        alignItems: 'center'
+    },
+    subtitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%'
     }
 })
 
