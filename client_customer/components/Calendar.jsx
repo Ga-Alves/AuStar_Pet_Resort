@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     month: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: 320
     },
     labelContainer: {
         flexDirection: 'row'
