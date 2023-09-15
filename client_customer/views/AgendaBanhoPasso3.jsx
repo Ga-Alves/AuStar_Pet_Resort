@@ -1,8 +1,10 @@
-import { ScrollView, Text, View, StyleSheet, Button } from 'react-native'
+import { useContext, useEffect, useState } from "react";
+import { ScrollView, Text, View, StyleSheet} from 'react-native'
 
 // components
 import { Footer } from '../components/Footer'
 import { GradientBorder } from '../components/GradientBorder'
+import { SelectTimeBath } from '../components/SelectTimeBath';
 
 // global styles
 import { textStyle } from "../utils/textStyles";
@@ -13,11 +15,23 @@ import { OrangeButton } from '../components/OrangeButton';
 import { Calendar } from '../components/Calendar';
 
 // context
-import { useContext } from 'react';
 import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
 function AgendaBanhoPasso3(props) {
-    const { setDate } = useContext(AgendaBanhoContext)
+    const { form, setDate, setTime } = useContext(AgendaBanhoContext)
+
+    const time = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"]
+    const [ availableTime, setAvailableTime ] = useState([])
+
+    useEffect(() => {
+        // simulando uma requisição de 3s de delay
+        // requisição para pegar os pets do usuario.
+        setTimeout(() => {
+            setAvailableTime([false, false, false, true, true, true, false, true, false])
+        }, 1500)
+    }, [])
+
+
     return (
         <ScrollView>
             <View style={{alignItems: 'center'}}>
@@ -25,7 +39,7 @@ function AgendaBanhoPasso3(props) {
                     <MaterialIcons name="date-range" size={30} color={textStyle.textColor.color} />
                     <Text style={[textStyle.title, textStyle.textColor]}>Agendar Banho</Text>
                 </View>
-                <GradientBorder width={350} height={700}>
+                <GradientBorder width={350} height={800}>
                     <View style={styles.gradientBody}>
                         <View style={styles.subtitle}>
                             <MaterialIcons name="date-range" size={23} color={textStyle.textColor.color} />
@@ -39,15 +53,11 @@ function AgendaBanhoPasso3(props) {
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Horário</Text>
                         </View>
 
+                        {/* Select Bath Time */}
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button disabled title='1:00'/>
-                            <Button disabled title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
+                            <SelectTimeBath selectedTime={form.horario} setSelectTime={setTime} times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
+                        
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
                     </View>
                 </GradientBorder>
