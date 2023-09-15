@@ -3,6 +3,7 @@ import { ScrollView, Text, View, StyleSheet, Button } from 'react-native'
 // components
 import { Footer } from '../components/Footer'
 import { GradientBorder } from '../components/GradientBorder'
+import { SelectTimeBath } from '../components/SelectTimeBath';
 
 // global styles
 import { textStyle } from "../utils/textStyles";
@@ -18,6 +19,11 @@ import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
 function AgendaBanhoPasso3(props) {
     const { setDate } = useContext(AgendaBanhoContext)
+
+
+    const availableTime = [false, false, false, true, true, true, false, true, false]
+    const time = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"]
+
     return (
         <ScrollView>
             <View style={{alignItems: 'center'}}>
@@ -39,15 +45,11 @@ function AgendaBanhoPasso3(props) {
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Horário</Text>
                         </View>
 
+                        {/* Select Bath Time */}
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button disabled title='1:00'/>
-                            <Button disabled title='1:00'/>
-                            <Button title='1:00'/>
-                            <Button title='1:00'/>
+                            <SelectTimeBath times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
+                        
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
                     </View>
                 </GradientBorder>
