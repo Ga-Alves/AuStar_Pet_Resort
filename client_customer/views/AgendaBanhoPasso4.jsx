@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, StyleSheet, Button } from 'react-native'
+import { ScrollView, Text, View, StyleSheet } from 'react-native'
 
 // components
 import { Footer } from '../components/Footer'
@@ -7,7 +7,7 @@ import { OrangeButton } from '../components/OrangeButton';
 import { CheckBox } from '../components/CheckBox';
 
 // icon
-import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // global styles
 import { textStyle } from "../utils/textStyles";
