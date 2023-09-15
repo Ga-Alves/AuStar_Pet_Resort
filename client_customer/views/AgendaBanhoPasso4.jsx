@@ -25,11 +25,15 @@ useEffect(() => {
     // simulando uma requisição de 3s de delay
     // requisição para pegar os pets do usuario.
     setTimeout(() => {
-        setUpSelling([
+        setUpSelling({
+            servicos: [
             { name: "Banho Clareador", valor: 30, id: 0 },
             { name: "Hidratação", valor: 30, id: 1 },
             { name: "Banho Volumizante", valor: 30, id: 2}
-            ]);
+            ],
+            tips: 'Por ser uma raça de pelo volumoso seu lulu da pomerania' +
+            'ficará mais charmoso(a) com nosso banho volumezante.'
+        });
         setService(new Set());
         
     }, 1500)
@@ -43,42 +47,40 @@ useEffect(() => {
                     <MaterialIcons name="date-range" size={30} color={textStyle.textColor.color} />
                     <Text style={[textStyle.title, textStyle.textColor]}>Agendar Banho</Text>
                 </View>
-                <GradientBorder width={350} height={700}>
+                <GradientBorder width={350} height={500}>
                     <View style={styles.gradientBody}>
-                        <Text style={[textStyle.subtitle, textStyle.textColor]}>Cuidados Especiais</Text>
+                        <View style={{alignSelf: 'flex-start'}}>
+                            <Text style={[textStyle.subtitle, textStyle.textColor, {textDecorationLine: 'underline', marginBottom: 10}]}>Cuidados Especiais</Text>
 
-                        <View>
-                            {upSelling && upSelling.map((item, idx) => {
-                                return (
-                                    <CheckBox 
-                                        key={idx} 
-                                        label={item.name} 
-                                        isChecked={form.servicos.has(item.id)} 
-                                        setChecked={() => {
-                                            let newService = new Set(form.servicos);
-                                            if (form.servicos.has(item.id)) 
-                                            { 
-                                                newService.delete(item.id);
-                                                setService(new Set(newService)); 
-                                                console.log(newService);                                           
-                                            }
-                                            else
-                                            {
-                                                newService.add(item.id);
-                                                setService(new Set(newService));
-                                                console.log(newService);
-                                            }
-                                        }}/>   
-                                )
-                            })}
+                            <View style={{gap: 10}}>
+                                {upSelling.servicos && upSelling.servicos.map((item, idx) => {
+                                    return (
+                                        <CheckBox 
+                                            key={idx} 
+                                            label={item.name} 
+                                            isChecked={form.servicos.has(item.id)} 
+                                            setChecked={() => {
+                                                let newService = new Set(form.servicos);
+                                                if (form.servicos.has(item.id)) 
+                                                { 
+                                                    newService.delete(item.id);
+                                                    setService(new Set(newService)); 
+                                                }
+                                                else
+                                                {
+                                                    newService.add(item.id);
+                                                    setService(new Set(newService));
+                                                }
+                                            }}/>   
+                                    )
+                                })}
+                            </View>
                         </View>
-
 
                         <View>
                             <Text style={[textStyle.regularText, textStyle.textColor]}>Dica*</Text>
                             <Text style={[textStyle.regularText, textStyle.textColor]}>
-                                Por ser uma raça de pelo volumoso seu lulu da pomerania
-                                ficará mais charmoso(a) com nosso banho volumezante.
+                               {upSelling.tips}
                             </Text>
                         </View>
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
