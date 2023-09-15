@@ -3,15 +3,25 @@ import { Text, StyleSheet, TouchableOpacity} from "react-native";
 
 function TimeButton(props) {
 
-    const enableButtonStyle = [styles.container, styles.flexAlign, styles.enableButton]
-    const disableButtonStyle = [styles.container, styles.flexAlign, styles.disableButton]
     return (
         // Button for not available time
         <TouchableOpacity 
             disabled={!props.isAvailable}
-            style={props.isAvailable ? enableButtonStyle : disableButtonStyle}>
+            style={[
+                styles.container, 
+                styles.flexAlign,
+                props.isAvailable ? 
+                    props.selectedTime == props.text ? styles.selectedButton : styles.enableButton
+                    : styles.disableButton, 
+            ]}
+            onPress={() => props.setSelectTime(props.text)}
+            >
             <Text 
-                style={props.isAvailable ? styles.enableText : styles.disableText}>
+                style={[
+                    props.isAvailable ? 
+                        props.selectedTime == props.text ? styles.selectText : styles.enableText
+                        : styles.disableText,
+                    ]}>
                 {props.text}</Text>
         </TouchableOpacity>
     )
@@ -24,7 +34,7 @@ const styles = StyleSheet.create({
         height: 34,
         borderRadius: 10,
         borderWidth: 1,
-        marginVertical: 5,
+        marginVertical: 0,
     },
 
     disableButton: {
@@ -33,6 +43,10 @@ const styles = StyleSheet.create({
 
     enableButton: {
         borderColor: "#603913",
+    },
+
+    selectedButton: {
+        backgroundColor: "#603913",
     },
     
     enableText: {
@@ -44,7 +58,7 @@ const styles = StyleSheet.create({
     },
 
     selectText: {
-
+        color: "#FFFFFF",
     },
 
     // Centraliza os elementos filhos

@@ -20,6 +20,7 @@ function Context(props) {
             form: form,
             setPetID: (id) => setForm({...form, id_pet: id}),
             setDate: (dateStr) => setForm({...form, dia: dateStr}),
+            setTime: (timeStr) => setForm({...form, horario: timeStr})
         }}>
             {props.children}
         </AgendaBanhoContext.Provider>

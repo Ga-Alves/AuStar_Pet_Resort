@@ -1,4 +1,5 @@
-import { ScrollView, Text, View, StyleSheet, Button } from 'react-native'
+import { useContext, useEffect, useState } from "react";
+import { ScrollView, Text, View, StyleSheet} from 'react-native'
 
 // components
 import { Footer } from '../components/Footer'
@@ -14,15 +15,22 @@ import { OrangeButton } from '../components/OrangeButton';
 import { Calendar } from '../components/Calendar';
 
 // context
-import { useContext } from 'react';
 import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
 function AgendaBanhoPasso3(props) {
-    const { setDate } = useContext(AgendaBanhoContext)
+    const { form, setDate, setTime } = useContext(AgendaBanhoContext)
 
-
-    const availableTime = [false, false, false, true, true, true, false, true, false]
     const time = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"]
+    const [ availableTime, setAvailableTime ] = useState([])
+
+    useEffect(() => {
+        // simulando uma requisição de 3s de delay
+        // requisição para pegar os pets do usuario.
+        setTimeout(() => {
+            setAvailableTime([false, false, false, true, true, true, false, true, false])
+        }, 1500)
+    }, [])
+
 
     return (
         <ScrollView>
@@ -47,7 +55,7 @@ function AgendaBanhoPasso3(props) {
 
                         {/* Select Bath Time */}
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
-                            <SelectTimeBath times={time} availableTimes={availableTime}></SelectTimeBath>    
+                            <SelectTimeBath selectedTime={form.horario} setSelectTime={setTime} times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
                         
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
