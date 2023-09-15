@@ -27,7 +27,7 @@ function AgendaBanhoPasso5  (props) {
         )
     }
 
-    const {form} = useContext(AgendaBanhoContext)
+    const {form, resetFormValues} = useContext(AgendaBanhoContext)
 
     const [services, setServices] = useState([])
     const [totalValue, setTotalValue] = useState(0)
@@ -35,6 +35,7 @@ function AgendaBanhoPasso5  (props) {
     function handleSubmit(){
         props.navigation.push('Home')
         console.log(form);
+        resetFormValues();
         
     }
 
