@@ -39,7 +39,7 @@ function AgendaBanhoPasso3(props) {
                     <MaterialIcons name="date-range" size={30} color={textStyle.textColor.color} />
                     <Text style={[textStyle.title, textStyle.textColor]}>Agendar Banho</Text>
                 </View>
-                <GradientBorder width={350} height={700}>
+                <GradientBorder width={350} height={800}>
                     <View style={styles.gradientBody}>
                         <View style={styles.subtitle}>
                             <MaterialIcons name="date-range" size={23} color={textStyle.textColor.color} />

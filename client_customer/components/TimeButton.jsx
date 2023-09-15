@@ -44,8 +44,9 @@ const styles = StyleSheet.create({
     enableButton: {
         borderColor: "#603913",
     },
-
+    
     selectedButton: {
+        borderColor: "#603913",
         backgroundColor: "#603913",
     },
     

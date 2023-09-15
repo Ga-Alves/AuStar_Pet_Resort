@@ -1,4 +1,4 @@
-import { View , StyleSheet} from "react-native";
+import { View } from "react-native";
 
 // components
 import { TimeButton } from "./TimeButton";
@@ -6,7 +6,7 @@ import { TimeButton } from "./TimeButton";
 // Cria uma lista com os horarios disponiveis
 function SelectTimeBath({times, availableTimes, selectedTime, setSelectTime}) {
     return (
-        <View>
+        <View style={{gap: 10}}>
             {times && availableTimes && availableTimes.map((available, idx) => {
                 return (
                     <TimeButton 
@@ -22,10 +22,6 @@ function SelectTimeBath({times, availableTimes, selectedTime, setSelectTime}) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-
-})
 
 
 export {SelectTimeBath}
