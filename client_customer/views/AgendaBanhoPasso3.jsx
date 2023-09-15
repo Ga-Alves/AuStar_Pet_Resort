@@ -57,8 +57,7 @@ function AgendaBanhoPasso3(props) {
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
                             <SelectTimeBath selectedTime={form.horario} setSelectTime={setTime} times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
-                        
-                        <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
+                        <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso4')} text='Próximo Passo !'/>
                     </View>
                 </GradientBorder>
                 <Text>
