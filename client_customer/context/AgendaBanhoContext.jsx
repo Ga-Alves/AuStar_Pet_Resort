@@ -5,7 +5,7 @@ const intialFormValue = {
 	id_pet: 0,
 	dia: '11/11/1111',
 	horario: '0:00',
-	servicos: [1, 2]
+	servicos: new Set(["1, 2"])
 }
 
 export const AgendaBanhoContext = createContext(null);
@@ -21,6 +21,17 @@ function Context(props) {
             setPetID: (id) => setForm({...form, id_pet: id}),
             setDate: (dateStr) => setForm({...form, dia: dateStr}),
             setTime: (timeStr) => setForm({...form, horario: timeStr}),
+            setService: (serviceSet) => setForm({...form, servicos: serviceSet}),
+            addService: (id) => {
+                let newService = new Set(form.servicos);
+                newService.add(id);
+                setForm({...form, servicos: newService});
+            },
+            deleteService: (id) => {
+                let newService = new Set(form.servicos);
+                newService.delete(id);
+                setForm({...form, servicos: newService});
+            },
             resetFormValues: () =>  setForm(intialFormValue)
         }}>
             {props.children}

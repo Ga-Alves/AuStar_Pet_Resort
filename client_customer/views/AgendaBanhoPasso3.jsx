@@ -25,7 +25,6 @@ function AgendaBanhoPasso3(props) {
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
-        // requisição para pegar os pets do usuario.
         setTimeout(() => {
             setAvailableTime([false, false, false, true, true, true, false, true, false])
         }, 1500)
@@ -57,8 +56,7 @@ function AgendaBanhoPasso3(props) {
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
                             <SelectTimeBath selectedTime={form.horario} setSelectTime={setTime} times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
-                        
-                        <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
+                        <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso4')} text='Próximo Passo !'/>
                     </View>
                 </GradientBorder>
                 <Text>
