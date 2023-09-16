@@ -30,7 +30,6 @@ function AgendaBanhoPasso1(props) {
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
-        // requisição para pegar os pets do usuario.
         setTimeout(() => {
             setTutorPets(['Pipoca', 'Rex'])
         }, 1500)

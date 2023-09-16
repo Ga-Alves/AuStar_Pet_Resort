@@ -19,11 +19,10 @@ import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 function AgendaBanhoPasso4(props) {
 
 const [ upSelling, setUpSelling ] = useState([]);
-const { form, setService } = useContext(AgendaBanhoContext)
+const { form, addService, deleteService } = useContext(AgendaBanhoContext)
 
 useEffect(() => {
     // simulando uma requisição de 3s de delay
-    // requisição para pegar os pets do usuario.
     setTimeout(() => {
         setUpSelling({
             servicos: [
@@ -34,12 +33,10 @@ useEffect(() => {
             tips: 'Por ser uma raça de pelo volumoso seu lulu da pomerania' +
             'ficará mais charmoso(a) com nosso banho volumezante.'
         });
-        setService(new Set());
         
     }, 1500)
 }, [])
 
-    const { setDate } = useContext(AgendaBanhoContext)
     return (
         <ScrollView>
             <View style={{alignItems: 'center'}}>
@@ -60,16 +57,13 @@ useEffect(() => {
                                             label={item.name} 
                                             isChecked={form.servicos.has(item.id)} 
                                             setChecked={() => {
-                                                let newService = new Set(form.servicos);
                                                 if (form.servicos.has(item.id)) 
                                                 { 
-                                                    newService.delete(item.id);
-                                                    setService(new Set(newService)); 
+                                                    deleteService(item.id);
                                                 }
                                                 else
                                                 {
-                                                    newService.add(item.id);
-                                                    setService(new Set(newService));
+                                                    addService(item.id);
                                                 }
                                             }}/>   
                                     )

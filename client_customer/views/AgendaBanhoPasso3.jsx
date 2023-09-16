@@ -25,7 +25,6 @@ function AgendaBanhoPasso3(props) {
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
-        // requisição para pegar os pets do usuario.
         setTimeout(() => {
             setAvailableTime([false, false, false, true, true, true, false, true, false])
         }, 1500)

@@ -22,6 +22,16 @@ function Context(props) {
             setDate: (dateStr) => setForm({...form, dia: dateStr}),
             setTime: (timeStr) => setForm({...form, horario: timeStr}),
             setService: (serviceSet) => setForm({...form, servicos: serviceSet}),
+            addService: (id) => {
+                let newService = new Set(form.servicos);
+                newService.add(id);
+                setForm({...form, servicos: newService});
+            },
+            deleteService: (id) => {
+                let newService = new Set(form.servicos);
+                newService.delete(id);
+                setForm({...form, servicos: newService});
+            },
             resetFormValues: () =>  setForm(intialFormValue)
         }}>
             {props.children}
