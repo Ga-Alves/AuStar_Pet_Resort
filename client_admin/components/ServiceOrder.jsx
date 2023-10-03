@@ -1,12 +1,65 @@
+import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 
 import { textStyle, colorPallet } from "../utils/globalStyles"
+import { PopUp } from "./PopUp"
 
 
-function ServiceOrder({services, responsable, total, title}) {
+function ServiceOrder({services, responsable, total, title, confirmOrder}) {
+
+    const [enableOrder, setEnableOrder] = useState(true);
+    const [popUplVisible, setPopUplVisible] = useState(false);
+
+
+    function handlePress(){
+        setPopUplVisible(true);
+    }
+
+    function handleConfirmOrder(){
+        setEnableOrder(false);
+        confirmOrder();
+    }
+
+
+    const styles = StyleSheet.create({
+        container: {
+            width: 300,
+            minHeight: 150,
+
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: enableOrder ? colorPallet.primary : colorPallet.secondary,
+            overflow: 'hidden',
+        },
+        header: {
+            width: '100%',
+            backgroundColor: enableOrder ? colorPallet.primary : colorPallet.secondary,
+            padding: 3,
+            textAlign: 'center',
+            color: '#fff'
+        },
+        body: {
+            minHeight: 100,
+            padding: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly'
+        },
+        bodyCell: {
+            width: '45%',
+        },
+        footer: {
+            paddingLeft: 15,
+            paddingBottom: 5,
+            paddingTop: 5,
+            borderTopWidth: 1,
+            borderColor: enableOrder ? colorPallet.primary : colorPallet.secondary
+        }
+    })
+
 
     return (
-        <TouchableOpacity>
+        <>
+        <TouchableOpacity onPress={enableOrder ? handlePress : null} disabled={!enableOrder}>
             <View style={styles.container}>
                 <Text style={[styles.header, textStyle.regularText]}>
                     {title}
@@ -28,44 +81,9 @@ function ServiceOrder({services, responsable, total, title}) {
                 <Text style={[styles.footer, textStyle.regularText]}>Total: {total}</Text>
             </View>
         </TouchableOpacity>
+        <PopUp text={`Deseja finalizar ${title} ?`} modalVisible={popUplVisible} setModalVisible={setPopUplVisible} onConfirm={handleConfirmOrder} />
+        </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        width: 300,
-        minHeight: 150,
-
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: colorPallet.primary,
-        overflow: 'hidden',
-
-
-    },
-    header: {
-        width: '100%',
-        backgroundColor: colorPallet.primary,
-        padding: 3,
-        textAlign: 'center',
-        color: '#fff'
-    },
-    body: {
-        minHeight: 100,
-        padding: 5,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly'
-    },
-    bodyCell: {
-        width: '45%',
-    },
-    footer: {
-        paddingLeft: 15,
-        paddingBottom: 5,
-        paddingTop: 5,
-        borderTopWidth: 1,
-        borderColor: colorPallet.primary
-    }
-})
 
 export {ServiceOrder}
