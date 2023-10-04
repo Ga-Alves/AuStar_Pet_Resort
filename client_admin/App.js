@@ -1,11 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+
+// components
+import { ServiceOrder } from './components/ServiceOrder';
 
 export default function App() {
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <ServiceOrder
+        title='Pipoca'
+        services={['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata']}
+        responsable='Rafael'
+        total='R$ 50,00'
+        confirmOrder={()=>console.log('confirm callback')}/>
     </View>
   );
 }
