@@ -17,15 +17,16 @@ import { useContext, useState, useEffect } from 'react';
 import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
 function AgendaBanhoPasso2(props) {
-
-const [ decoration, setDecoration ] = useState([]);
-const { form, setService } = useContext(AgendaBanhoContext)
+// Mock é nome dado em engenharia de software
+// Quando simulamos algo como um banco de dados, requisição web
+const [ decorationMock, setDecorationMock ] = useState([]);
+const { form, setDecoration, addDecoration, deleteDecoration } = useContext(AgendaBanhoContext)
 
 useEffect(() => {
     // simulando uma requisição de 3s de delay
     // requisição para pegar os pets do usuario.
     setTimeout(() => {
-        setDecoration ([
+        setDecorationMock ([
             { name: "Lacinho", valor: 30, id: 0 },
             { name: "Gravatinha", valor: 30, id: 1 },
             { name: "Bandana", valor: 30, id: 2},
@@ -33,7 +34,7 @@ useEffect(() => {
             ]
         );
         
-        setService(new Set());
+        setDecoration(new Set());
         
     }, 1500)
 }, [])
@@ -49,38 +50,32 @@ useEffect(() => {
                 <GradientBorder width={350} height={500}>
                     <View style={styles.gradientBody}>
                         <View style={{alignSelf: 'flex-start'}}>
-                            <Text style={[textStyle.subtitle, textStyle.textColor, {textDecorationLine: 'underline', marginBottom: 10}]}>O que podemos adicionar na finalização ?</Text>
-
+                            <Text style={
+                                [textStyle.subtitle,
+                                 textStyle.textColor,
+                                 {marginBottom: 10}]
+                                 }><Text style={textStyle.sublime}>O que podemos adicionar</Text> na finalização ?</Text>
+                
                             <View style={{gap: 10}}>
-                                {upSelling.servicos && upSelling.servicos.map((item, idx) => {
+                                {decorationMock && decorationMock.map((item, idx) => {
                                     return (
                                         <CheckBox 
                                             key={idx} 
                                             label={item.name} 
-                                            isChecked={form.servicos.has(item.id)} 
+                                            isChecked={form.decoracoes.has(item.id)} 
                                             setChecked={() => {
-                                                let newService = new Set(form.servicos);
-                                                if (form.servicos.has(item.id)) 
+                                                if (form.decoracoes.has(item.id)) 
                                                 { 
-                                                    newService.delete(item.id);
-                                                    setService(new Set(newService)); 
+                                                    deleteDecoration(item.id);
                                                 }
                                                 else
                                                 {
-                                                    newService.add(item.id);
-                                                    setService(new Set(newService));
+                                                    addDecoration(item.id);
                                                 }
                                             }}/>   
                                     )
                                 })}
                             </View>
-                        </View>
-
-                        <View>
-                            <Text style={[textStyle.regularText, textStyle.textColor]}>Dica*</Text>
-                            <Text style={[textStyle.regularText, textStyle.textColor]}>
-                               {upSelling.tips}
-                            </Text>
                         </View>
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso3')} text='Próximo Passo !'/>
                     </View>
