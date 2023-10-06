@@ -39,7 +39,6 @@ useEffect(() => {
     }, 1500)
 }, [])
 
-    const { setDate } = useContext(AgendaBanhoContext)
     return (
         <ScrollView>
             <View style={{alignItems: 'center'}}>
