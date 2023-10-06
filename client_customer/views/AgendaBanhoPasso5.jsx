@@ -33,7 +33,7 @@ function AgendaBanhoPasso5  (props) {
     const [totalValue, setTotalValue] = useState(0)
 
     function handleSubmit(){
-        props.navigation.push('Home')
+        props.navigation.push('AgendaBanhoPasso6')
         console.log(form);
         resetFormValues();
         

@@ -7,7 +7,8 @@ import { CadastroPet } from "../views/CadastroPet"
 import { AgendaBanhoPasso1 } from '../views/AgendaBanhoPasso1'
 import { AgendaBanhoPasso3 } from '../views/AgendaBanhoPasso3'
 import { AgendaBanhoPasso4 } from "../views/AgendaBanhoPasso4";
-import { AgendaBanhoPasso5 } from '../views/AgendaBanhoPasso5'
+import { AgendaBanhoPasso5 } from '../views/AgendaBanhoPasso5';
+import { AgendaBanhoPasso6 } from '../views/AgendaBanhoPasso6'
 
 // Componentes
 import { Header } from "../components/Header";
@@ -26,6 +27,7 @@ export default function Routes() {
         <Stack.Screen name="AgendaBanhoPasso3" component={AgendaBanhoPasso3}/>
         <Stack.Screen name="AgendaBanhoPasso4" component={AgendaBanhoPasso4}/>
         <Stack.Screen name="AgendaBanhoPasso5" component={AgendaBanhoPasso5}/>
+        <Stack.Screen name="AgendaBanhoPasso6" component={AgendaBanhoPasso6}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
