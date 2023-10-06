@@ -24,7 +24,7 @@ function AgendaBanhoPasso1(props) {
     function handleSubmit(){
         setPetID(555);
         if (pet != '') {
-            props.navigation.push('AgendaBanhoPasso3')
+            props.navigation.push('AgendaBanhoPasso2')
         }
     }
 
