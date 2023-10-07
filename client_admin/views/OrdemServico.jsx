@@ -18,7 +18,7 @@ function ServiceOrdemScreen(props) {
     const schedule = (time, service, indx) => {
         return(
             <View key={indx}>
-                <Text style={[textStyle.subtitle, textStyle.textColor, styles.text]}>{time}</Text>
+                <Text style={[textStyle.regularText, textStyle.textColor, styles.text]}>{time}</Text>
                 <View style={styles.divider}/>
                 <View style={styles.serviceOrderStyle}>
                     {service ? 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
     cards: {
         flexDirection: 'row',
-        marginBottom: 40,
+        marginBottom: 120,
     },
 
     divider: {
