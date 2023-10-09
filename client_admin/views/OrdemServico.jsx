@@ -7,6 +7,7 @@ import { textStyle } from '../utils/globalStyles';
 import { Footer } from '../components/Footer';
 import { Card } from '../components/Card';
 import { ServiceOrder } from '../components/ServiceOrder';
+import { RoundButton } from '../components/RoundButton';
 
 // context
 import { useState, useEffect } from 'react';
@@ -14,6 +15,8 @@ import { useState, useEffect } from 'react';
 function ServiceOrdemScreen(props) {
     const windowWidth = Dimensions.get('window').width;
     const TIMES = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"];
+    const [week, setWeek] = useState('')
+    const [day, setDay] = useState('')
     
     const schedule = (time, service, indx) => {
         return(
@@ -89,7 +92,7 @@ function ServiceOrdemScreen(props) {
                             <Image source={require('../assets/men_bathing_a_cat.png')}/>
                         </Card>
                     </View>
-                
+        
                     <View style={{width: windowWidth - 80 || 150}}>
                         {TIMES && TIMES.map((time, indx) => {
                             service = serviceOrdemMock.filter((elem) => {
@@ -97,7 +100,25 @@ function ServiceOrdemScreen(props) {
                             });
                             return schedule(time, service[0], indx)
                         })}
-                        
+
+                    </View>
+
+                    <View style={[styles.selectDayAndWeek]}>
+                        <Text>Semana: </Text>
+                        <RoundButton text='1' isSelected={week == '1'} setSelect={() => setWeek('1')}></RoundButton>
+                        <RoundButton text='2' isSelected={week == '2'} setSelect={() => setWeek('2')}></RoundButton>
+                        <RoundButton text='3' isSelected={week == '3'} setSelect={() => setWeek('3')}></RoundButton>
+                        <RoundButton text='4' isSelected={week == '4'} setSelect={() => setWeek('4')}></RoundButton>
+                        <RoundButton text='5' isSelected={week == '5'} setSelect={() => setWeek('5')}></RoundButton>
+                    </View>
+                    <View style={[styles.selectDayAndWeek]}>
+                        <Text>Dia: </Text>
+                        <RoundButton text='seg' isSelected={day == 'seg'} setSelect={() => setDay('seg')}></RoundButton>
+                        <RoundButton text='ter' isSelected={day == 'ter'} setSelect={() => setDay('ter')}></RoundButton>
+                        <RoundButton text='qua' isSelected={day == 'qua'} setSelect={() => setDay('qua')}></RoundButton>
+                        <RoundButton text='qui' isSelected={day == 'qui'} setSelect={() => setDay('qui')}></RoundButton>
+                        <RoundButton text='sex' isSelected={day == 'sex'} setSelect={() => setDay('sex')}></RoundButton>
+                        <RoundButton text='sab' isSelected={day == 'sab'} setSelect={() => setDay('sab')}></RoundButton>
                     </View>
                 
                 </View>
@@ -116,15 +137,15 @@ const styles = StyleSheet.create({
     },
 
     body: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'space-around',
-      flexWrap: 'wrap',
       flex: 1,
       marginTop: 20,
       marginBottom: 50,
     },
 
     serviceOrderStyle: {
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 20,
@@ -140,6 +161,12 @@ const styles = StyleSheet.create({
         borderColor: textStyle.textColor.color,
         borderTopWidth: 1,
     },
+
+    selectDayAndWeek: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 
   });
 
