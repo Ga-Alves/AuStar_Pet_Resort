@@ -15,8 +15,11 @@ import { useState, useEffect } from 'react';
 function ServiceOrdemScreen(props) {
     const windowWidth = Dimensions.get('window').width;
     const TIMES = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"];
-    const [week, setWeek] = useState('')
-    const [day, setDay] = useState('')
+    const WEEK_DAYS = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
+    const WEEK_INDX = new Date().getDay() - 1 % 6;
+
+    const [week, setWeek] = useState(1)
+    const [day, setDay] = useState(WEEK_DAYS[WEEK_INDX]);
     
     const schedule = (time, services, indx) => {
         return(
@@ -43,6 +46,7 @@ function ServiceOrdemScreen(props) {
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
+        // para o dia <day> e semana <week>
         setTimeout(() => {
             setServiceOrdemMock ([
                 { 
@@ -84,7 +88,7 @@ function ServiceOrdemScreen(props) {
             );
             
         }, 1500)
-    }, [])
+    }, [week, day])
 
     return (
         <ScrollView>
