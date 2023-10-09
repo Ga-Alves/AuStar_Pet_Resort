@@ -18,20 +18,20 @@ function ServiceOrdemScreen(props) {
     const [week, setWeek] = useState('')
     const [day, setDay] = useState('')
     
-    const schedule = (time, service, indx) => {
+    const schedule = (time, services, indx) => {
         return(
             <View key={indx}>
                 <Text style={[textStyle.regularText, textStyle.textColor, styles.text]}>{time}</Text>
                 <View style={styles.divider}/>
                 <View style={styles.serviceOrderStyle}>
-                    {service ? 
-                    (<ServiceOrder
-                        title={service.title}
-                        services={service.services}
-                        responsable={service.responsable}
-                        total={service.total}
-                        confirmOrder={()=>console.log('confirm callback')}/>) : null
-                        
+                    {services && services.map((service) => {
+                       return <ServiceOrder
+                            title={service.title}
+                            services={service.services}
+                            responsable={service.responsable}
+                            total={service.total}
+                            confirmOrder={()=>console.log('confirm callback')}/>
+                    })
                     }
                     
                 </View>
@@ -47,6 +47,13 @@ function ServiceOrdemScreen(props) {
             setServiceOrdemMock ([
                 { 
                     title: "Lacinho", 
+                    services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata'], 
+                    responsable: 'Rafael', 
+                    total: 'R$ 50,00',
+                    time: "8:00"
+                },
+                { 
+                    title: "Outro Lacinho as 8:00", 
                     services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata'], 
                     responsable: 'Rafael', 
                     total: 'R$ 50,00',
@@ -95,10 +102,10 @@ function ServiceOrdemScreen(props) {
         
                     <View style={{width: windowWidth - 80 || 150}}>
                         {TIMES && TIMES.map((time, indx) => {
-                            service = serviceOrdemMock.filter((elem) => {
+                            services = serviceOrdemMock.filter((elem) => {
                                return elem.time == time
                             });
-                            return schedule(time, service[0], indx)
+                            return schedule(time, services, indx)
                         })}
 
                     </View>
@@ -149,6 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 20,
+        gap: 5
     },
 
     cards: {
