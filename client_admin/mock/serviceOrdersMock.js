@@ -1,4 +1,4 @@
-const mock = [
+const serviceOrdersMock = [
     { 
         id: 1,
         title: "Yoda", 
@@ -46,4 +46,4 @@ const mock = [
     }
 ]
 
-export {mock};
+export {serviceOrdersMock};
