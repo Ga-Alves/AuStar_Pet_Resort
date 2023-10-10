@@ -29,8 +29,9 @@ function ServiceOrdemScreen(props) {
                 <Text style={[textStyle.regularText, textStyle.textColor, styles.text]}>{time}</Text>
                 <View style={styles.divider}/>
                 <View style={styles.serviceOrderStyle}>
-                    {services && services.map((service) => {
+                    {services && services.map((service, indx) => {
                        return <ServiceOrder
+                            key={indx}
                             title={service.title}
                             services={service.services}
                             responsable={service.responsable}
