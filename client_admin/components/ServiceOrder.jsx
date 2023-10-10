@@ -5,9 +5,9 @@ import { textStyle, colorPallet } from "../utils/globalStyles"
 import { PopUp } from "./PopUp"
 
 
-function ServiceOrder({services, responsable, total, title, confirmOrder}) {
+function ServiceOrder({services, responsable, total, title, confirmOrder, enabled}) {
 
-    const [enableOrder, setEnableOrder] = useState(true);
+    const [enableOrder, setEnableOrder] = useState(enabled);
     const [popUplVisible, setPopUplVisible] = useState(false);
 
 
