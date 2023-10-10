@@ -12,7 +12,7 @@ import { RoundButton } from '../components/RoundButton';
 // context
 import { useState, useEffect } from 'react';
 
-import { mock } from './mock'
+import { serviceOrdersMock } from '../mock/serviceOrdersMock'
 
 function ServiceOrdemScreen(props) {
     const windowWidth = Dimensions.get('window').width;
@@ -45,13 +45,13 @@ function ServiceOrdemScreen(props) {
         )
     };
 
-    const [serviceOrdemMock, setServiceOrdemMock] = useState([]);
+    const [serviceOrdersData, setServiceOrdersData] = useState([]);
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
         // para o dia <day> e semana <week>
         setTimeout(() => {
-            setServiceOrdemMock (mock);
+            setServiceOrdersData (serviceOrdersMock);
             
         }, 1500)
     }, [week, day])
@@ -72,7 +72,7 @@ function ServiceOrdemScreen(props) {
         
                     <View style={{width: windowWidth - 80 || 150}}>
                         {TIMES && TIMES.map((time, indx) => {
-                            services = serviceOrdemMock.filter((elem) => {
+                            services = serviceOrdersData.filter((elem) => {
                                return elem.time == time
                             });
                             return schedule(time, services, indx)
