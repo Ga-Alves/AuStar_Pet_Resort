@@ -12,6 +12,8 @@ import { RoundButton } from '../components/RoundButton';
 // context
 import { useState, useEffect } from 'react';
 
+import { serviceOrdersMock } from '../mock/serviceOrdersMock'
+
 function ServiceOrdemScreen(props) {
     const windowWidth = Dimensions.get('window').width;
     const TIMES = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"];
@@ -27,13 +29,15 @@ function ServiceOrdemScreen(props) {
                 <Text style={[textStyle.regularText, textStyle.textColor, styles.text]}>{time}</Text>
                 <View style={styles.divider}/>
                 <View style={styles.serviceOrderStyle}>
-                    {services && services.map((service) => {
+                    {services && services.map((service, indx) => {
                        return <ServiceOrder
+                            key={indx}
                             title={service.title}
                             services={service.services}
                             responsable={service.responsable}
                             total={service.total}
-                            confirmOrder={()=>console.log('confirm callback')}/>
+                            enabled={!service.completed}
+                            confirmOrder={()=>console.log('confirm callback', service.id)}/>
                     })
                     }
                     
@@ -42,50 +46,13 @@ function ServiceOrdemScreen(props) {
         )
     };
 
-    const [serviceOrdemMock, setServiceOrdemMock] = useState([]);
+    const [serviceOrdersData, setServiceOrdersData] = useState([]);
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
         // para o dia <day> e semana <week>
         setTimeout(() => {
-            setServiceOrdemMock ([
-                { 
-                    title: "Lacinho", 
-                    services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata'], 
-                    responsable: 'Rafael', 
-                    total: 'R$ 50,00',
-                    time: "8:00"
-                },
-                { 
-                    title: "Outro Lacinho as 8:00", 
-                    services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata'], 
-                    responsable: 'Rafael', 
-                    total: 'R$ 50,00',
-                    time: "8:00"
-                },
-                { 
-                    title: "Thor", 
-                    services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Gravata'], 
-                    responsable: 'Guilherme Costa', 
-                    total: 'R$ 50,00',
-                    time: "8:50"
-                },
-                { 
-                    title: "Pipoca", 
-                    services: ['Banho'], 
-                    responsable: 'Roberto', 
-                    total: 'R$ 70,00',
-                    time: "10:30"
-                },
-                { 
-                    title: "Rex", 
-                    services: ['Banho', 'Banho Volumezante', 'Sem Perfume', 'Lacinho'], 
-                    responsable: 'Rafael', 
-                    total: 'R$ 60,00',
-                    time: "14:00"
-                }
-                ]
-            );
+            setServiceOrdersData (serviceOrdersMock);
             
         }, 1500)
     }, [week, day])
@@ -106,7 +73,7 @@ function ServiceOrdemScreen(props) {
         
                     <View style={{width: windowWidth - 80 || 150}}>
                         {TIMES && TIMES.map((time, indx) => {
-                            services = serviceOrdemMock.filter((elem) => {
+                            services = serviceOrdersData.filter((elem) => {
                                return elem.time == time
                             });
                             return schedule(time, services, indx)
