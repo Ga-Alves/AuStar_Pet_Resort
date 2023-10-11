@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         width: windowWidth/1.2,
         marginVertical: 20,
         borderBottomWidth: 1,
-        borderColor: textStyle.textColor
+        borderColor: textStyle.textColor.color
     },
     employees: {
         flexDirection: 'row',
