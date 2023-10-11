@@ -7,6 +7,7 @@ import { Footer } from "../components/Footer"
 import {textStyle} from '../utils/globalStyles'
 import { SecondaryButton } from "../components/SecondaryButton";
 import { GerenciaAgendaWeekdayColumn } from "../components/GerenciaAgendaWeekdayColumn";
+import { RoundButton } from "../components/RoundButton";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,6 +17,9 @@ import { employeesMock, weekScheeduleMock } from "./mock";
 
 
 function GerenciaAgenda() {
+
+    const [week, setWeek] = useState(1)
+
 
     const [employees, setEmployees] = useState([])
     const [selectedEmployee, setSelectedEmployee] = useState({})
@@ -27,18 +31,15 @@ function GerenciaAgenda() {
         setSelectedEmployee(employee);
     }
 
+    // pega todos os funcionarios
     useEffect(() => {
-        // simulando uma requisição de 1.5s de delay
-        setTimeout(() => {
-            setEmployees(employeesMock)
-        }, 1500);
-        
-        
-        setTimeout(() => {
-            setWeekScheedule(weekScheeduleMock)
-        }, 1500);
-
+        setEmployees(employeesMock)
     }, [])
+    
+    // pega agenda da semana
+    useEffect(() => {
+        setWeekScheedule(weekScheeduleMock);
+    }, [week])
 
 
     return (
@@ -68,6 +69,14 @@ function GerenciaAgenda() {
                                 )
                             }
                         </ScrollView>
+                    </View>
+
+                    <View style={[styles.selectDayAndWeek]}>
+                        <RoundButton text='1' isSelected={week == '1'} setSelect={() => setWeek('1')}></RoundButton>
+                        <RoundButton text='2' isSelected={week == '2'} setSelect={() => setWeek('2')}></RoundButton>
+                        <RoundButton text='3' isSelected={week == '3'} setSelect={() => setWeek('3')}></RoundButton>
+                        <RoundButton text='4' isSelected={week == '4'} setSelect={() => setWeek('4')}></RoundButton>
+                        <RoundButton text='5' isSelected={week == '5'} setSelect={() => setWeek('5')}></RoundButton>
                     </View>
 
                 </View>
@@ -103,6 +112,11 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         width: windowWidth/1.2,
         // height: 400
+    },
+    selectDayAndWeek: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
 
