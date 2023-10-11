@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
-import { textStyle } from "../utils/globalStyles"
+import { colorPallet, textStyle } from "../utils/globalStyles"
 import { useState } from "react";
 
 function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmployee}) {
@@ -11,10 +11,7 @@ function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmploy
         
         if (!res && addEmployee.id != -1) {
             setEmployees([...employees, addEmployee])
-
-            const body = {
-                
-            }
+            // faz requisição back
             console.log('post');
         }
         
@@ -29,7 +26,7 @@ function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmploy
 
                 {
                     employees && employees.map((addEmployee, indx) => 
-                        <Text key={indx}>
+                        <Text key={indx} style={styles.employeeColumnName}>
                             {addEmployee.name}
                         </Text>
                     )
@@ -48,6 +45,14 @@ const styles = StyleSheet.create({
     weekDayName: {
         borderBottomWidth: 1,
         textAlign: 'center'
+    },
+    employeeColumnName: {
+        backgroundColor: colorPallet.primary,
+        color: '#fff',
+        textAlign: 'center',
+        padding: 3,
+        marginTop: 2,
+        borderRadius: 5,
     }
 })
 
