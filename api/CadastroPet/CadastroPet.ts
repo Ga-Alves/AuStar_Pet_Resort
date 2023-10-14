@@ -1,4 +1,4 @@
-import RepositorioPets from "./RepositorioPets";
+import RepositorioPets from "./Repositorio";
 import petCadastrado from "./petCadastrado";
 
 export default class CadastraPet {

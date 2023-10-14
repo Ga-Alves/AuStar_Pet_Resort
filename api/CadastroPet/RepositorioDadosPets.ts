@@ -1,7 +1,7 @@
-import Conexao from "./conexao";
+import Conexao from "../conexao";
 import petCadastrado from "./petCadastrado";
-import RepositorioPets from "./RepositorioPets";
-import pgp from "pg-promise";
+import RepositorioPets from "./Repositorio";
+//import pgp from "pg-promise";
 
 export default class RepositorioDadosPets implements RepositorioPets{
 
