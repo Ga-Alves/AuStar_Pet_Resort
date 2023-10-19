@@ -9,10 +9,12 @@ function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmploy
     function scheeduleEmployee() {
         var res = employees.find(function(val){ return (addEmployee.id == val.id)});
         
-        if (!res && addEmployee.id != -1) {
+        function isEmptyObject(obj){
+            return JSON.stringify(obj) === '{}'
+        }
+        
+        if (res === undefined && !isEmptyObject(addEmployee)) {
             setEmployees([...employees, addEmployee])
-            // faz requisição back
-            console.log('post');
         }
         
     }

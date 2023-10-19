@@ -13,7 +13,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 //mock
-import { employeesMock, weekScheeduleMock } from "./mock";
+import { employeesMock, weekScheeduleMock } from "../mock/GerenciaAgendaMock";
 
 
 function GerenciaAgenda() {
