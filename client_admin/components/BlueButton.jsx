@@ -9,10 +9,10 @@ import { LinearGradient } from "expo-linear-gradient";
  */
 
 
-function OrangeButton(props) {
+function BlueButton(props) {
     return (
         <LinearGradient 
-            colors={["#FFF12E", "#F28A00"]}
+            colors={['#5E93C9', '#5EB5C9']}
             start={{
                 x: 0,
                 y: 0
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: '#603913'
+        color: '#fff'
     },
 
     flexGrow1: {
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export {OrangeButton}
+export {BlueButton}
