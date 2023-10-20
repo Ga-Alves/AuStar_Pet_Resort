@@ -23,7 +23,7 @@ function GradientBorder({width, height, borderRadius, ...props}) {
 
     return (
         <LinearGradient
-            colors={['#F28A00', '#FFF12E']}
+            colors={['#5E93C9', '#5EB5C9']}
             style={styles.border}
             >
                 <View style={styles.card}>
