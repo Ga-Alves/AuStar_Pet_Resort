@@ -15,16 +15,15 @@ const repositorioUser = new RepositorioDadosUsers(conexao);
 app.post("/CadastroPet", async function (request: Request, response: Response){
     const cadastraPet = new CadastraPet(repositorioPet);
     await cadastraPet.execute({nomePet: request.body.nomePet, raca: request.body.raca, sexo: request.body.sexo, 
-    cor: request.body.cor, porte: request.body.porte, id_tutor: request.body.id}) //id?
+    cor: request.body.cor, porte: request.body.porte, id_tutor: request.body.id}) 
     response.end();
 });
 
 app.post("/CadastroUser", async function (request: Request, response: Response){
     const cadastraUser = new CadastraUser(repositorioUser);
-
-    await cadastraUser.execute({notifyToken: request.body.notifyToken}); //id?
-    
-    response.end();
+    const userId = await cadastraUser.execute({notifyToken: request.body.notifyToken}); 
+    console.log(userId)
+    response.json(userId);
 });
 
 app.listen(3030);

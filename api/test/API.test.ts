@@ -5,7 +5,7 @@ test("Deve cadastrar usuario", async function () {
 		url: "http://localhost:3030/CadastroUser",
 		method: "post",
 		data: {
-			notifyToken: "13123-12-31-23-123",
+			notifyToken: '131235690ddifrfff5',
 		}
 	});
 	await axios({

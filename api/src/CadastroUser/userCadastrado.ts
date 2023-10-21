@@ -1,5 +1,6 @@
 export default class userCadastrado{
-    constructor (readonly notifyToken: string){
+
+    constructor (readonly idUser: number, readonly notifyToken: string){
         }
     // colocar funcoes relacionadas a operacoes/regras de negocio aqui
 }
