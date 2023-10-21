@@ -9,7 +9,7 @@ export default class RepositorioDadosUsers implements RepositorioUsers{
     }
 
     async save (userCadastrado: userCadastrado): Promise<void> {
-        await this.conexao.query("insert into user (notifyToken) values ($1) ",
+        await this.conexao.query("insert into app.User (notifyToken) values ($1) ",
         [userCadastrado.notifyToken]); // resolver dps
     }
 } 

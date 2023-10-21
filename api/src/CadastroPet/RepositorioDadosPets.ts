@@ -9,7 +9,7 @@ export default class RepositorioDadosPets implements RepositorioPets{
     }
 
     async save (petCadastrado: petCadastrado): Promise<void> {
-        await this.conexao.query("insert into pet (nomePet, raca, sexo, cor, porte, id_tutor) values ($1, $2, $3, $4, $5, $6) ",
+        await this.conexao.query("insert into app.Pet (nome, raca, sexo, cor, porte, id_tutor) values ($1, $2, $3, $4, $5, $6) ",
         [petCadastrado.nomePet, petCadastrado.raca, petCadastrado.sexo, petCadastrado.cor, petCadastrado.porte, petCadastrado.id]); // resolver dps
     }
 } 

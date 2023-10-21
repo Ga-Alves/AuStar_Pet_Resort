@@ -21,7 +21,9 @@ app.post("/CadastroPet", async function (request: Request, response: Response){
 
 app.post("/CadastroUser", async function (request: Request, response: Response){
     const cadastraUser = new CadastraUser(repositorioUser);
-    await cadastraUser.execute({notifyToken: request.body.notifyToken}) //id?
+
+    await cadastraUser.execute({notifyToken: request.body.notifyToken}); //id?
+    
     response.end();
 });
 

@@ -5,6 +5,7 @@ export default class CadastraUser {
     constructor (readonly repositorioUsers: RepositorioUsers){
     }
     async execute (input: Input): Promise<void>{
+
         await this.repositorioUsers.save(new userCadastrado(input.notifyToken))
 
     }

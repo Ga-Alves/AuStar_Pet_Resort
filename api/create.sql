@@ -1,15 +1,16 @@
-CREATE TABLE "User" (
-	"id_tutor"	TEXT,
-	"notify_token"	TEXT,
-	PRIMARY KEY("id_tutor" AUTOINCREMENT)
+CREATE TABLE app.User (
+	id_tutor	serial primary key,
+	notifyToken	text
+	
 );
 
-CREATE TABLE "Pet" (
-	"id_pet"	TEXT,
-	"reca"	TEXT,
-	"sexo"	TEXT,
-	"cor"	TEXT,
-	"porte"	TEXT,
-	"id_tutor"	TEXT,
-	PRIMARY KEY("id_pet" AUTOINCREMENT)
+CREATE TABLE app.Pet (
+	nome text,
+	raca	text,
+	sexo	text,
+	cor	text,
+	porte	text,
+	id_tutor	text,
+	id_pet	serial primary key
+
 );

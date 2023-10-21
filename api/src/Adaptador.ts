@@ -6,9 +6,9 @@ export default class Adaptador implements Conexao{
     conexao: any;
 
     constructor(){
-        this.conexao = pgp() ("postgres://postgres:123456@localhost:5432/app") // resolver dps
+        this.conexao = pgp() ("postgres://postgres:rapha@localhost:5432/app") // resolver dps
     }
-    query(statement: string, params: any): Promise<any> {
+    query(statement: string, params: any): Promise<any> {  
         return this.conexao.query(statement, params);
     }
     one(statement: string, params: any): Promise<any> {
