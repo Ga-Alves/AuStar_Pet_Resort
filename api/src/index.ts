@@ -1,11 +1,16 @@
 import express, {Request, response, Response}  from "express";
 import CadastraPet from "./CadastroPet/CadastroPet";
+import CadastraUser from "./CadastroUser/CadastroUser";
+
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
+import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
+
 import Adaptador from "./Adaptador";
 const app = express();
 app.use(express.json());
 const conexao = new Adaptador();
 const repositorioPet = new RepositorioDadosPets(conexao);
+const repositorioUser = new RepositorioDadosUsers(conexao);
 
 app.post("/CadastroPet", async function (request: Request, response: Response){
     const cadastraPet = new CadastraPet(repositorioPet);
