@@ -66,7 +66,7 @@ function ServiceOrdemScreen(props) {
                         <Card title='Organizar Agenda' onPress={() => props.navigation.push('GerenciaAgenda')}>
                             <Image source={require('../assets/calendar-week_svgrepo.com.png')}/>
                         </Card>
-                        <Card title='Cadastrar Funcionário' onPress={() => props.navigation.push('Ordem de Serviço')}>
+                        <Card title='Cadastrar Funcionário' onPress={() => props.navigation.push('Cadastrar Funcionario')}>
                             <Image source={require('../assets/men_bathing_a_cat.png')}/>
                         </Card>
                     </View>

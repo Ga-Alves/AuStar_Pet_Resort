@@ -1,14 +1,19 @@
 import RepositorioServicos from "./Repositorio";
+import servicoOferecido from "./servicoOferecido";
+import Dicas from "./dicas"
 
 export default class OfereceServico {
     constructor (readonly repositorioServicos: RepositorioServicos){
     }
     async execute (input: Input): Promise<Output>{
-        const servicoOferecido = await this.repositorioServicos.get(input.id_dog)
-        servicoOferecido.getRandom(servicoOferecido.tip)
+        const [servicoOferecidoUpselling, servicoOferecidoDicas] = await this.repositorioServicos.get(input.id_dog)
+        //const dicas = new Dicas(servicoOferecidoDicas.dica);
+
+        const dica: string = servicoOferecidoDicas.getRandom()
+
 		return {
-			upSelling: servicoOferecido.upSelling,
-			tip: servicoOferecido.tip
+            servicoOferecidoUpselling : servicoOferecidoUpselling,
+            servicoOferecidoDicas : dica
 		};
     }
 }
@@ -16,6 +21,6 @@ type Input = {
     id_dog: string
 }
 type Output = {
-    upSelling?: any[],
-    tip?: any[]
+    servicoOferecidoUpselling : servicoOferecido,
+    servicoOferecidoDicas : string
 }

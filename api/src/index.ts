@@ -4,13 +4,16 @@ import CadastraUser from "./CadastroUser/CadastroUser";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
 import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
+import RepositorioDadosServicos from "./ServicosUpselling/RepositorioDadosServicos";
 
 import Adaptador from "./Adaptador";
+import OfereceServico from "./servicosUpselling/ofereceServico";
 const app = express();
 app.use(express.json());
 const conexao = new Adaptador();
 const repositorioPet = new RepositorioDadosPets(conexao);
 const repositorioUser = new RepositorioDadosUsers(conexao);
+const repositorioUpselling = new RepositorioDadosServicos(conexao);
 
 app.post("/CadastroPet", async function (request: Request, response: Response){
     const cadastraPet = new CadastraPet(repositorioPet);
@@ -22,8 +25,14 @@ app.post("/CadastroPet", async function (request: Request, response: Response){
 app.post("/CadastroUser", async function (request: Request, response: Response){
     const cadastraUser = new CadastraUser(repositorioUser);
     const userId = await cadastraUser.execute({notifyToken: request.body.notifyToken}); 
-    console.log(userId)
     response.json(userId);
+});
+
+app.get("/ServicoUpselling", async function (request: Request, response: Response){
+    const ofereceServico = new OfereceServico(repositorioUpselling);
+    const servicos = await ofereceServico.execute({id_dog: request.body.id_dog}); 
+    console.log(servicos)
+    response.json(servicos);
 });
 
 app.listen(3030);

@@ -1,4 +1,5 @@
 import ServicoOferecido from "./servicoOferecido";
+import Dicas from "./dicas";
 import RepositorioServicos from "./Repositorio";
 
 export default class RepositorioMemoriaServico implements RepositorioServicos{
@@ -6,9 +7,9 @@ export default class RepositorioMemoriaServico implements RepositorioServicos{
     constructor(){
         this.servicosOferecidos = [];
     }
-    async get(id_dog : string): Promise<ServicoOferecido>{
-		const servicoOferecido = this.servicosOferecidos.find(servicoOferecido => servicoOferecido.tip); ///trocar essa carniça dps
+    async get(id_dog : string): Promise<[ServicoOferecido, Dicas]>{
+		const servicoOferecido = this.servicosOferecidos.find(servicoOferecido => servicoOferecido.nome); ///trocar essa  dps
 		if (!servicoOferecido) throw new Error();
-		return servicoOferecido;
+		return [servicoOferecido];
     }
 }
