@@ -1,5 +1,5 @@
 import Conexao from "../conexao";
-import BanhistaCadastrado from "./banhistaCadastrado";
+import BanhistaCadastrado from "./BanhistaCadastrado";
 import RepositorioBanhistas from "./Repositorio";
 
 export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
