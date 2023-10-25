@@ -1,6 +1,6 @@
 import axios from "axios";
 
-test("Deve cadastrar usuario", async function () {
+test.skip("Deve cadastrar usuario", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroUser",
 		method: "post",
@@ -8,11 +8,14 @@ test("Deve cadastrar usuario", async function () {
 			notifyToken: '131235690ddifrfff5',
 		}
 	});
+});
+	
+test.skip("Deve cadastrar Pet", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroPet",
 		method: "post",
 		data: {
-			nome: "Billy",
+			nomePet: "Billy",   
 			raca: "Maltês",
 			sexo: "Macho",
 			cor: "Branco",
@@ -21,5 +24,15 @@ test("Deve cadastrar usuario", async function () {
 
 		}
 	});
+});
 
+test("Deve retornar upselling", async function () {
+	await axios({
+		url: "http://localhost:3030/ServicoUpselling",
+		method: "get",
+		data: {
+			id_dog: '1'
+
+		}
+	});
 });

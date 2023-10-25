@@ -1,4 +1,11 @@
 -- Nomes estão inconsistentes entre os arquivos, precisamos ver o que temos que mudar
+DROP table app.User;
+DROP table app.OrdemServico;
+DROP table app.Pet;
+DROP table app.Banhista;
+DROP table app.Agenda;
+DROP table app.Finalizacoes;
+DROP table app.ServicosUpselling;
 
 CREATE TABLE app.User (
 	id_tutor	serial primary key,
@@ -48,8 +55,10 @@ CREATE TABLE app.Finalizacoes (	-- A gente vai manter as tabelas com nomes no pl
 );
 
 CREATE TABLE app.ServicosUpselling (
-	id_upselling	int primary key,
+	id_upselling	serial primary key,
 	nome			text,
 	preco			numeric(5, 2),
-	dica 			text
+	dica 			text,
+	raca			text,
+	cor				text
 );

@@ -1,13 +1,8 @@
 export default class servicoOferecido{
-    tip: any[];
-    upSelling?: any[];
-    constructor (readonly servicoUpselling : any[], readonly tips: any[]){
-        }
 
-    getRandom(tips: any[]){
-        this.tip = tips[Math.floor(Math.random() * tips.length)]
-    }
+    constructor (readonly nome : string, readonly valor : number, readonly id : number){
+        }
     
     // colocar funcoes relacionadas a operacoes/regras de negocio aqui
-}
+}   
 
