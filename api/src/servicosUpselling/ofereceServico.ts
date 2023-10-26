@@ -1,6 +1,5 @@
 import RepositorioServicos from "./Repositorio";
 import servicoOferecido from "./servicoOferecido";
-import Dicas from "./dicas"
 
 export default class OfereceServico {
     constructor (readonly repositorioServicos: RepositorioServicos){
