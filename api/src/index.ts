@@ -7,7 +7,7 @@ import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
 import RepositorioDadosServicos from "./ServicosUpselling/RepositorioDadosServicos";
 
 import Adaptador from "./Adaptador";
-import OfereceServico from "./servicosUpselling/ofereceServico";
+import OfereceServico from "./ServicosUpselling/ofereceServico";
 const app = express();
 app.use(express.json());
 const conexao = new Adaptador();
