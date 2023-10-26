@@ -57,6 +57,13 @@ app.get("/ServicoUpselling", async function (request: Request, response: Respons
     response.json(servicos);
 });
 
+/*
+app.post("/AgendarBanho", async function (request: Request, response: Response){
+    const agendaBanho = new AgendaBanho(repositorioAgenda);
+    await agendaBanho.execute({data: request.body.data, horario: request.body.horario}); 
+    response.end();
+});*/
+
 app.get("/HorariosDisponiveisDia", async function (request: Request, response: Response){
     const horariosDisponiveisDia = new HorariosDisponiveisDia(repositorioAgenda, repositorioPet);
     const horarios = await horariosDisponiveisDia.execute({week: request.body.week, day: request.boy.day, id_pet: request.body.id_pet});
