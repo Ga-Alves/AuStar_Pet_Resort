@@ -33,8 +33,8 @@ export default class AgendaBanho {
             horaIndex = 7
         }
         const pet = await this.repositorioPets.get(input.id_pet)
-        const  = await this.repositorioAgenda.get(week, input.horario) //how to get week?
-        await this.repositorioAgenda.schedule(week, input.dia, banhistaAlocado[0].employeeID, horaIndex, pet.porte)
+        //const banhistaAlocado = await this.repositorioAgenda.get(week, input.horario) //how to get week?
+        //await this.repositorioAgenda.schedule(week, input.dia, banhistaAlocado[0].employeeID, horaIndex, pet.porte)
     }
 }
 type Input = {

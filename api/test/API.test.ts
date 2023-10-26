@@ -20,18 +20,28 @@ test.skip("Deve cadastrar Pet", async function () {
 			sexo: "Macho",
 			cor: "Branco",
 			porte: "P",
-			id: '1231-1231-231-23-12'
+			id: 1
 
 		}
 	});
 });
 
-test("Deve retornar upselling", async function () {
+test.skip("Deve retornar upselling", async function () {
 	await axios({
 		url: "http://localhost:3030/ServicoUpselling",
 		method: "get",
 		data: {
 			id_dog: '1'
+
+		}
+	});
+});
+test("Deve retornar cachoros", async function () {
+	await axios({
+		url: "http://localhost:3030/CachorrosTutor",
+		method: "get",  
+		data: {
+			id: 0
 
 		}
 	});

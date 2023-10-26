@@ -1,9 +1,10 @@
 import express, {Request, response, Response}  from "express";
 import CadastraPet from "./CadastroPet/CadastroPet";
+import RetornaPet from "./CadastroPet/RetornaPets";
 import CadastraUser from "./CadastroUser/CadastroUser";
 import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
-import OfereceServico from "./servicosUpselling/ofereceServico";
+//import OfereceServico from "./servicosUpselling/ofereceServico";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
 
@@ -67,7 +68,7 @@ app.post("/AgendarBanho", async function (request: Request, response: Response){
 
 app.get("/HorariosDisponiveisDia", async function (request: Request, response: Response){
     const horariosDisponiveisDia = new HorariosDisponiveisDia(repositorioAgenda, repositorioPet);
-    const horarios = await horariosDisponiveisDia.execute({week: request.body.week, day: request.boy.day, id_pet: request.body.id_pet});
+    const horarios = await horariosDisponiveisDia.execute({week: request.body.week, day: request.body.day, id_pet: request.body.id_pet});
     console.log(horarios);
     response.json(horarios);
 })
@@ -77,6 +78,13 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     const orders = await serviceOrders.execute({week: request.body.week, day: request.body.day});
     console.log(orders);
     response.json(orders);
+})
+
+app.get("/CachorrosTutor", async function (request: Request, response: Response){
+    console.log(request.body.id)
+    const petsR = new RetornaPet(repositorioPet);
+    const pets = petsR.execute({id_tutor: request.body.id}) 
+    response.json(pets);
 })
 
 app.listen(3030);
