@@ -30,22 +30,24 @@ CREATE TABLE app.Banhista (
 );
 
 CREATE TABLE app.Agenda (
-	id_banhista	serial primary key,
-	dia			date,
-	horarios	int[]		-- Time slots em que o banhista está livre
+	id_entrada  	serial primary key,
+	id_banhista		int,
+	dia				date,
+	horarios		int[],
+	CONSTRAINT data_banhista_unico UNIQUE (data, id_banhista)
 );
 
 CREATE TABLE app.OrdemServico (
-	id_ordem 		serial primary key,
-	id_pet 			int,
+	id_ordem		serial primary key,
+	id_pet			int,
 	foreign key (id_pet) references app.Pet (id_pet),
-	id_banhista 	int,
+	id_banhista		int,
 	foreign key (id_banhista) references app.Banhista (id_banhista),
-	dia				date,			-- Data e horário no mesmo campo
-	servicos		int[], 			-- Vetor com os identificadores de finalizações
-	finalizacoes 	int[], 			-- Vetor com os identificadores de finalizações
-	preco			numeric(5, 2), 	-- 5 dígitos, duas casas decimais
-	ativo			boolean
+	servicos 		text[],
+	total			text,
+	dia				date,
+	horario 		text,
+	completo		boolean
 );
 
 CREATE TABLE app.Finalizacoes (	-- A gente vai manter as tabelas com nomes no plural ou no singular?
