@@ -12,20 +12,19 @@ export default class HorariosDisponiveisDia {
         const pet: petCadastrado = await this.repositorioPet.get(input.id_pet)
         
         const horariosDisponiveis: Set<number> = new Set();
-        if (pet.porte === "P") {
-            for (const banhista of banhistasDisponiveis) {
-                for (const horario of banhista.schedule) {
-                    horariosDisponiveis.add(horario);
-                }
-            }
-        }
-        else {
+        if (pet.porte === "G" || pet.porte === "XL") {
             for (const banhista of banhistasDisponiveis) {
                 banhista.schedule.sort((h1, h2) => h1 - h2)
                 for (let i = 1; i < banhista.schedule.length; i++) {
                     if (banhista.schedule[i] === banhista.schedule[i-1] + 1) {
                         horariosDisponiveis.add(banhista.schedule[i-1]);
                     }
+                }
+            }
+        } else {
+            for (const banhista of banhistasDisponiveis) {
+                for (const horario of banhista.schedule) {
+                    horariosDisponiveis.add(horario);
                 }
             }
         }
