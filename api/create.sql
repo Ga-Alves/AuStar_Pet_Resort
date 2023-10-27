@@ -19,7 +19,7 @@ CREATE TABLE app.Pet (
 	sexo	text,
 	cor	text,
 	porte	text,
-	id_tutor	text,
+	id_tutor	int,
 	id_pet	serial primary key
 
 );
@@ -64,3 +64,20 @@ CREATE TABLE app.ServicosUpselling (
 	raca			text,
 	cor				text
 );
+
+
+/*
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Tosa higiênica', 10, 'essa ai mesmo', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'essa ai mesmo', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'essa ai mesmo', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho volumizante', 25, 'essa ai mesmo', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'essa ai mesmo', 'Todos', 'Preto');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'essa ai mesmo', 'Todos', 'Branco');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'essa ai mesmo', 'Todos', 'Todos');
+
+Hidratação $20 - Todos menos Spitz e Jack Russel
+Queratinização $25 - Todos menos Spitz e Jack Russel
+Banho volumizante $25 - Todas as raças de pelo fluffy ex: poodle, spitz
+Banho tonalizante $25 - Pretos ou brancos
+Banho Xtreme $10 - Todas as raças muito sujas
+*/

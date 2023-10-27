@@ -17,5 +17,5 @@ type Input = {
     sexo: string, 
     cor: string,
     porte: string,
-    id_tutor: string //como conectar? 
+    id_tutor: number //como conectar? 
 }

@@ -4,9 +4,9 @@ import RetornaPet from "./CadastroPet/RetornaPets";
 import CadastraUser from "./CadastroUser/CadastroUser";
 import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
-//import OfereceServico from "./servicosUpselling/ofereceServico";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
+import AgendaBanho from "./Agenda/AgendaBanho";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
 import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
@@ -60,12 +60,12 @@ app.get("/ServicoUpselling", async function (request: Request, response: Respons
     response.json(servicos);
 });
 
-/*
+
 app.post("/AgendarBanho", async function (request: Request, response: Response){
-    const agendaBanho = new AgendaBanho(repositorioAgenda);
-    await agendaBanho.execute({data: request.body.data, horario: request.body.horario}); 
+    const agendaBanho = new AgendaBanho(repositorioAgenda, repositorioPet);
+    await agendaBanho.execute({id_pet: request.body.id_pet, dia: request.body.dia, horario: request.body.horario, week: request.body.week}); 
     response.end();
-});*/
+});
 
 app.get("/HorariosDisponiveisDia", async function (request: Request, response: Response){
     const horariosDisponiveisDia = new HorariosDisponiveisDia(repositorioAgenda, repositorioPet);

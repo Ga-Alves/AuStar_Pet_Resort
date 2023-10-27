@@ -5,4 +5,5 @@ export default interface RepositorioAgenda {
     add (week: number, day: string, employeeID: number): Promise<void>;
     get (week: number, day: string): Promise<BanhistaAlocado[]>;
     schedule (date: Date, employeeID: number, scheduledIndex: number, size: string): Promise<void>;
+    horaStrToIndex(horario: string): number;
 }

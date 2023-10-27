@@ -88,4 +88,33 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         await this.conexao.query("delete from app.Agenda where id_entrada = $1", [banhistaAlocadoDados.entryID]);
         await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [banhistaAlocadoDados.date, employeeID, newSchedule]);
     }
+    horaStrToIndex(horario: string): number{
+        let horaIndex: number = -1;
+
+        if(horario =='8:00'){
+            horaIndex = 0
+        }
+        if(horario =='8:50'){
+            horaIndex = 1
+        }
+        if(horario =='9:40'){
+            horaIndex = 2
+        }
+        if(horario =='10:30'){
+            horaIndex = 3
+        }
+        if(horario =='13:10'){
+            horaIndex = 4
+        }
+        if(horario =='14:00'){
+            horaIndex = 5
+        }
+        if(horario =='14:50'){
+            horaIndex = 6
+        }
+        if(horario =='15:40'){
+            horaIndex = 7
+        }
+        return horaIndex
+    }
 }

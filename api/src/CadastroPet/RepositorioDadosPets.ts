@@ -20,7 +20,7 @@ export default class RepositorioDadosPets implements RepositorioPets{
 
     }
     async getComIdTutor (id_tutor: number): Promise<PetCadastrado[]>{
-        const dadosPetCadastrado = await this.conexao.query("select id_pet, nome from app.Pet where id_tutor = '$1'", id_tutor)  
+        const dadosPetCadastrado = await this.conexao.query("select id_pet, nome from app.Pet where id_tutor = $1", id_tutor)  
         console.log(id_tutor)
         console.log(dadosPetCadastrado)
 		return dadosPetCadastrado;
