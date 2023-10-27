@@ -7,21 +7,68 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
     }
 
     async save (banhistaAlocado: BanhistaAlocado): Promise<void> {
-        await this.conexao.query("insert into app.Agenda (date, week, day, employeeID, horarios) values ($1, $2, $3, $4, $5)", [banhistaAlocado.date, banhistaAlocado.week, banhistaAlocado.day, banhistaAlocado.employeeID, banhistaAlocado.schedule]);
+        await this.conexao.query("insert into app.Agenda (date, employeeID, horarios) values ($1, $2, $3)", [banhistaAlocado.date, banhistaAlocado.employeeID, banhistaAlocado.schedule]);
     }
 
     async add (week: number, day: string, employeeID: number): Promise<void> {
         const schedule: number[] = [0, 1, 2, 3, 4, 6, 7, 8, 9];
+        const today = new Date();
+        const start_day = new Date();
+        start_day.setDate(today.getDate() - today.getDay()); // Domingo da semana atual
+        
+        const start_week = week - 1;
+
         const date = new Date();
-        await this.conexao.query("insert into app.Agenda (date, week, day, employeeID, horarios) values ($1, $2, $3, $4, $5)", [date, week, day, employeeID, schedule]);
+
+        if (day === 'seg') {
+            date.setDate(start_day.getDate() + start_week * 7 + 1);
+        } else if (day === 'ter') {
+            date.setDate(start_day.getDate() + start_week * 7 + 2);
+        } else if (day === 'qua') {
+            date.setDate(start_day.getDate() + start_week * 7 + 3);
+        } else if (day === 'qui') {
+            date.setDate(start_day.getDate() + start_week * 7 + 4);
+        } else if (day === 'sex') {
+            date.setDate(start_day.getDate() + start_week * 7 + 5);
+        } else if (day == 'sab') {
+            date.setDate(start_day.getDate() + start_week * 7 + 6);
+        } else {
+            throw new Error("Dia inválido.");
+        }
+
+        await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [date, employeeID, schedule]);
     }
 
     async get (week: number, day: string): Promise<BanhistaAlocado[]> {
-        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where week = $1 and day = $2", [week, day]);
+        const today = new Date();
+        const start_day = new Date();
+        start_day.setDate(today.getDate() - today.getDay()); // Domingo da semana atual
+        
+        const start_week = week - 1;
+
+        const date = new Date();
+
+        if (day === 'seg') {
+            date.setDate(start_day.getDate() + start_week * 7 + 1);
+        } else if (day === 'ter') {
+            date.setDate(start_day.getDate() + start_week * 7 + 2);
+        } else if (day === 'qua') {
+            date.setDate(start_day.getDate() + start_week * 7 + 3);
+        } else if (day === 'qui') {
+            date.setDate(start_day.getDate() + start_week * 7 + 4);
+        } else if (day === 'sex') {
+            date.setDate(start_day.getDate() + start_week * 7 + 5);
+        } else if (day == 'sab') {
+            date.setDate(start_day.getDate() + start_week * 7 + 6);
+        } else {
+            throw new Error("Dia inválido.");
+        }
+        
+        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1", [date]);
         return banhistaAlocadoDados;
     }
     
-    async schedule (week: number, day: string, employeeID: number, scheduledIndex: number, size: string) {
+    async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string) {
         let scheduledTime: number;
         if (scheduledIndex < 5) {
             scheduledTime = scheduledIndex
@@ -36,9 +83,9 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
             scheduled.push(scheduledTime + 1)
         }
 
-        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where week = $1 and day = $2 and employeeID = $3", [week, day, employeeID]);
+        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1 and id_banhista = $2", [date, employeeID]);
         const newSchedule: number[] = banhistaAlocadoDados.schedule.filter((t: number) => !scheduled.includes(t));
-        await this.conexao.query("delete from app.Agenda where entryId = $1", [banhistaAlocadoDados.entryID]);
-        await this.conexao.query("insert into app.Agenda (week, day, employeeID, schedule) values ($1, $2, $3)", [banhistaAlocadoDados.week, banhistaAlocadoDados.day, employeeID, newSchedule]);
+        await this.conexao.query("delete from app.Agenda where id_entrada = $1", [banhistaAlocadoDados.entryID]);
+        await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [banhistaAlocadoDados.date, employeeID, newSchedule]);
     }
 }

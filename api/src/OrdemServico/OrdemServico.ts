@@ -1,6 +1,6 @@
 export default class OrdemServico {
-    constructor (readonly title: string, readonly services: string[], readonly responsible: string,
-                readonly total: string, readonly week: number, readonly day: string,
+    constructor (readonly petID: number, readonly employeeID: number, readonly services: string[], 
+                readonly total: string, readonly date: Date,
                 readonly time: string, readonly completed: boolean) {
     }
 }

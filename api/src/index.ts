@@ -17,6 +17,7 @@ import RepositorioDadosOrdem from "./OrdemServico/RepositorioDadosOrdem";
 
 import Adaptador from "./Adaptador";
 import OfereceServico from "./servicosUpselling/ofereceServico";
+import MostrarAlocacao from "./Agenda/MostrarAlocacao";
 const app = express();
 app.use(express.json());
 const conexao = new Adaptador();
@@ -85,6 +86,13 @@ app.get("/CachorrosTutor", async function (request: Request, response: Response)
     const petsR = new RetornaPet(repositorioPet);
     const pets = petsR.execute({id_tutor: request.body.id}) 
     response.json(pets);
+})
+
+app.get("/OrganizacaoSemana", async function (request: Request, response: Response){
+    const mostrarAlocacao = new MostrarAlocacao(repositorioAgenda);
+    const alocacao = await mostrarAlocacao.execute({week: request.body.week});
+    console.log(alocacao);
+    response.json(alocacao);
 })
 
 app.listen(3030);
