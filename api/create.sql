@@ -79,6 +79,10 @@ INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (0, 'Lacinho',
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (1, 'Gravatinha', 30);
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (2, 'Bandana', 30);
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (3, 'Perfume', 30);
+INSERT INTO app.User (notifyToken) VALUES ('131235690ddifrfff5');
+INSERT INTO app.User (notifyToken) VALUES ('131235690ddifrfff6');
+INSERT INTO app.Pet (nome, raca, sexo, cor, porte, id_tutor) VALUES ('bilu', 'Pug', 'macho', 'Branco', 'p', 1);
+INSERT INTO app.Pet (nome, raca, sexo, cor, porte, id_tutor) VALUES ('Lili', 'Yorkshire', 'femea', 'Amarelo', 'p', 1);
 
 
 /*

@@ -22,7 +22,7 @@ function AgendaBanhoPasso1(props) {
     const [pet, setPet] = useState('')
 
     function handleSubmit(){
-        setPetID(555);
+        setPetID(2);
         if (pet != '') {
             props.navigation.push('AgendaBanhoPasso2')
         }
