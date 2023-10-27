@@ -2,7 +2,6 @@ import Conexao from "../conexao";
 import ServicoOferecido from "./servicoOferecido";
 import Dicas from "./dicas";
 import RepositorioServicos from "./Repositorio";
-//import pgp from "pg-promise";
 
 export default class RepositorioDadosServicos implements RepositorioServicos{
 

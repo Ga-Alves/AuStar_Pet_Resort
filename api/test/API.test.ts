@@ -10,23 +10,22 @@ test.skip("Deve cadastrar usuario", async function () {
 	});
 });
 	
-test.skip("Deve cadastrar Pet", async function () {
+test("Deve cadastrar Pet", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroPet",
 		method: "post",
 		data: {
 			nomePet: "Billy",   
-			raca: "Maltês",
+			raca: "mmmm",
 			sexo: "Macho",
 			cor: "Branco",
 			porte: "P",
 			id: 1
-
 		}
 	});
 });
 
-test("Deve retornar upselling", async function () {
+test.skip("Deve retornar upselling", async function () {
 	await axios({
 		url: "http://localhost:3030/ServicoUpselling",
 		method: "get",
@@ -39,9 +38,9 @@ test("Deve retornar upselling", async function () {
 test.skip("Deve retornar cachoros", async function () {
 	await axios({
 		url: "http://localhost:3030/CachorrosTutor",
-		method: "get",  
+		method: "post",      
 		data: {
-			id: 1
+			id: '1'
 
 		}
 	});

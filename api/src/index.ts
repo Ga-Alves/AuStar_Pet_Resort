@@ -19,6 +19,13 @@ import Adaptador from "./Adaptador";
 import OfereceServico from "./servicosUpselling/ofereceServico";
 import MostrarAlocacao from "./Agenda/MostrarAlocacao";
 const app = express();
+const cors = require('cors');
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+
+}));
+
 app.use(express.json());
 const conexao = new Adaptador();
 const repositorioPet = new RepositorioDadosPets(conexao);
@@ -28,16 +35,17 @@ const repositorioUpselling = new RepositorioDadosServicos(conexao);
 const repositorioAgenda = new RepositorioDadosAgenda(conexao);
 const repositorioOrdem = new RepositorioDadosOrdem(conexao);
 
-app.post("/CadastroPet", async function (request: Request, response: Response){
+app.post("/CadastroPet", cors(), (request, response, next)=>{
     const cadastraPet = new CadastraPet(repositorioPet);
-    await cadastraPet.execute({nomePet: request.body.nomePet, raca: request.body.raca, sexo: request.body.sexo, 
+    cadastraPet.execute({nomePet: request.body.nomePet, raca: request.body.raca, sexo: request.body.sexo, 
     cor: request.body.cor, porte: request.body.porte, id_tutor: request.body.id}) 
     response.end();
 });
 
-app.post("/CadastroUser", async function (request: Request, response: Response){
+app.post("/CadastroUser", cors(), (request, response, next) =>{
     const cadastraUser = new CadastraUser(repositorioUser);
-    const userId = await cadastraUser.execute({notifyToken: request.body.notifyToken}); 
+    console.log(request.body)
+    const userId =  cadastraUser.execute({notifyToken: request.body.notifyToken}); 
     response.json(userId);
 });
 
@@ -81,7 +89,8 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     response.json(orders);
 })
 
-app.get("/CachorrosTutor", async function (request: Request, response: Response){
+app.post("/CachorrosTutor", async function (request: Request, response: Response){
+    console.log(request.body.id)
     console.log(request.body.id)
     const petsR = new RetornaPet(repositorioPet);
     const pets = petsR.execute({id_tutor: request.body.id}) 
