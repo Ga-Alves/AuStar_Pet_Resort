@@ -1,4 +1,4 @@
-import express, {Request, response, Response}  from "express";
+import express, {Request, Response}  from "express";
 import CadastraPet from "./CadastroPet/CadastroPet";
 import RetornaPet from "./CadastroPet/RetornaPets";
 import CadastraUser from "./CadastroUser/CadastroUser";
@@ -104,4 +104,4 @@ app.get("/OrganizacaoSemana", async function (request: Request, response: Respon
     response.json(alocacao);
 })
 
-app.listen(3030);
+app.listen(3030, () => console.log("Running"));
