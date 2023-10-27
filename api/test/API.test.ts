@@ -26,12 +26,12 @@ test.skip("Deve cadastrar Pet", async function () {
 	});
 });
 
-test.skip("Deve retornar upselling", async function () {
+test("Deve retornar upselling", async function () {
 	await axios({
 		url: "http://localhost:3030/ServicoUpselling",
 		method: "get",
 		data: {
-			id_dog: '1'
+			id_dog: 2
 
 		}
 	});

@@ -5,7 +5,7 @@ export default class Dicas{
 
     getRandom(){
         var keys = Object.keys(this.dica).length;
-        return this.dica[Math.floor(Math.random() * (keys+1))];
+        return this.dica[Math.floor(Math.random() * (keys))];
     }   
     
     // colocar funcoes relacionadas a operacoes/regras de negocio aqui

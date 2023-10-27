@@ -34,7 +34,7 @@ CREATE TABLE app.Agenda (
 	id_banhista		int,
 	dia				date,
 	horarios		int[],
-	CONSTRAINT data_banhista_unico UNIQUE (data, id_banhista)
+	data_banhista_unico UNIQUE (data, id_banhista)
 );
 
 CREATE TABLE app.OrdemServico (
@@ -66,15 +66,23 @@ CREATE TABLE app.ServicosUpselling (
 );
 
 
-/*
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Tosa higiênica', 10, 'essa ai mesmo', 'Todos', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'essa ai mesmo', 'Todos', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'essa ai mesmo', 'Todos', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho volumizante', 25, 'essa ai mesmo', 'Todos', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'essa ai mesmo', 'Todos', 'Preto');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'essa ai mesmo', 'Todos', 'Branco');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'essa ai mesmo', 'Todos', 'Todos');
 
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Tosa higiênica', 10, 'Para seu dog ficar com o pelo na régua!', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Clareador', 10, 'Para seu dog deixar de ser amarelado, devolvemos o branco ao pelo', 'Todos', 'Branco');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'Para seu dog ficar com o pelo macio e brilhante de arrasar', 'Todos-', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'Para seu dog ficar com o pelo resistente, à prova de balas', 'Todos-', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho volumizante', 25, 'Por ser uma raça de pelo volumoso seu dog ficará mais charmoso(a) com nosso banho volumezante.', 'Todos-', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Preto');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Branco');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'Se seu dog estiver muito sujo, essa é a opção certa', 'Todos', 'Todos');
+INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (0, 'Lacinho', 30);
+INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (1, 'Gravatinha', 30);
+INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (2, 'Bandana', 30);
+INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (3, 'Perfume', 30);
+
+
+/*
+Consertar dps
 Hidratação $20 - Todos menos Spitz e Jack Russel
 Queratinização $25 - Todos menos Spitz e Jack Russel
 Banho volumizante $25 - Todas as raças de pelo fluffy ex: poodle, spitz

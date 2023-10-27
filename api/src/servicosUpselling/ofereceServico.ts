@@ -17,7 +17,7 @@ export default class OfereceServico {
     }
 }
 type Input = {
-    id_dog: string
+    id_dog: number
 }
 type Output = {
     servicoOferecidoUpselling : servicoOferecido,
