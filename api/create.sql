@@ -34,7 +34,7 @@ CREATE TABLE app.Agenda (
 	id_banhista		int,
 	dia				date,
 	horarios		int[],
-	data_banhista_unico UNIQUE (data, id_banhista)
+	data_banhista_unico UNIQUE (dia, id_banhista)
 );
 
 CREATE TABLE app.OrdemServico (
