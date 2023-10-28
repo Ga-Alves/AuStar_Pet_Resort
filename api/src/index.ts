@@ -20,10 +20,13 @@ import OfereceServico from "./servicosUpselling/ofereceServico";
 import MostrarAlocacao from "./Agenda/MostrarAlocacao";
 const app = express();
 const cors = require('cors');
+
 app.use(cors({
     origin: '*',
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+    headers: '*'
+    // credentials: true,            //access-control-allow-credentials:true
+    // optionSuccessStatus: 200
 }));
 
 app.use(express.json());
