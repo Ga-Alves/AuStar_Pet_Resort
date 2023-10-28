@@ -13,24 +13,25 @@ import { getNotifyToken } from './services/getNotifyToken';
 // api
 import backend from './services/BackEndAPI'
 
-async function setDeviceID(key) {
-  const tkn = await SecureStore.getItemAsync(key)
-  if(!tkn) {
-    console.log('No ID config yet.');
+async function setDeviceID() {
+  const id = await SecureStore.getItemAsync('id')
+
+  if(!id) {
     const notifyTkn = await getNotifyToken();
 
-    console.log(notifyTkn);
-    backend.post('/CadastroUser', {notifyToken: notifyTkn})
+    await backend.post('/CadastroUser', {notifyToken: notifyTkn})
+      .then(async (res) => {
+        await SecureStore.setItemAsync('id', res.data.idUser.toString());
+      })
       .catch((err) => {
         console.log("ERR: ", err);
       })
-    await SecureStore.setItemAsync('id', notifyTkn);
   }
 
 }
 
 export default function App() {
-  setDeviceID('id');
+  setDeviceID();
   return (
     <Context>
       <Routes/>
