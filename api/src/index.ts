@@ -38,17 +38,18 @@ const repositorioUpselling = new RepositorioDadosServicos(conexao);
 const repositorioAgenda = new RepositorioDadosAgenda(conexao);
 const repositorioOrdem = new RepositorioDadosOrdem(conexao);
 
-app.post("/CadastroPet", cors(), (request, response, next)=>{
+app.post("/CadastroPet", async function (request, response, next){
     const cadastraPet = new CadastraPet(repositorioPet);
-    cadastraPet.execute({nomePet: request.body.nomePet, raca: request.body.raca, sexo: request.body.sexo, 
+    await cadastraPet.execute({nomePet: request.body.nomePet, raca: request.body.raca, sexo: request.body.sexo, 
     cor: request.body.cor, porte: request.body.porte, id_tutor: request.body.id}) 
     response.end();
 });
 
-app.post("/CadastroUser", cors(), (request, response, next) =>{
+app.post("/CadastroUser", async function (request, response, next) {
     const cadastraUser = new CadastraUser(repositorioUser);
     console.log(request.body)
-    const userId =  cadastraUser.execute({notifyToken: request.body.notifyToken}); 
+    const userId =  await cadastraUser.execute({notifyToken: request.body.notifyToken}); 
+    console.log(userId)
     response.json(userId);
 });
 

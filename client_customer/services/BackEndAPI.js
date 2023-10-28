@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const backend = axios.create({
-    baseURL: 'http://200.131.184.176:3030/',
+    baseURL: 'http://192.168.0.36:3030',
     withCredentials: true,
 });
 
-export default backend
+export default backend;
