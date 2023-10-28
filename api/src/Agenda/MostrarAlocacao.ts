@@ -7,7 +7,13 @@ export default class MostrarAlocacao {
     }
 
     async execute(input: Input): Promise<Output[]> {
-        const alocacao: Output[] = [];
+        const alocacao: {
+            day: string,
+            employees: {
+                id_banhista: number,
+                nome: string
+            }[]
+        }[] = [];
 
         const semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
 
