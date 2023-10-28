@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const backend = axios.create({
-    baseURL: 'http://localhost:3030/',
+    baseURL: 'http://200.131.184.176:3030/',
     withCredentials: true,
 });
 

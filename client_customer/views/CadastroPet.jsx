@@ -17,30 +17,6 @@ import axios from "axios";
 
 function CadastroPet({ navigation }) {
 
-  // const postCadastroPet = async () => {
-  //   console.log("Entrou");
-  //   await axios({
-  //     url: "http://localhost:3030/CadastroPet",
-  //     method: "post",
-  //     data: {
-  //       nomePet: "Rapha",   
-  //       raca: "Maltês",
-  //       sexo: "Macho",
-  //       cor: "Branco",
-  //       porte: "P",
-  //       id: 1
-  //     }
-  //   })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  // }
-
-  // postCadastroPet();
-
   const breeds = ['Lulu da Pomerânia', 'Yorkshire', 'Shih-tzu', 'Pug', 'Schnauzer', 'Lhasa Apso', 'King Cavalier Charles spaniel', 'Bulldog francês', 'Jack Russel', 'Outro']
   const colors = ['Branco', 'Preto', 'Preto e Branco', 'Amarelo', 'Outro']
   const size = ['P', 'M', 'G', 'XL']
@@ -73,9 +49,11 @@ function CadastroPet({ navigation }) {
       id: 1
     }
 
-    axios.post("http://localhost:3030/CadastroPet",data)
+    // Deveria ser assincrono
+
+    axios.post("CadastroPet",data)
       .then(function (response) {
-        console.log(response);
+        console.log("Pet cadastrado com sucesso");
         // signupDog(body); //chamar rota do back aqui
         const allInputsOk = !Object.values(body).includes('');
         if (allInputsOk) {
