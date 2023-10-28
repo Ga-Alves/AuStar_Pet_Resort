@@ -13,7 +13,7 @@ export default class RepositorioDadosPets implements RepositorioPets{
         [petCadastrado.nomePet, petCadastrado.raca, petCadastrado.sexo, petCadastrado.cor, petCadastrado.porte, petCadastrado.id]); // resolver dps
     }
     async get (pet_id: number): Promise<PetCadastrado>{
-        const dadosPetCadastrado = await this.conexao.one("select * from app.Pet where pet_id = $1", pet_id)
+        const dadosPetCadastrado = await this.conexao.one("select * from app.Pet where id_pet = $1", pet_id)
         const petCadastrado = new PetCadastrado(dadosPetCadastrado.nomePet, dadosPetCadastrado.raca, dadosPetCadastrado.sexo, dadosPetCadastrado.cor,
             dadosPetCadastrado.porte, dadosPetCadastrado.id);
 		return petCadastrado;

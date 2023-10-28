@@ -5,19 +5,28 @@ import Routes from './utils/Routes';
 import { Context } from "./context/AgendaBanhoContext";
 
 // storage
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store'; 
+
+//notify token
+import { getNotifyToken } from './services/getNotifyToken';
+
+// api
+import backend from './services/BackEndAPI'
 
 async function setDeviceID(key) {
   const tkn = await SecureStore.getItemAsync(key)
-  
   if(!tkn) {
     console.log('No ID config yet.');
-    const backendID = '1'
-    const setTkn = await SecureStore.setItemAsync('id', backendID);
+    const notifyTkn = await getNotifyToken();
+
+    console.log(notifyTkn);
+    backend.post('/CadastroUser', {notifyToken: notifyTkn})
+      .catch((err) => {
+        console.log("ERR: ", err);
+      })
+    await SecureStore.setItemAsync('id', notifyTkn);
   }
-  else{
-    console.log('Seu DeviceID é:', tkn);
-  }
+
 }
 
 export default function App() {
