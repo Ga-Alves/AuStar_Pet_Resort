@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXIST app;
+
 -- Nomes estão inconsistentes entre os arquivos, precisamos ver o que temos que mudar
 DROP table app.User;
 DROP table app.OrdemServico;
