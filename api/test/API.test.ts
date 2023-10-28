@@ -1,16 +1,16 @@
 import axios from "axios";
 
-test.skip("Deve cadastrar usuario", async function () {
+test("Deve cadastrar usuario", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroUser",
 		method: "post",
 		data: {
-			notifyToken: '131235690ddifrfff5',
+			notifyToken: '131235ddfrfff5',
 		}
 	});
 });
 	
-test("Deve cadastrar Pet", async function () {
+test.skip("Deve cadastrar Pet", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroPet",
 		method: "post",
