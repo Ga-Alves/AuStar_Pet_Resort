@@ -83,7 +83,7 @@ function CadastroPet({ navigation }) {
         }
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(console.log(JSON.stringify(error)));
     });
 
   }
