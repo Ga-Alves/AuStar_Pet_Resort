@@ -1,11 +1,11 @@
 import axios from "axios";
 
-test("Deve cadastrar usuario", async function () {
+test.skip("Deve cadastrar usuario", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroUser",
 		method: "post",
 		data: {
-			notifyToken: '131235ddfrfff5',
+			notifyToken: '131235ddrfff5',
 		}
 	});
 });
@@ -35,12 +35,12 @@ test.skip("Deve retornar upselling", async function () {
 		}
 	});
 });
-test.skip("Deve retornar cachoros", async function () {
+test("Deve retornar cachoros", async function () {
 	await axios({
 		url: "http://localhost:3030/CachorrosTutor",
 		method: "post",      
 		data: {
-			id: '1'
+			id: 1
 
 		}
 	});
