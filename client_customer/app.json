@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "client_customer",
-    "slug": "client_customer",
+    "slug": "austart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "26dac9a7-6ed8-496f-9c3d-e781c1c2a769"
+      }
+    },
+    "owner": "ga_alves"
   }
 }
