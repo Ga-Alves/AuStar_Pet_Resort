@@ -24,7 +24,7 @@ const cors = require('cors');
 app.use(cors({
     origin: '*',
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-    headers: '*'
+    allowedHeaders: '*'
     // credentials: true,            //access-control-allow-credentials:true
     // optionSuccessStatus: 200
 }));
