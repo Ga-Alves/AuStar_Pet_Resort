@@ -94,11 +94,12 @@ test.skip("Deve mostrar horarios disponíveis", async function() {
 });
 
 test("Deve mostrar alocacao", async function() {
-	await axios({
+	const alocacao = await axios({
 		url: "http://localhost:3030/OrganizacaoSemana",
 		method: "get",
 		data: {
 			week: 2
 		}
-	})
+	});
+	console.log(alocacao);
 });

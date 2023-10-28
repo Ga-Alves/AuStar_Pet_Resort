@@ -10,7 +10,7 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [banhistaAlocado.employeeID, banhistaAlocado.name, banhistaAlocado.date, banhistaAlocado.schedule]);
     }
 
-    async add (week: number, day: string, employeeID: number): Promise<void> {
+    async add (week: number, day: string, employeeID: number, name: string): Promise<void> {
         const schedule: number[] = [0, 1, 2, 3, 4, 6, 7, 8, 9];
         const today = new Date();
         const start_day = new Date();
@@ -36,7 +36,7 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
             throw new Error("Dia inválido.");
         }
 
-        await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [date, employeeID, schedule]);
+        await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [employeeID, name, date, schedule]);
     }
 
     async get (week: number, day: string): Promise<BanhistaAlocado[]> {
@@ -67,8 +67,13 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1", [date]);
         return banhistaAlocadoDados;
     }
+
+    async get_name (employeeID: number): Promise<string> {
+        const name = await this.conexao.query("select nome from app.Agenda where id_banhista = $1", [employeeID]);
+        return name;
+    }
     
-    async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string) {
+    async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string): Promise<void> {
         let scheduledTime: number;
         if (scheduledIndex < 5) {
             scheduledTime = scheduledIndex
