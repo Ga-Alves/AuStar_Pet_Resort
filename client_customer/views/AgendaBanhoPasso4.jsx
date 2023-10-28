@@ -16,10 +16,20 @@ import { textStyle } from "../utils/textStyles";
 import { useContext, useState, useEffect } from 'react';
 import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
+// API
+import backend from '../services/BackEndAPI';
+
 function AgendaBanhoPasso4(props) {
 
 const [ upSelling, setUpSelling ] = useState([]);
 const { form, addService, deleteService } = useContext(AgendaBanhoContext)
+
+const getUpSelling = async () => {
+    const {data} = await backend("CachorrosTutor", {id: 1});
+    console.log(data);
+}
+
+getUpSelling();
 
 useEffect(() => {
     // simulando uma requisição de 3s de delay

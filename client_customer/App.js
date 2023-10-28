@@ -5,7 +5,7 @@ import Routes from './utils/Routes';
 import { Context } from "./context/AgendaBanhoContext";
 
 // storage
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store'; 
 
 async function setDeviceID(key) {
   const tkn = await SecureStore.getItemAsync(key)

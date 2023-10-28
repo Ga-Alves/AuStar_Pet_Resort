@@ -11,7 +11,35 @@ import { PopUp } from "../components/PopUp";
 // Styles
 import { textStyle } from "../utils/textStyles";
 
+// API
+import backend from "../services/BackEndAPI";
+import axios from "axios";
+
 function CadastroPet({ navigation }) {
+
+  // const postCadastroPet = async () => {
+  //   console.log("Entrou");
+  //   await axios({
+  //     url: "http://localhost:3030/CadastroPet",
+  //     method: "post",
+  //     data: {
+  //       nomePet: "Rapha",   
+  //       raca: "Maltês",
+  //       sexo: "Macho",
+  //       cor: "Branco",
+  //       porte: "P",
+  //       id: 1
+  //     }
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // }
+
+  // postCadastroPet();
 
   const breeds = ['Lulu da Pomerânia', 'Yorkshire', 'Shih-tzu', 'Pug', 'Schnauzer', 'Lhasa Apso', 'King Cavalier Charles spaniel', 'Bulldog francês', 'Jack Russel', 'Outro']
   const colors = ['Branco', 'Preto', 'Preto e Branco', 'Amarelo', 'Outro']
@@ -35,11 +63,29 @@ function CadastroPet({ navigation }) {
       dogSize
     };
     console.log(body);
-    // signupDog(body); //chamar rota do back aqui
-    const allInputsOk = !Object.values(body).includes('');
-    if (allInputsOk) {
-      setModalVisible(true);
+
+    const data = {
+      nomePet: dogName,   
+      raca: dogBreed,
+      sexo: dogSex,
+      cor: dogColor,
+      porte: dogSize,
+      id: 1
     }
+
+    axios.post("http://localhost:3030/CadastroPet",data)
+      .then(function (response) {
+        console.log(response);
+        // signupDog(body); //chamar rota do back aqui
+        const allInputsOk = !Object.values(body).includes('');
+        if (allInputsOk) {
+          setModalVisible(true);
+        }
+    })
+    .catch(function (error) {
+      console.log(console.log(JSON.stringify(error)));
+    });
+
   }
 
   return (
