@@ -70,8 +70,14 @@ app.post("/AlocaBanhista", async function (request: Request, response: Response)
 })
 
 app.get("/ServicoUpselling", async function (request: Request, response: Response){
+    // console.log(request.query.id_dog)
+    const id_dog = request.query.id_dog;
+    if ( typeof id_dog !== "string" ) {
+        response.status(500).json({ error: 'Invalid id_dog' });
+        return;
+    }
     const ofereceServico = new OfereceServico(repositorioUpselling);
-    const servicos = await ofereceServico.execute({id_dog: request.body.id_dog}); 
+    const servicos = await ofereceServico.execute({id_dog: parseInt(id_dog)}); 
     console.log(servicos)
     response.json(servicos);
 });
