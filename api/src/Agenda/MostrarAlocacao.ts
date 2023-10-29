@@ -1,3 +1,4 @@
+import BanhistaAlocado from "./BanhistaAlocado";
 import RepositorioAgenda from "./Repositorio";
 
 export default class MostrarAlocacao {
@@ -16,11 +17,16 @@ export default class MostrarAlocacao {
 
         for (let idx = 0; idx < 6; idx++) {
             const alocacaoDia = await this.repositorioAgenda.get(input.week, semana[idx]);
-            for (const banhistaAlocado of alocacaoDia) {
+            for (let idx_banhista = 0; idx_banhista < alocacaoDia.length; idx_banhista++){
+                const banhistaAlocado = alocacaoDia[idx_banhista];
+
+                const id: number = banhistaAlocado.id_banhista;
+                const name: string = banhistaAlocado.nome;
+
                 const dayIndex = semana.indexOf(semana[idx]);
                 alocacao[dayIndex].employees.push({
-                    id: banhistaAlocado.employeeID,
-                    name: banhistaAlocado.name,
+                    id: id,
+                    name: name,
                 });
             }
         }

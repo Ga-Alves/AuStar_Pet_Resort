@@ -8,7 +8,7 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
     }
 
     async save (banhistaAlocado: BanhistaAlocado): Promise<void> {
-        await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [banhistaAlocado.employeeID, banhistaAlocado.name, banhistaAlocado.date, banhistaAlocado.schedule]);
+        await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [banhistaAlocado.id_banhista, banhistaAlocado.nome, banhistaAlocado.dia, banhistaAlocado.horarios]);
     }
 
     async add (week: number, day: string, employeeID: number): Promise<void> {
