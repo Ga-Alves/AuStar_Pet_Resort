@@ -43,7 +43,10 @@ function GerenciaAgenda() {
     useEffect(() => {
         backend.get(`OrganizacaoSemana?week=${week}`)
         .then((res) => {            
-            setWeekScheedule(res.data);
+            const resData = JSON.parse(res.data)
+            setWeekScheedule(resData);
+            console.log(resData);
+            
             })
             .catch((err) => {
                 console.log(err);
