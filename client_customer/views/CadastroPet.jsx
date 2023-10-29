@@ -73,7 +73,7 @@ function CadastroPet({ navigation }) {
       id: 1
     }
 
-    axios.post("http://localhost:3030/CadastroPet",data)
+    backend.post("CadastroPet",data)
       .then(function (response) {
         console.log(response);
         // signupDog(body); //chamar rota do back aqui
@@ -83,7 +83,7 @@ function CadastroPet({ navigation }) {
         }
     })
     .catch(function (error) {
-      console.log(console.log(JSON.stringify(error)));
+      console.log(error);
     });
 
   }

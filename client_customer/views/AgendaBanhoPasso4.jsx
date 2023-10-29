@@ -24,27 +24,23 @@ function AgendaBanhoPasso4(props) {
 const [ upSelling, setUpSelling ] = useState([]);
 const { form, addService, deleteService } = useContext(AgendaBanhoContext)
 
-const getUpSelling = async () => {
-    const {data} = await backend("CachorrosTutor", {id: 1});
-    console.log(data);
-}
-
-getUpSelling();
 
 useEffect(() => {
-    // simulando uma requisição de 3s de delay
-    setTimeout(() => {
-        setUpSelling({
-            servicos: [
-            { name: "Banho Clareador", valor: 30, id: 0 },
-            { name: "Hidratação", valor: 30, id: 1 },
-            { name: "Banho Volumizante", valor: 30, id: 2}
-            ],
-            tips: 'Por ser uma raça de pelo volumoso seu lulu da pomerania' +
-            'ficará mais charmoso(a) com nosso banho volumezante.'
+    backend.get(`ServicoUpselling?id_dog=${form.id_pet}`)
+        .then(function (response) {
+            back_response = {
+                dica: response.data.servicoOferecidoDicas['dica'],
+                servicos: response.data.servicoOferecidoUpselling
+            }
+
+            console.log(back_response);
+            
+            setUpSelling(back_response);
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-        
-    }, 1500)
+
 }, [])
 
     return (
@@ -64,16 +60,16 @@ useEffect(() => {
                                     return (
                                         <CheckBox 
                                             key={idx} 
-                                            label={item.name} 
-                                            isChecked={form.servicos.has(item.id)} 
+                                            label={item.nome} 
+                                            isChecked={form.servicos.has(item.id_upselling)} 
                                             setChecked={() => {
-                                                if (form.servicos.has(item.id)) 
+                                                if (form.servicos.has(item.id_upselling)) 
                                                 { 
-                                                    deleteService(item.id);
+                                                    deleteService(item.id_upselling);
                                                 }
                                                 else
                                                 {
-                                                    addService(item.id);
+                                                    addService(item.id_upselling);
                                                 }
                                             }}/>   
                                     )
@@ -84,7 +80,7 @@ useEffect(() => {
                         <View>
                             <Text style={[textStyle.regularText, textStyle.textColor]}>Dica*</Text>
                             <Text style={[textStyle.regularText, textStyle.textColor]}>
-                               {upSelling.tips}
+                               {upSelling.dica}
                             </Text>
                         </View>
                         <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso5')} text='Próximo Passo !'/>
