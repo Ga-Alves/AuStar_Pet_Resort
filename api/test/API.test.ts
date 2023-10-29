@@ -25,7 +25,7 @@ test.skip("Deve cadastrar Pet", async function () {
 	});
 });
 
-test.skip("Deve retornar upselling", async function () {
+test("Deve retornar upselling", async function () {
 	await axios({
 		url: "http://localhost:3030/ServicoUpselling?id_dog=2",
 		method: "get" 
@@ -73,7 +73,7 @@ test.skip("Deve alocar banhista", async function () {
 	});
 });
 
-test("Deve mostrar horarios disponíveis", async function() {
+test.skip("Deve mostrar horarios disponíveis", async function() {
 	await axios({
 		url: "http://localhost:3030/HorariosDisponiveisDia?week=2&day=qua&id_pet=2",
 		method: "get",

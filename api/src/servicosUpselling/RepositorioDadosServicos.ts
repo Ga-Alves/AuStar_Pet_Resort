@@ -17,13 +17,13 @@ export default class RepositorioDadosServicos implements RepositorioServicos{
 
         if(pet.cor == 'Branco'){ 
             const servico1 = {nome: 'Banho Clareador',preco: 10, id_upselling: 2}
-            const dica1 = {dica: 'Para seu dog deixar de ser amarelado, devolvemos o branco ao pelo'}
+            const dica1 = {dica: 'Para seu dog deixar de ser amarelado, o Banho Clareador devolve o branco ao pelo do seu Pet!'}
             dadosServicosUpselling.push(servico1)
             dadosServicoDicas.push(dica1)
         }
         if(pet.cor == 'Branco' || pet.cor == 'Preto' || pet.cor == 'Preto e Branco'){
             const servico2 = {nome:'Banho tonalizante',preco: 25, id_upselling: 6}
-            const dica2 = {dica: 'Pro seu dog deixar de ser desbotado'}
+            const dica2 = {dica: 'Se seu dog estiver desbotado, o Banho Tonalizante resolve seu problema!'}
             dadosServicosUpselling.push(servico2)
             dadosServicoDicas.push(dica2)
         }
@@ -32,8 +32,8 @@ export default class RepositorioDadosServicos implements RepositorioServicos{
             const servico4 = {nome: 'Queratinização', preco: 25, id_upselling: 4}
             dadosServicosUpselling.push(servico3)
             dadosServicosUpselling.push(servico4)
-            const dica3 = {dica: 'Para seu dog ficar com o pelo macio e brilhante de arrasar'}
-            const dica4 = {dica: 'Para seu dog ficar com o pelo resistente, à prova de balas'}
+            const dica3 = {dica: 'Para seu dog ficar com o pelo macio e brilhante de arrasar a Hidratação é a melhor opção!'}
+            const dica4 = {dica: 'Para seu dog ficar com o pelo resistente, à prova de balas, escolha a Queratinização!'}
             dadosServicoDicas.push(dica3)
             dadosServicoDicas.push(dica4)
         }
