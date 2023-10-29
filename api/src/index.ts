@@ -9,7 +9,7 @@ import ServiceOrders from "./OrdemServico/ServiceOrders";
 import UserNotify from "./CadastroUser/NotificaUser";
 import AgendaBanho from "./Agenda/AgendaBanho";
 import FinalizaOrdemDeServico from "./OrdemServico/FinalizaOrdemDeServico";
-
+import RetornaBanhistas from "./CadastroBanhista/RetornaBanhistas"
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
 import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
 import RepositorioDadosBanhistas from "./CadastroBanhista/RepositorioDadosBanhistas"
@@ -181,6 +181,14 @@ app.get("/FinalizaOrdemDeServico", async function (request: Request, response: R
     const userNotify = new UserNotify(repositorioUser);
     await userNotify.execute({id_user : id_user.id_user});
 
+})
+
+app.get("/RetornaBanhistas", async function (request: Request, response: Response){
+    const retornaBanhistas = new RetornaBanhistas(repositorioBanhista)
+    const banhistas = await retornaBanhistas.execute();
+
+    console.log(banhistas);
+    response.json(banhistas);
 })
 
 app.listen(3030, () => console.log("Running"));
