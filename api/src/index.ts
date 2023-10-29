@@ -6,6 +6,7 @@ import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
+import UserNotify from "./CadastroUser/notifyToken";
 import AgendaBanho from "./Agenda/AgendaBanho";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
@@ -16,6 +17,7 @@ import RepositorioDadosAgenda from "./Agenda/RepositorioDadosAgenda";
 import RepositorioDadosOrdem from "./OrdemServico/RepositorioDadosOrdem";
 
 import Adaptador from "./Adaptador";
+import AdaptadorNotificacao from "./AdaptadorNotificacao";
 import OfereceServico from "./servicosUpselling/ofereceServico";
 import MostrarAlocacao from "./Agenda/MostrarAlocacao";
 const app = express();
@@ -31,8 +33,10 @@ app.use(cors({
 
 app.use(express.json());
 const conexao = new Adaptador();
+const conexaoNotifica = new AdaptadorNotificacao();
+
 const repositorioPet = new RepositorioDadosPets(conexao);
-const repositorioUser = new RepositorioDadosUsers(conexao);
+const repositorioUser = new RepositorioDadosUsers(conexao, conexaoNotifica);
 const repositorioBanhista = new RepositorioDadosBanhistas(conexao);
 const repositorioUpselling = new RepositorioDadosServicos(conexao);
 const repositorioAgenda = new RepositorioDadosAgenda(conexao);
@@ -88,14 +92,15 @@ app.get("/HorariosDisponiveisDia", async function (request: Request, response: R
 
 app.get("/ServiceOrders", async function (request: Request, response: Response){
     const serviceOrders = new ServiceOrders(repositorioOrdem);
+    const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: request.body.week, day: request.body.day});
+    // eu acho q isso é aqui
+    await userNotify.execute({id_user : request.body.id_user});
     console.log(orders);
     response.json(orders);
 })
 
-app.post("/CachorrosTutor", async function (request: Request, response: Response){
-    console.log(request.body.id)
-    console.log(request.body.id)
+app.get("/CachorrosTutor", async function (request: Request, response: Response){
     const petsR = new RetornaPet(repositorioPet);
     const pets = petsR.execute({id_tutor: request.body.id}) 
     response.json(pets);

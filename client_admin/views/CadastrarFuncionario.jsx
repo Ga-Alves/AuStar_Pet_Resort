@@ -11,19 +11,25 @@ import { useState } from 'react';
 import { GradientBorder } from '../components/GradientBorder';
 import { BlueButton } from '../components/BlueButton';
 
+//api
+import backend from '../services/BackEndAPI'
+
 function RegisterEmployee(props) {
     const [workerName, setWorkerName] = useState('');
     const windowWidth = Dimensions.get('window').width;
 
     function createEmployee() {
-        const body = {
-          workerName,
-        };
-        console.log(body);
-        const allInputsOk = !Object.values(body).includes('');
+        const allInputsOk = !Object.values(workerName).includes('');
+        console.log(allInputsOk);
+        
         if (allInputsOk) {
-            // signupDog(body); //chamar rota do back aqui
-            props.navigation.push('Ordem de Serviço')
+            backend.post("/CadastroBanhista", {nome: workerName})
+                .then(() => {
+                    props.navigation.push('Ordem de Serviço')
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
         }
       }
     

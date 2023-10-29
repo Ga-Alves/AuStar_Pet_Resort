@@ -1,11 +1,13 @@
 import Conexao from "../conexao";
+import ConexaoNotificacao from "../ConexaoNotificacao";
+
 import UserCadastrado from "./userCadastrado";
 import RepositorioUsers from "./Repositorio";
 //import pgp from "pg-promise";
 
 export default class RepositorioDadosUsers implements RepositorioUsers{
 
-    constructor(readonly conexao: Conexao){
+    constructor(readonly conexao: Conexao, readonly conexaoNotificacao : ConexaoNotificacao){
     }
 
     async save (userCadastrado: UserCadastrado): Promise<void> {
@@ -17,6 +19,16 @@ export default class RepositorioDadosUsers implements RepositorioUsers{
         [notifyToken]); 
 		const usuarioCadastrado = new UserCadastrado(dadosUserCadastrado.id_tutor,notifyToken);
 		return usuarioCadastrado;
+
+    }
+    async getComId (notifyToken: string): Promise<string> {
+        const dadosUserCadastrado = await this.conexao.one("select id_tutor from app.User where id_user = $1", 
+        [notifyToken]); 
+		const usuarioCadastrado = new UserCadastrado(dadosUserCadastrado.id_tutor,notifyToken);
+		return usuarioCadastrado.notifyToken;
+    }
+    async notificaUser (notifyToken: string): Promise<void> {
+        await this.conexaoNotificacao.notifica(notifyToken);
 
     }
 } 
