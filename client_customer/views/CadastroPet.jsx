@@ -19,9 +19,63 @@ import * as SecureStore from 'expo-secure-store';
 
 function CadastroPet({ navigation }) {
 
-  const breeds = ['Lulu da Pomerânia', 'Yorkshire', 'Shih-tzu', 'Pug', 'Schnauzer', 'Lhasa Apso', 'King Cavalier Charles spaniel', 'Bulldog francês', 'Jack Russel', 'Outro']
-  const colors = ['Branco', 'Preto', 'Preto e Branco', 'Amarelo', 'Outro']
-  const size = ['P', 'M', 'G', 'XL']
+  const breeds = [
+    {
+      "label":'Lulu da Pomerânia',
+      "id": 'Lulu da Pomerânia'
+    },
+    {
+      "label":'Yorkshire',
+      "id": 'Yorkshire'
+    },
+    {
+      "label":'Shih-tzu',
+      "id": 'Shih-tzu'
+    },
+    {
+      "label":'Pug',
+      "id": 'Pug'
+    },
+    {
+      "label":'Schnauzer',
+      "id": 'Schnauzer'
+    },
+    {
+      "label":'Lhasa Apso',
+      "id": 'Lhasa Apso'
+    },
+    {
+      "label":'King Cavalier Charles spaniel',
+      "id": 'King Cavalier Charles spaniel'
+    },
+    {
+      "label":'Bulldog francês',
+      "id": 'Bulldog francês'
+    },
+    {
+      "label":'Jack Russel',
+      "id": 'Jack Russel'
+    },
+    {
+      "label":'Outro',
+      "id": 'Outro'
+    },
+  ]
+
+
+  const colors = [
+    {"label": 'Branco', "id": 'Branco'},
+    {"label": 'Preto', "id": 'Preto'},
+    {"label": 'Preto e Branco', "id": 'Preto e Branco'},
+    {"label": 'Amarelo', "id": 'Amarelo'},
+    {"label": 'Outro', "id": 'Outro'},
+  ]
+  const size = [
+   {"label":'P', "id": 'P'},
+   {"label":'M', "id": 'M'},
+   {"label":'G', "id": 'G'},
+   {"label":'XL', "id": 'XL'},
+  ]
 
   const [dogName, setDogName] = useState('');
   const [dogBreed, setDogBreed] = useState('');

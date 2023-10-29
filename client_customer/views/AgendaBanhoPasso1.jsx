@@ -21,6 +21,9 @@ import backend from "../services/BackEndAPI";
 // storage
 import * as SecureStore from 'expo-secure-store'; 
 
+// service
+import { renameKeys } from "../services/renameObjKeys";
+
 function AgendaBanhoPasso1(props) {
 
     const {setPetID} = useContext(AgendaBanhoContext)
@@ -28,24 +31,27 @@ function AgendaBanhoPasso1(props) {
     const [pet, setPet] = useState('')
 
     function handleSubmit(){
-        setPetID(2);
+        setPetID(pet);
         if (pet != '') {
             props.navigation.push('AgendaBanhoPasso2')
         }
     }
 
-    useEffect(async () => {
-        const id = await SecureStore.getItemAsync('id');
-        console.log(id);
-        
-        await backend.get(`CachorrosTutor?id_tutor=${1}`)
-        .then(function (response) {
-            setTutorPets(response.data.res)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
+    useEffect(() => {
+        async function fetchData(){
+            const id = await SecureStore.getItemAsync('id');
+            
+            backend.get(`CachorrosTutor?id_tutor=${1}`)
+            .then(function (res) {
+                const resData = res.data.res
+                const SelectPatternPets = resData.map((obj) => renameKeys(obj, {"id_pet": "id", "nome": "label"}))
+                setTutorPets(SelectPatternPets)
+            })
+            .catch(function (error) {
+                console.log("ERR: ", error);
+            });
+        }
+        fetchData();
     }, [])
 
     return (
