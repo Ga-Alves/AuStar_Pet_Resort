@@ -3,6 +3,7 @@ import ConexaoNotificacao from "../ConexaoNotificacao";
 
 import UserCadastrado from "./userCadastrado";
 import RepositorioUsers from "./Repositorio";
+import NotifyToken from "./notifyToken";
 //import pgp from "pg-promise";
 
 export default class RepositorioDadosUsers implements RepositorioUsers{
@@ -27,8 +28,8 @@ export default class RepositorioDadosUsers implements RepositorioUsers{
 		const usuarioCadastrado = new UserCadastrado(dadosUserCadastrado.id_tutor,notifyToken);
 		return usuarioCadastrado.notifyToken;
     }
-    async notificaUser (notifyToken: string): Promise<void> {
-        await this.conexaoNotificacao.notifica(notifyToken);
+    async notificaUser (notifyToken: string, dadosNotificacao: NotifyToken): Promise<void> {
+        await this.conexaoNotificacao.notifica(notifyToken, dadosNotificacao);
 
     }
 } 
