@@ -1,5 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS app;
 
+GRANT INSERT, SELECT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app TO postgres;
+
 DROP table app.User;
 DROP table app.OrdemServico;
 DROP table app.Pet;

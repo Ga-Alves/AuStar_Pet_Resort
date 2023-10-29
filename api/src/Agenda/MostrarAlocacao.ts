@@ -4,21 +4,27 @@ export default class MostrarAlocacao {
     constructor (readonly repositorioAgenda: RepositorioAgenda){
     }
 
-    async execute(input: Input): Promise<Output[]> {
-        const alocacao: Output[] = [];
-
+    async execute(input: Input): Promise<string> {
         const semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
 
-        for (const dia of semana) {
-            const alocacaoDia = await this.repositorioAgenda.get(input.week, dia);
-            const alocados: Banhista[] = [];
+        const alocacao: Semana[] = semana.map((day) => {
+            return {
+              day,
+              employees: [], // Inicializa array de banhistas
+            };
+          });
 
+        for (let idx = 0; idx < 6; idx++) {
+            const alocacaoDia = await this.repositorioAgenda.get(input.week, semana[idx]);
             for (const banhistaAlocado of alocacaoDia) {
-                alocados.push({id: banhistaAlocado.employeeID, name: banhistaAlocado.name});
+                const dayIndex = semana.indexOf(semana[idx]);
+                alocacao[dayIndex].employees.push({
+                    id: banhistaAlocado.employeeID,
+                    name: banhistaAlocado.name,
+                });
             }
-            alocacao.push({day: dia, employees: alocados});
         }
-        return alocacao;
+        return JSON.stringify(alocacao);
     }
 }
 
@@ -26,7 +32,7 @@ type Input = {
     week: number
 }
 
-type Output = {
+type Semana = {
     day: string,
     employees: Banhista[]
 }
