@@ -148,7 +148,8 @@ app.get("/CachorrosTutor", async function (request: Request, response: Response)
         return;
     }
     const petsR = new RetornaPet(repositorioPet);
-    const pets = petsR.execute({id_tutor: parseInt(id_tutor)}) 
+    const pets = await petsR.execute({id_tutor: parseInt(id_tutor)}) 
+    console.log(pets);
     response.json(pets);
 })
 
