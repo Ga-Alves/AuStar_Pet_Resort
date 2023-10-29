@@ -1,3 +1,4 @@
+import NotifyToken from "./CadastroUser/notifyToken";
 import ConexaoNotificacao from "./ConexaoNotificacao";
 import { Expo } from 'expo-server-sdk';
 
@@ -9,14 +10,14 @@ export default class AdaptadorNotificaco implements ConexaoNotificacao{
         this.expo = new Expo();
 
     }
-    notifica(pushToken: string): number {  
+    notifica(pushToken: string, dadosNotificacao: NotifyToken): number {  
         //return this.expo.query(statement, params);
-        if (this.expo.isExpoPushToken(pushToken)) {
+        if (Expo.isExpoPushToken(pushToken)) {
                 this.expo.sendPushNotificationsAsync([{
                 to: pushToken,
-                sound: 'default',
-                title: "Agora sim, cheirosinho! 🐶⭐",
-                body: 'Já estou de banho tomado, vem me buscar.',
+                sound: dadosNotificacao.sound,
+                title: dadosNotificacao.title,
+                body: dadosNotificacao.body,
                 data: { withSome: 'data' },
               }]);
               return 1

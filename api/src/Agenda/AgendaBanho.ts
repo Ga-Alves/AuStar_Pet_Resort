@@ -30,7 +30,7 @@ export default class AgendaBanho {
 
         const banhistasDisponiveis: BanhistaAlocado[] = [];
         for (const banhistaAlocado of banhistasAlocados) {
-            const horarios = banhistaAlocado.schedule;
+            const horarios = banhistaAlocado.horarios;
             if (horarios.includes(horaID)) {
                 banhistasDisponiveis.push(banhistaAlocado);
             }
@@ -39,11 +39,11 @@ export default class AgendaBanho {
 
         const pet = await this.repositorioPets.get(input.id_pet);
 
-        await this.repositorioAgenda.schedule(data, banhistaEscolhido.employeeID, horaIndex, pet.porte);
+        await this.repositorioAgenda.schedule(data, banhistaEscolhido.id_banhista, horaIndex, pet.porte);
 
         const total = await this.repositorioOrdem.calcula_total(input.finalizacoes, input.servicos);
 
-        await this.repositorioOrdem.save(new OrdemServico(input.id_pet, banhistaEscolhido.employeeID, input.finalizacoes, input.servicos, total, data, input.horario, false));
+        await this.repositorioOrdem.save(new OrdemServico(input.id_pet, banhistaEscolhido.id_banhista, input.finalizacoes, input.servicos, total, data, input.horario, false));
     }
 }
 type Input = {

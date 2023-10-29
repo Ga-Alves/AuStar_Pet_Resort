@@ -14,16 +14,16 @@ export default class HorariosDisponiveisDia {
         const horariosDisponiveis: Set<number> = new Set();
         if (pet.porte === "G" || pet.porte === "XL") {
             for (const banhista of banhistasDisponiveis) {
-                banhista.schedule.sort((h1, h2) => h1 - h2)
-                for (let i = 1; i < banhista.schedule.length; i++) {
-                    if (banhista.schedule[i] === banhista.schedule[i-1] + 1) {
-                        horariosDisponiveis.add(banhista.schedule[i-1]);
+                banhista.horarios.sort((h1, h2) => h1 - h2)
+                for (let i = 1; i < banhista.horarios.length; i++) {
+                    if (banhista.horarios[i] === banhista.horarios[i-1] + 1) {
+                        horariosDisponiveis.add(banhista.horarios[i-1]);
                     }
                 }
             }
         } else {
             for (const banhista of banhistasDisponiveis) {
-                for (const horario of banhista.schedule) {
+                for (const horario of banhista.horarios) {
                     horariosDisponiveis.add(horario);
                 }
             }

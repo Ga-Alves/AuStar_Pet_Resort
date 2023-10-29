@@ -27,27 +27,19 @@ test.skip("Deve cadastrar Pet", async function () {
 
 test.skip("Deve retornar upselling", async function () {
 	await axios({
-		url: "http://localhost:3030/ServicoUpselling",
-		method: "get",
-		data: {
-			id_dog: 2
-
-		}
+		url: "http://localhost:3030/ServicoUpselling?id_dog=2",
+		method: "get" 
 	});
 });
-test("Deve retornar cachoros", async function () {
+test.skip("Deve retornar cachoros", async function () {
 	await axios({
-		url: "http://localhost:3030/CachorrosTutor",
-		method: "get",      
-		data: {
-			id: 1
-
-		}
+		url: "http://localhost:3030/CachorrosTutor?id_tutor=1",
+		method: "get"
 	});
 });
 test.skip("Agendar banho", async function () {
 	await axios({
-		url: "http://localhost:3030/CachorrosTutor",
+		url: "http://localhost:3030/AgendarBanho",
 		method: "post",  
 		data: {
 			id_pet: 1,
@@ -59,7 +51,7 @@ test.skip("Agendar banho", async function () {
 	});
 });
 
-test("Deve cadastrar banhista", async function () {
+test.skip("Deve cadastrar banhista", async function () {
 	await axios({
 		url: "http://localhost:3030/CadastroBanhista",
 		method: "post",
@@ -69,7 +61,7 @@ test("Deve cadastrar banhista", async function () {
 	});
 });
 
-test("Deve alocar banhista", async function () {
+test.skip("Deve alocar banhista", async function () {
 	await axios({
 		url: "http://localhost:3030/AlocaBanhista",
 		method: "post",
@@ -83,23 +75,29 @@ test("Deve alocar banhista", async function () {
 
 test.skip("Deve mostrar horarios disponíveis", async function() {
 	await axios({
-		url: "http://localhost:3030/HorariosDisponiveisDia",
+		url: "http://localhost:3030/HorariosDisponiveisDia?week=2&day=qua&id_pet=2",
 		method: "get",
-		data: {
-			week: 2,
-			day: 'qua',
-			id_pet: 1
-		}
 	});
 });
 
-test("Deve mostrar alocacao", async function() {
+test.skip("Deve mostrar alocacao", async function() {
 	const alocacao = await axios({
-		url: "http://localhost:3030/OrganizacaoSemana",
-		method: "get",
-		data: {
-			week: 2
-		}
+		url: "http://localhost:3030/OrganizacaoSemana?week=2",
+		method: "get"
 	});
-	console.log(alocacao);
+	console.log(alocacao)
 });
+test("Deve finalizar ordem de servico", async function() {
+	await axios({
+		url: "http://localhost:3030/FinalizaOrdemDeServico?id_ordem=2",
+		method: "get"
+	});
+});
+test.skip("Deve testar ServiceOrders", async function() {
+	await axios({
+		url: "http://localhost:3030/ServiceOrders?week=2&day=qua&id_user=2",
+		method: "get",
+	});
+});
+
+

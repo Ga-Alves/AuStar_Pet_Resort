@@ -1,24 +1,36 @@
+import BanhistaAlocado from "./BanhistaAlocado";
 import RepositorioAgenda from "./Repositorio";
 
 export default class MostrarAlocacao {
     constructor (readonly repositorioAgenda: RepositorioAgenda){
     }
 
-    async execute(input: Input): Promise<Output[]> {
-        const alocacao: Output[] = [];
-
+    async execute(input: Input): Promise<string> {
         const semana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
 
-        for (const dia of semana) {
-            const alocacaoDia = await this.repositorioAgenda.get(input.week, dia);
-            const alocados: Banhista[] = [];
+        const alocacao: Semana[] = semana.map((day) => {
+            return {
+              day,
+              employees: [], // Inicializa array de banhistas
+            };
+          });
 
-            for (const banhistaAlocado of alocacaoDia) {
-                alocados.push({id: banhistaAlocado.employeeID, name: banhistaAlocado.name});
+        for (let idx = 0; idx < 6; idx++) {
+            const alocacaoDia = await this.repositorioAgenda.get(input.week, semana[idx]);
+            for (let idx_banhista = 0; idx_banhista < alocacaoDia.length; idx_banhista++){
+                const banhistaAlocado = alocacaoDia[idx_banhista];
+
+                const id: number = banhistaAlocado.id_banhista;
+                const name: string = banhistaAlocado.nome;
+
+                const dayIndex = semana.indexOf(semana[idx]);
+                alocacao[dayIndex].employees.push({
+                    id: id,
+                    name: name,
+                });
             }
-            alocacao.push({day: dia, employees: alocados});
         }
-        return alocacao;
+        return JSON.stringify(alocacao);
     }
 }
 
@@ -26,7 +38,7 @@ type Input = {
     week: number
 }
 
-type Output = {
+type Semana = {
     day: string,
     employees: Banhista[]
 }

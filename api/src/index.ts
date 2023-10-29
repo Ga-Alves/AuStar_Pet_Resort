@@ -6,8 +6,9 @@ import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
-import UserNotify from "./CadastroUser/notifyToken";
+import UserNotify from "./CadastroUser/NotificaUser";
 import AgendaBanho from "./Agenda/AgendaBanho";
+import FinalizaOrdemDeServico from "./OrdemServico/FinalizaOrdemDeServico";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
 import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
@@ -134,7 +135,9 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     // eu acho q isso é aqui
-    await userNotify.execute({id_user : request.body.id_user});
+
+    console.log(parseInt(id_user))
+    await userNotify.execute({id_user : parseInt(id_user)});
     console.log(orders);
     response.json(orders);
 })
@@ -148,7 +151,8 @@ app.get("/CachorrosTutor", async function (request: Request, response: Response)
         return;
     }
     const petsR = new RetornaPet(repositorioPet);
-    const pets = petsR.execute({id_tutor: parseInt(id_tutor)}) 
+    const pets = await petsR.execute({id_tutor: parseInt(id_tutor)}) 
+    console.log(pets);
     response.json(pets);
 })
 
@@ -162,6 +166,20 @@ app.get("/OrganizacaoSemana", async function (request: Request, response: Respon
     const mostrarAlocacao = new MostrarAlocacao(repositorioAgenda);
     const alocacao = await mostrarAlocacao.execute({week: parseInt(week)});
     response.json(alocacao);
+})
+
+app.get("/FinalizaOrdemDeServico", async function (request: Request, response: Response){
+    const id_ordem = request.query.id_ordem;
+
+    if ( typeof id_ordem !== "string" ) {
+        response.status(500).json({ error: 'Invalid id_ordem' });
+        return;
+    }
+    const ordemServico = new FinalizaOrdemDeServico(repositorioOrdem)
+    const id_user = await ordemServico.execute({id_ordem: parseInt(id_ordem)});
+    const userNotify = new UserNotify(repositorioUser);
+    await userNotify.execute({id_user : id_user.id_user});
+
 })
 
 app.listen(3030, () => console.log("Running"));

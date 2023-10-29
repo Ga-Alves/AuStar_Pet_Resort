@@ -1,6 +1,7 @@
-CREATE SCHEMA IF NOT EXIST app;
+CREATE SCHEMA IF NOT EXISTS app;
 
--- Nomes estão inconsistentes entre os arquivos, precisamos ver o que temos que mudar
+GRANT INSERT, SELECT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app TO postgres;
+
 DROP table app.User;
 DROP table app.OrdemServico;
 DROP table app.Pet;
@@ -16,10 +17,10 @@ CREATE TABLE app.User (
 );
 
 CREATE TABLE app.Pet (
-	nome text,
+	nome 	text,
 	raca	text,
 	sexo	text,
-	cor	text,
+	cor		text,
 	porte	text,
 	id_tutor	int,
 	id_pet	serial primary key
@@ -70,14 +71,13 @@ CREATE TABLE app.ServicosUpselling (
 
 
 
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Tosa higiênica', 10, 'Para seu dog ficar com o pelo na régua!', 'Todos', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Clareador', 10, 'Para seu dog deixar de ser amarelado, devolvemos o branco ao pelo', 'Todos', 'Branco');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'Para seu dog ficar com o pelo macio e brilhante de arrasar', 'Todos-', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'Para seu dog ficar com o pelo resistente, à prova de balas', 'Todos-', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Tosa higiênica', 10, 'Marque a Tosa Higiência para seu dog ficar com o pelo na régua!', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Clareador', 10, 'Para seu dog deixar de ser amarelado, o Banho Clareador devolve o branco ao pelo do seu Pet!', 'Todos', 'Branco');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'Para seu dog ficar com o pelo macio e brilhante de arrasar a Hidratação é a melhor opção!', 'Todos-', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'Para seu dog ficar com o pelo resistente, à prova de balas, escolha a Queratinização!', 'Todos-', 'Todos');
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho volumizante', 25, 'Por ser uma raça de pelo volumoso seu dog ficará mais charmoso(a) com nosso banho volumezante.', 'Todos-', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Preto');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Branco');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'Se seu dog estiver muito sujo, essa é a opção certa', 'Todos', 'Todos');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Se seu dog estiver desbotado, o Banho Tonalizante resolve seu problema!', 'Todos-', 'Branco');
+INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'Se seu dog estiver muito sujo, marque um Banho Xtreme!', 'Todos', 'Todos');
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (0, 'Lacinho', 30);
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (1, 'Gravatinha', 30);
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (2, 'Bandana', 30);
