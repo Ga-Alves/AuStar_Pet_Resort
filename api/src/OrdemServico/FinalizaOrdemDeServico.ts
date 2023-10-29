@@ -5,10 +5,10 @@ export default class FinalizaOrdemDeServico {
     constructor (readonly repositorioOrdem: RepositorioOrdem){
     }
     async execute (input: Input): Promise<Output>{
-        const status = await this.repositorioOrdem.finalizaServico(input.id_ordem)
+        const id_user = await this.repositorioOrdem.finalizaServico(input.id_ordem)
 
 		return {
-            status : status
+            id_user : id_user
 		};
     }
 }
@@ -16,5 +16,5 @@ type Input = {
     id_ordem: number
 }
 type Output = {
-    status : number
+    id_user : number
 }

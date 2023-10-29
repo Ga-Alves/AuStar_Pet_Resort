@@ -68,9 +68,12 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
         return total;
     }
     async finalizaServico(id_ordem: number): Promise<number> {
-        const status = await this.conexao.query("update app.OrdemServico set completo = true where id_ordem = $1", [id_ordem]);
+        await this.conexao.query("update app.OrdemServico set completo = true where id_ordem = $1", [id_ordem]);
+        const id_pet = await this.conexao.query("select id_pet from app.OrdemServico where id_ordem = $1", [id_ordem])
 
-        return status
-        
+        const id_tutor = await this.conexao.query("select id_tutor from app.pet where id_pet = $1", [id_pet.id_pet])
+
+        return id_tutor.id_tutor
+           
     }
 }

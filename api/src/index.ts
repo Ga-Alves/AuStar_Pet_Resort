@@ -8,6 +8,7 @@ import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
 import UserNotify from "./CadastroUser/NotificaUser";
 import AgendaBanho from "./Agenda/AgendaBanho";
+import FinalizaOrdemDeServico from "./OrdemServico/FinalizaOrdemDeServico";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
 import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
@@ -134,7 +135,6 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     // eu acho q isso é aqui
-    console.log(id_user)
 
     console.log(parseInt(id_user))
     await userNotify.execute({id_user : parseInt(id_user)});
@@ -175,9 +175,11 @@ app.get("/FinalizaOrdemDeServico", async function (request: Request, response: R
         response.status(500).json({ error: 'Invalid id_ordem' });
         return;
     }
-    //const status = await finalizaOrdemDeServico.execute({id_ordem: parseInt(id_ordem)});
-    //console.log(status);
-    //response.json(status);
+    const ordemServico = new FinalizaOrdemDeServico(repositorioOrdem)
+    const id_user = await ordemServico.execute({id_ordem: parseInt(id_ordem)});
+    const userNotify = new UserNotify(repositorioUser);
+    await userNotify.execute({id_user : id_user.id_user});
+
 })
 
 app.listen(3030, () => console.log("Running"));
