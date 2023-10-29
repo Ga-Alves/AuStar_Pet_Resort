@@ -50,9 +50,8 @@ function CadastroPet({ navigation }) {
     }
 
     // Deveria ser assincrono
-
-    axios.post("CadastroPet",data)
-      .then(function (response) {
+    backend.post("CadastroPet",data)
+    .then(function (response) {
         console.log("Pet cadastrado com sucesso");
         // signupDog(body); //chamar rota do back aqui
         const allInputsOk = !Object.values(body).includes('');
@@ -61,7 +60,7 @@ function CadastroPet({ navigation }) {
         }
     })
     .catch(function (error) {
-      console.log(console.log(JSON.stringify(error)));
+      console.log(error);
     });
 
   }
