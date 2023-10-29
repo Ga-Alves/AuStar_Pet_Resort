@@ -2,7 +2,10 @@ import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import { colorPallet, textStyle } from "../utils/globalStyles"
 import { useState } from "react";
 
-function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmployee}) {
+//api
+import backend from '../services/BackEndAPI'
+
+function GerenciaAgendaWeekdayColumn({week, weekDayName, scheeduledEmployes, addEmployee}) {
 
     const [employees, setEmployees] = useState(scheeduledEmployes)
 
@@ -14,6 +17,17 @@ function GerenciaAgendaWeekdayColumn({weekDayName, scheeduledEmployes, addEmploy
         }
         
         if (res === undefined && !isEmptyObject(addEmployee)) {
+            const body = {
+                week: week,
+                day: weekDayName,
+                employeeID: addEmployee.id
+            }
+            console.log(body);
+            backend.post("/AlocaBanhista", body)
+                .catch((err) => {
+                    console.log(err.data);
+                })
+
             setEmployees([...employees, addEmployee])
         }
         

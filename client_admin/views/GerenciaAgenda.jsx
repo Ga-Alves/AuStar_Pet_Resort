@@ -63,6 +63,7 @@ function GerenciaAgenda() {
                                 weekScheedule && weekScheedule.map((week_day, indx) => 
                                     <GerenciaAgendaWeekdayColumn
                                         key={indx}
+                                        week={week}
                                         weekDayName={week_day.day}
                                         scheeduledEmployes={week_day.employees}
                                         addEmployee={selectedEmployee}/>
