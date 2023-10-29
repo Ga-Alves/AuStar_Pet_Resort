@@ -6,21 +6,21 @@ const employeesMock = [
         name: 'Fernanda'
     },
     {
-        id: 5,
+        id: 2,
         name: 'Eduardo'
     },
 ]
 
 const weekScheeduleMock = [
     {
-        day: 'Seg',
+        day: 'seg',
         employees: [
             {
                 id: 1,
                 name: 'Fernanda'
             },
             {
-                id: 5,
+                id: 2,
                 name: 'Eduardo'
             },
             {
@@ -30,11 +30,11 @@ const weekScheeduleMock = [
         ]
     },
     {
-        day: 'Ter',
+        day: 'ter',
         employees: []
     },
     {
-        day: 'Qua',
+        day: 'qua',
         employees: [
             {
                 id: 1,
@@ -43,7 +43,7 @@ const weekScheeduleMock = [
         ]
     },
     {
-        day: 'Qui',
+        day: 'qui',
         employees: [
             {
                 id: 11,
@@ -52,14 +52,14 @@ const weekScheeduleMock = [
         ]
     },
     {
-        day: 'Sex',
+        day: 'sex',
         employees: [
             {
                 id: 1,
                 name: 'Fernanda'
             },
             {
-                id: 5,
+                id: 2,
                 name: 'Eduardo'
             },
             {
@@ -69,7 +69,7 @@ const weekScheeduleMock = [
         ]
     },
     {
-        day: 'Sab',
+        day: 'sab',
         employees: []
     },
 ]

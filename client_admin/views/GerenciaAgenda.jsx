@@ -15,10 +15,14 @@ const windowHeight = Dimensions.get('window').height;
 //mock
 import { employeesMock, weekScheeduleMock } from "../mock/GerenciaAgendaMock";
 
+//api
+import backend from "../services/BackEndAPI";
+
 
 function GerenciaAgenda() {
 
     const [week, setWeek] = useState(1)
+    const [resetData, setResetData] = useState(1)
 
 
     const [employees, setEmployees] = useState([])
@@ -38,7 +42,29 @@ function GerenciaAgenda() {
     
     // pega agenda da semana
     useEffect(() => {
-        setWeekScheedule(weekScheeduleMock);
+        if (resetData == 1) {
+            setWeekScheedule([]);
+        }
+        else {
+            backend.get(`OrganizacaoSemana?week=${week}`)
+            .then((res) => {            
+                const resData = JSON.parse(res.data)
+                
+                setWeekScheedule(resData);
+                
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+
+        setResetData(0);
+    }, [resetData])
+
+    useEffect(() => {
+        if (resetData == 0) {
+            setResetData(1)
+        }
     }, [week])
 
 
@@ -63,6 +89,7 @@ function GerenciaAgenda() {
                                 weekScheedule && weekScheedule.map((week_day, indx) => 
                                     <GerenciaAgendaWeekdayColumn
                                         key={indx}
+                                        week={week}
                                         weekDayName={week_day.day}
                                         scheeduledEmployes={week_day.employees}
                                         addEmployee={selectedEmployee}/>
