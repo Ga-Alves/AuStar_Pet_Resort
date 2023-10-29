@@ -67,4 +67,10 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
         const total = banho + total_finalizacoes + total_servicos;
         return total;
     }
+    async finalizaServico(id_ordem: number): Promise<number> {
+        const status = await this.conexao.query("update app.OrdemServico set completo = true where id_ordem = $1", [id_ordem]);
+
+        return status
+        
+    }
 }

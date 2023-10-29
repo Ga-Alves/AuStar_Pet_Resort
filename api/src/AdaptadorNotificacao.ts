@@ -12,7 +12,7 @@ export default class AdaptadorNotificaco implements ConexaoNotificacao{
     }
     notifica(pushToken: string, dadosNotificacao: NotifyToken): number {  
         //return this.expo.query(statement, params);
-        if (this.expo.isExpoPushToken(pushToken)) {
+        if (Expo.isExpoPushToken(pushToken)) {
                 this.expo.sendPushNotificationsAsync([{
                 to: pushToken,
                 sound: dadosNotificacao.sound,

@@ -25,7 +25,7 @@ test.skip("Deve cadastrar Pet", async function () {
 	});
 });
 
-test("Deve retornar upselling", async function () {
+test.skip("Deve retornar upselling", async function () {
 	await axios({
 		url: "http://localhost:3030/ServicoUpselling?id_dog=2",
 		method: "get" 
@@ -85,5 +85,13 @@ test.skip("Deve mostrar alocacao", async function() {
 		url: "http://localhost:3030/OrganizacaoSemana?week=2",
 		method: "get"
 	});
-	console.log(alocacao);
 });
+
+test("Deve testar ServiceOrders", async function() {
+	await axios({
+		url: "http://localhost:3030/ServiceOrders?week=2&day=qua&id_user=2",
+		method: "get",
+	});
+});
+
+

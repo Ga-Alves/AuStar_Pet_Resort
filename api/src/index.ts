@@ -134,7 +134,10 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     // eu acho q isso é aqui
-    await userNotify.execute({id_user : request.body.id_user});
+    console.log(id_user)
+
+    console.log(parseInt(id_user))
+    await userNotify.execute({id_user : parseInt(id_user)});
     console.log(orders);
     response.json(orders);
 })
@@ -163,6 +166,18 @@ app.get("/OrganizacaoSemana", async function (request: Request, response: Respon
     const alocacao = await mostrarAlocacao.execute({week: parseInt(week)});
     console.log(alocacao);
     response.json(alocacao);
+})
+
+app.get("/FinalizaOrdemDeServico", async function (request: Request, response: Response){
+    const id_ordem = request.query.id_ordem;
+
+    if ( typeof id_ordem !== "string" ) {
+        response.status(500).json({ error: 'Invalid id_ordem' });
+        return;
+    }
+    //const status = await finalizaOrdemDeServico.execute({id_ordem: parseInt(id_ordem)});
+    //console.log(status);
+    //response.json(status);
 })
 
 app.listen(3030, () => console.log("Running"));

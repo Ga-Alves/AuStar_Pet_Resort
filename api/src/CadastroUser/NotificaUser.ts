@@ -15,7 +15,7 @@ export default class NotificaUser {
     }
 
 type Input = {
-    id_user: string
+    id_user: number
 }
 
 
