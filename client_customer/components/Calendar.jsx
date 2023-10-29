@@ -28,7 +28,8 @@ function Calendar({setSelectedDate}) {
 
     // função utilizada para renderizar um unico dia no calendário
     function renderDay(day, indx) {
-        if (day < today.getDate() && indx < 6) {
+        if (indx < today.getDay() && indx < 6) {
+            
             return(
                 <View key={indx} style={[styles.day, styles.disable]}>
                     <Text>

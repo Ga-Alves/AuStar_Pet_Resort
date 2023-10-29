@@ -17,6 +17,9 @@ import { Calendar } from '../components/Calendar';
 // context
 import { AgendaBanhoContext } from '../context/AgendaBanhoContext';
 
+//api
+import backend from '../services/BackEndAPI'
+
 function AgendaBanhoPasso3(props) {
     const { form, setDate, setTime } = useContext(AgendaBanhoContext)
 
@@ -24,11 +27,48 @@ function AgendaBanhoPasso3(props) {
     const [ availableTime, setAvailableTime ] = useState([])
 
     useEffect(() => {
-        // simulando uma requisição de 3s de delay
-        setTimeout(() => {
-            setAvailableTime([false, false, false, true, true, true, false, true, false])
-        }, 1500)
-    }, [])
+        function getWeekDayOf(strDate){
+            const splitDate = strDate.split('/')
+            const selectDate = new Date(splitDate[2], parseInt(splitDate[1]), splitDate[0])
+    
+            const today = new Date()
+            const firstMondayOfThisWeek = new Date(today)
+            firstMondayOfThisWeek.setDate(today.getDate() - today.getDay() + 1)
+    
+            const currentDate = new Date(firstMondayOfThisWeek)
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 6; j++) {
+                    // console.log(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear());
+                    if (currentDate.getDate() == selectDate.getDate() && 
+                        currentDate.getMonth() == selectDate.getMonth() && 
+                        currentDate.getFullYear() == selectDate.getFullYear() ) {
+                        return [i, j];
+                    }
+                    currentDate.setDate(currentDate.getDate() + 1)
+                }
+                currentDate.setDate(currentDate.getDate() + 1)
+            }
+            return [0, 0];
+        }
+        const [week, day] = getWeekDayOf(form.dia);
+
+
+        const strDay = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
+
+        backend.get(`/HorariosDisponiveisDia?week=${week + 1}&day=${strDay[day]}&id_pet=${form.id_pet}`)
+            .then((res) => {
+                setAvailableTime(res.data);
+            })
+            .catch((res) => {
+                
+                // console.log(JSON.stringify(res));
+                console.log(res);
+            })
+
+        
+        
+        
+    }, [form.dia])
 
 
     return (
