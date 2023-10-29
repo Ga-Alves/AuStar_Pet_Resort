@@ -6,6 +6,7 @@ export default class ServiceOrders {
 
     async execute(input: Input) {
         const serviceOrders = await this.repositorioOrdem.list_day(input.week, input.day);
+        console.log(serviceOrders)
         return serviceOrders;
     }
 }

@@ -93,15 +93,15 @@ test.skip("Deve finalizar ordem de servico", async function() {
 		method: "get"
 	});
 });
-test.skip("Deve testar ServiceOrders", async function() {
+test("Deve testar ServiceOrders", async function() {
 	await axios({
-		url: "http://localhost:3030/ServiceOrders?week=2&day=qua&id_user=2",
+		url: "http://localhost:3030/ServiceOrders?week=1&day=seg&id_user=2",
 		method: "get",
 	});
 });
 
 
-test("Deve testar RetornaBanhistas", async function() {
+test.skip("Deve testar RetornaBanhistas", async function() {
 	await axios({
 		url: "http://localhost:3030/RetornaBanhistas",
 		method: "get",

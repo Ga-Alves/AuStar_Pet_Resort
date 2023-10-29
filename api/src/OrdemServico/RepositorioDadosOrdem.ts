@@ -42,7 +42,46 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
             throw new Error("Dia inválido.");
         }
         
-        const ordensServicoDados: OrdemServico[] = await this.conexao.query("select * from app.OrdemServico where dia = $1", [date]);
+        var ordensServicoDados : any[] = await this.conexao.query("select id_ordem, app.pet.nome as nome_pet, app.banhista.nome as nome_banhista , finalizacao, servicos, total, data, horario, completo\
+        from app.OrdemServico \
+        join app.pet on pet.id_pet = ordemservico.id_pet \
+        join app.banhista on banhista.id_banhista = ordemservico.id_banhista\
+        where data = $1", [date]);
+        var i = 0
+        var j = 0
+        var arrayFinalizacoes: string[] = []
+        for (const ordem of ordensServicoDados)
+        {
+            arrayFinalizacoes = []
+            for (const finalizacao of ordem.finalizacao)
+            {
+                var nomeFinalizacoes = await this.conexao.query("select nome as nome_finalizacao from app.finalizacoes where id_finalizacao = $1", [finalizacao])
+                arrayFinalizacoes[j] = nomeFinalizacoes[0].nome_finalizacao
+                j++
+            }
+            var arrayFinalizacoes =  arrayFinalizacoes.filter(e => e.length);
+            ordensServicoDados[i].finalizacao = arrayFinalizacoes
+            i++
+        }
+        i = 0
+        j = 0
+        var arrayServicos: string[] = []
+        for (const ordem of ordensServicoDados)
+        {
+            arrayServicos  = []
+
+            for (const servico of ordem.servicos)
+            {
+                var nomeServicos = await this.conexao.query("select nome as nome_servico from app.ServicosUpselling where id_upselling = $1", [servico])
+                arrayServicos[j] = nomeServicos[0].nome_servico
+                j++
+            }
+            var arrayServicos =  arrayServicos.filter(e => e.length);
+            ordensServicoDados[i].servicos = arrayServicos
+            i++
+        }
+
+
         return ordensServicoDados;
     }
 

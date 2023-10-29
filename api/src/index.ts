@@ -132,13 +132,13 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
         return;
     }
     const serviceOrders = new ServiceOrders(repositorioOrdem);
-    const userNotify = new UserNotify(repositorioUser);
+    //const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     // eu acho q isso é aqui
 
-    console.log(parseInt(id_user))
-    await userNotify.execute({id_user : parseInt(id_user)});
-    console.log(orders);
+    //console.log(parseInt(id_user))
+    //await userNotify.execute({id_user : parseInt(id_user)});
+    //console.log(orders);
     response.json(orders);
 })
 
