@@ -89,32 +89,77 @@ app.post("/AgendarBanho", async function (request: Request, response: Response){
     response.end();
 });
 
+
 app.get("/HorariosDisponiveisDia", async function (request: Request, response: Response){
-    const horariosDisponiveisDia = new HorariosDisponiveisDia(repositorioAgenda, repositorioPet);
-    const horarios = await horariosDisponiveisDia.execute({week: request.body.week, day: request.body.day, id_pet: request.body.id_pet});
+    const week = request.query.week;
+    const day = request.query.day;
+    const id_pet = request.query.id_pet;
+
+    if ( typeof week !== "string") {
+        response.status(500).json({ error: 'Invalid week' });
+        return;
+    }
+    if (typeof day !== "string") {
+        response.status(500).json({ error: 'Invalid day' });
+        return;
+    }
+    if ( typeof id_pet !== "string") {
+        response.status(500).json({ error: 'Invalid id_pet' });
+        return;
+    }
+    const horariosDisponiveisDia = new HorariosDisponiveisDia(repositorioAgenda, repositorioPet);  
+    const horarios = await horariosDisponiveisDia.execute({week: parseInt(week), day: day, id_pet: parseInt(id_pet)});
     console.log(horarios);
     response.json(horarios);
 })
 
 app.get("/ServiceOrders", async function (request: Request, response: Response){
+    const week = request.query.week;
+    const day = request.query.day;
+    const id_user = request.query.id_user;
+
+    if ( typeof week !== "string") {
+        response.status(500).json({ error: 'Invalid week' });
+        return;
+    }
+    if ( typeof day !== "string") {
+        response.status(500).json({ error: 'Invalid day' });
+        return;
+    }
+    if (typeof id_user !== "string") {
+        response.status(500).json({ error: 'Invalid id_user' });
+        return;
+    }
     const serviceOrders = new ServiceOrders(repositorioOrdem);
     const userNotify = new UserNotify(repositorioUser);
-    const orders = await serviceOrders.execute({week: request.body.week, day: request.body.day});
+    const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     // eu acho q isso é aqui
     await userNotify.execute({id_user : request.body.id_user});
     console.log(orders);
     response.json(orders);
 })
 
-app.post("/CachorrosTutor", async function (request: Request, response: Response){
+app.get("/CachorrosTutor", async function (request: Request, response: Response){
+    const id_tutor = request.query.id_tutor;
+
+    if ( typeof id_tutor !== "string" ) {
+        response.status(500).json({ error: 'Invalid id_tutor' });
+        return;
+    }
     const petsR = new RetornaPet(repositorioPet);
-    const pets = petsR.execute({id_tutor: request.body.id}) 
+    const pets = petsR.execute({id_tutor: parseInt(id_tutor)}) 
     response.json(pets);
 })
 
 app.get("/OrganizacaoSemana", async function (request: Request, response: Response){
+    const week = request.query.week;
+
+    if ( typeof week !== "string" ) {
+        response.status(500).json({ error: 'Invalid week' });
+        return;
+    }
     const mostrarAlocacao = new MostrarAlocacao(repositorioAgenda);
-    const alocacao = await mostrarAlocacao.execute({week: request.body.week});
+    const alocacao = await mostrarAlocacao.execute({week: parseInt(week)});
     console.log(alocacao);
     response.json(alocacao);
 })
