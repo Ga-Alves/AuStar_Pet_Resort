@@ -117,7 +117,7 @@ app.get("/HorariosDisponiveisDia", async function (request: Request, response: R
 app.get("/ServiceOrders", async function (request: Request, response: Response){
     const week = request.query.week;
     const day = request.query.day;
-    const id_user = request.query.id_user;
+    // const id_user = request.query.id_user;
 
     if ( typeof week !== "string") {
         response.status(500).json({ error: 'Invalid week' });
@@ -127,10 +127,10 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
         response.status(500).json({ error: 'Invalid day' });
         return;
     }
-    if (typeof id_user !== "string") {
-        response.status(500).json({ error: 'Invalid id_user' });
-        return;
-    }
+    // if (typeof id_user !== "string") {
+    //     response.status(500).json({ error: 'Invalid id_user' });
+    //     return;
+    // }
     const serviceOrders = new ServiceOrders(repositorioOrdem);
     //const userNotify = new UserNotify(repositorioUser);
     const orders = await serviceOrders.execute({week: parseInt(week), day: day});

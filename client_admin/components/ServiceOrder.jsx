@@ -5,11 +5,10 @@ import { textStyle, colorPallet } from "../utils/globalStyles"
 import { PopUp } from "./PopUp"
 
 
-function ServiceOrder({services, responsable, total, title, confirmOrder, enabled}) {
+function ServiceOrder({key, services, responsable, total, title, confirmOrder, enabled, id}) {
 
     const [enableOrder, setEnableOrder] = useState(enabled);
     const [popUplVisible, setPopUplVisible] = useState(false);
-
 
     function handlePress(){
         setPopUplVisible(true);
@@ -17,7 +16,8 @@ function ServiceOrder({services, responsable, total, title, confirmOrder, enable
 
     function handleConfirmOrder(){
         setEnableOrder(false);
-        confirmOrder();
+        console.log("Tá executando");
+        confirmOrder(id);
     }
 
 

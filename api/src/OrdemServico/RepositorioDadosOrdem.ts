@@ -8,7 +8,7 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
     }
     
     async save (ordemServico: OrdemServico): Promise<void> {
-        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, dia, horario, completo) values ($1, $2, $3, $4, $5, $6, $7)",
+        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) values ($1, $2, $3, $4, $5, $6, $7)",
         [ordemServico.id_pet, ordemServico.id_banhista, ordemServico.finalizacoes, ordemServico.servicos, ordemServico.total, ordemServico.data, ordemServico.horario, ordemServico.completo]);
     }
     
