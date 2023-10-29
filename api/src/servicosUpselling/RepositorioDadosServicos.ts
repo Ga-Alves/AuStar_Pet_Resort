@@ -16,13 +16,13 @@ export default class RepositorioDadosServicos implements RepositorioServicos{
         const dadosServicoDicas = await this.conexao.query("select dica from app.servicosupselling where raca = 'Todos' and cor = 'Todos'", 0); 
 
         if(pet.cor == 'Branco'){ 
-            const servico1 = {nome: 'Banho Clareador',preco: 10, id_upselling: 1}
+            const servico1 = {nome: 'Banho Clareador',preco: 10, id_upselling: 2}
             const dica1 = {dica: 'Para seu dog deixar de ser amarelado, devolvemos o branco ao pelo'}
             dadosServicosUpselling.push(servico1)
             dadosServicoDicas.push(dica1)
         }
         if(pet.cor == 'Branco' || pet.cor == 'Preto' || pet.cor == 'Preto e Branco'){
-            const servico2 = {nome:'Banho tonalizante',preco: 25, id_upselling: 2}
+            const servico2 = {nome:'Banho tonalizante',preco: 25, id_upselling: 6}
             const dica2 = {dica: 'Pro seu dog deixar de ser desbotado'}
             dadosServicosUpselling.push(servico2)
             dadosServicoDicas.push(dica2)

@@ -75,7 +75,6 @@ INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho 
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Hidratação', 20, 'Para seu dog ficar com o pelo macio e brilhante de arrasar', 'Todos-', 'Todos');
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Queratinização', 25, 'Para seu dog ficar com o pelo resistente, à prova de balas', 'Todos-', 'Todos');
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho volumizante', 25, 'Por ser uma raça de pelo volumoso seu dog ficará mais charmoso(a) com nosso banho volumezante.', 'Todos-', 'Todos');
-INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Preto');
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho tonalizante', 25, 'Pro seu dog deixar de ser desbotado', 'Todos-', 'Branco');
 INSERT INTO app.ServicosUpselling (nome, preco, dica, raca, cor) VALUES ('Banho Xtreme', 25, 'Se seu dog estiver muito sujo, essa é a opção certa', 'Todos', 'Todos');
 INSERT INTO app.Finalizacoes (id_finalizacao, nome, preco) VALUES (0, 'Lacinho', 30);
