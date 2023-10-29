@@ -12,14 +12,7 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
 
     async add (week: number, day: string, employeeID: number, name: string): Promise<void> {
         const schedule: number[] = [0, 1, 2, 3, 4, 6, 7, 8, 9];
-        const today = new Date();
-        const start_day = new Date();
-        start_day.setDate(today.getDate() - today.getDay()); // Domingo da semana atual
-        
-        const start_week = week - 1;
-        
         const date = await this.get_date_from_week_day(week, day);
-        
         await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [employeeID, name, date, schedule]);
     }
     
@@ -90,6 +83,11 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
 
         return {week: week, day: day};
 
+    }
+
+    async get_name (employeeID: number): Promise<string> {
+        const name = await this.conexao.query("select nome from app.Agenda where id_banhista = $1", [employeeID]);
+        return name;
     }
     
     async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string): Promise<void> {
