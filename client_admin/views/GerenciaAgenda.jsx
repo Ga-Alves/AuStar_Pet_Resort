@@ -42,7 +42,7 @@ function GerenciaAgenda() {
     // pega agenda da semana
     useEffect(() => {
         backend.get(`OrganizacaoSemana?week=${week}`)
-        .then((res) => {
+        .then((res) => {            
             setWeekScheedule(res.data);
             })
             .catch((err) => {
