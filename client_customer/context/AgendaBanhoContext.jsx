@@ -5,8 +5,8 @@ const intialFormValue = {
 	id_pet: 0,
 	dia: '11/11/1111',
 	horario: '0:00',
-    decoracoes: new Set(["1, 2"]),
-	servicos: new Set(["1, 2"])
+    decoracoes: new Set(),
+	servicos: new Set()
 }
 
 export const AgendaBanhoContext = createContext(null);

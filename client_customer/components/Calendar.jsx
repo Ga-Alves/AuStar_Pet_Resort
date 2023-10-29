@@ -53,7 +53,7 @@ function Calendar({setSelectedDate}) {
         const selectedDay =  new Date()
         selectedDay.setDate(firstMondayOfThisWeek.getDate() + calendarIndx + Math.floor(calendarIndx / 6))
         
-        setSelectedDate(selectedDay.getDate()+'/'+selectedDay.getMonth()+'/'+selectedDay.getFullYear())
+        setSelectedDate(selectedDay.getDate()+'/'+(selectedDay.getMonth() + 1)+'/'+selectedDay.getFullYear())
         
     }, [calendarIndx])
 

@@ -15,6 +15,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 //context
 import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
 
+// API
+import backend from '../services/BackEndAPI';
+
 function AgendaBanhoPasso5  (props) {
     const windowWidth = Dimensions.get('window').width;
 
@@ -33,36 +36,49 @@ function AgendaBanhoPasso5  (props) {
     const [totalValue, setTotalValue] = useState(0)
 
     function handleSubmit(){
-        props.navigation.push('AgendaBanhoPasso6')
-        console.log(form);
-        resetFormValues();
+        // props.navigation.push('AgendaBanhoPasso6')
+        
+        const body = {
+            id_pet: form.id_pet,
+            data: form.dia,
+            horario: form.horario,
+            finalizacoes: [...form.decoracoes],
+            servicos: [...form.servicos]
+        }
+        console.log(body);
+        backend.post('/AgendarBanho', body)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // resetFormValues();
         
     }
 
     useEffect(() => {
-        // simulando uma requisição de 3s de delay
-        // requisição para pegar os pets do usuario.
-        setTimeout(() => {
-            const APIResponse = [
-                {
-                    service: 'Banho',
-                    value: 50
-                },
-                {
-                    service: 'Banho Volumezante ',
-                    value: 20
-                },
-            ]
-            setServices(APIResponse);
+        backend.get(`ServicoUpselling?id_dog=${form.id_pet}`)
+        .then(function (response) {
+            const servicos = response.data.servicoOferecidoUpselling;
 
+            const servicosRequisitados = []
             let total = 0;
-            APIResponse.forEach((e) => {
-                total += e.value;
-            })
-            setTotalValue(total)
-        }, 1500)
 
-        
+            servicos.forEach((servico) => {
+                if (form.servicos.has(servico.id_upselling)) {
+                    servicosRequisitados.push({service: servico.nome, value: servico.preco})
+                    total += parseInt(servico.preco)
+                }
+            })
+            setServices(servicosRequisitados);
+            setTotalValue(total);
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
     }, [])
 
