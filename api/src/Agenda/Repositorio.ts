@@ -2,7 +2,7 @@ import BanhistaAlocado from "./BanhistaAlocado";
 
 export default interface RepositorioAgenda {
     save (banhistaAlocado: BanhistaAlocado): Promise<void>;
-    add (week: number, day: string, employeeID: number, name: string): Promise<void>;
+    add (week: number, day: string, employeeID: number): Promise<void>;
     get (week: number, day: string): Promise<BanhistaAlocado[]>;
     get_name (employeeID: number): Promise<string>;
     get_date_from_week_day(week: number, day:string): Promise<Date>;

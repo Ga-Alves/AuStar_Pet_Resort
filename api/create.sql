@@ -1,6 +1,7 @@
-CREATE SCHEMA IF NOT EXIST app;
+CREATE SCHEMA IF NOT EXISTS app;
 
--- Nomes estão inconsistentes entre os arquivos, precisamos ver o que temos que mudar
+GRANT INSERT, SELECT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app TO postgres;
+
 DROP table app.User;
 DROP table app.OrdemServico;
 DROP table app.Pet;
@@ -16,10 +17,10 @@ CREATE TABLE app.User (
 );
 
 CREATE TABLE app.Pet (
-	nome text,
+	nome 	text,
 	raca	text,
 	sexo	text,
-	cor	text,
+	cor		text,
 	porte	text,
 	id_tutor	int,
 	id_pet	serial primary key

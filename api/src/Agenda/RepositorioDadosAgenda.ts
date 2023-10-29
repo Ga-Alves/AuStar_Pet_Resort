@@ -1,3 +1,4 @@
+import BanhistaCadastrado from "../CadastroBanhista/BanhistaCadastrado";
 import Conexao from "../conexao";
 import BanhistaAlocado from "./BanhistaAlocado";
 import RepositorioAgenda from "./Repositorio";
@@ -10,9 +11,11 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [banhistaAlocado.employeeID, banhistaAlocado.name, banhistaAlocado.date, banhistaAlocado.schedule]);
     }
 
-    async add (week: number, day: string, employeeID: number, name: string): Promise<void> {
+    async add (week: number, day: string, employeeID: number): Promise<void> {
         const schedule: number[] = [0, 1, 2, 3, 4, 6, 7, 8, 9];
         const date = await this.get_date_from_week_day(week, day);
+        const employee = await this.conexao.one("select nome from app.Banhista where id_banhista = $1", [employeeID]);
+        const name: string = employee.nome;
         await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [employeeID, name, date, schedule]);
     }
     
@@ -30,7 +33,8 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
     }
     
     async get_name (employeeID: number): Promise<string> {
-        const name = await this.conexao.query("select nome from app.Agenda where id_banhista = $1", [employeeID]);
+        const employee = await this.conexao.query("select * from app.Banhista where id_banhista = $1", [employeeID]);
+        const name = employee.nome;
         return name;
     }
     
