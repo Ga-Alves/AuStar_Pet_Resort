@@ -86,6 +86,10 @@ INSERT INTO app.User (notifyToken) VALUES ('131235690ddifrfff5');
 INSERT INTO app.User (notifyToken) VALUES ('131235690ddifrfff6');
 INSERT INTO app.Pet (nome, raca, sexo, cor, porte, id_tutor) VALUES ('bilu', 'Pug', 'macho', 'Branco', 'p', 1);
 INSERT INTO app.Pet (nome, raca, sexo, cor, porte, id_tutor) VALUES ('Lili', 'Yorkshire', 'femea', 'Amarelo', 'p', 1);
+INSERT INTO app.Banhista (nome) VALUES ('Deborah');
+INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{1,2,3}', '{1,2,3}', 50, '2023-10-30', '8:00', false);
+INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{3}', '{1,3}', 50, '2023-10-30', '8:50', false);
+INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{1}', '{2,3}', 50, '2023-10-30', '9:40', false);
 
 
 /*
