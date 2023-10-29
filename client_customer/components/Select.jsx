@@ -71,9 +71,9 @@ function Select({title, setOption, width, options}) {
     const [showOption, setShowOption] = useState(title)
 
     function handleSelect(option){
-        setShowOption(option);
+        setShowOption(option.label);
         setIsOptionsEnable(false);
-        setOption && setOption(option);
+        setOption && setOption(option.id);
     }
 
     return (
@@ -93,7 +93,7 @@ function Select({title, setOption, width, options}) {
                 {options && options.map((option, idx) => {
                     return <TouchableOpacity onPress={() => handleSelect(option)} key={idx}>
                         <View style={styles.option}>
-                            <Text>{option}</Text>
+                            <Text>{option.label}</Text>
                         </View>
                     </TouchableOpacity>
                 })}
