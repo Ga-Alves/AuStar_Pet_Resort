@@ -15,6 +15,12 @@ import { MaterialIcons } from '@expo/vector-icons';
 //context
 import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
 
+// API
+import backend from "../services/BackEndAPI";
+
+// storage
+import * as SecureStore from 'expo-secure-store'; 
+
 function AgendaBanhoPasso1(props) {
 
     const {setPetID} = useContext(AgendaBanhoContext)
@@ -28,11 +34,18 @@ function AgendaBanhoPasso1(props) {
         }
     }
 
-    useEffect(() => {
-        // simulando uma requisição de 3s de delay
-        setTimeout(() => {
-            setTutorPets(['Pipoca', 'Rex'])
-        }, 1500)
+    useEffect(async () => {
+        const id = await SecureStore.getItemAsync('id');
+        console.log(id);
+        
+        await backend.get(`CachorrosTutor?id_tutor=${1}`)
+        .then(function (response) {
+            setTutorPets(response.data.res)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     }, [])
 
     return (
