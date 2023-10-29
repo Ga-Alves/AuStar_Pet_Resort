@@ -100,7 +100,7 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
     response.json(orders);
 })
 
-app.post("/CachorrosTutor", async function (request: Request, response: Response){
+app.get("/CachorrosTutor", async function (request: Request, response: Response){
     const petsR = new RetornaPet(repositorioPet);
     const pets = petsR.execute({id_tutor: request.body.id}) 
     response.json(pets);

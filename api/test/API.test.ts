@@ -38,7 +38,7 @@ test.skip("Deve retornar upselling", async function () {
 test("Deve retornar cachoros", async function () {
 	await axios({
 		url: "http://localhost:3030/CachorrosTutor",
-		method: "post",      
+		method: "get",      
 		data: {
 			id: 1
 
