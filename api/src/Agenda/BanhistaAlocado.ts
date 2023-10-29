@@ -1,4 +1,4 @@
 export default class BanhistaAlocado {
-    constructor (readonly date: Date, readonly employeeID: number, readonly name: string, readonly schedule: number[]) {
+    constructor (readonly id_banhista: number, readonly nome: string, readonly dia: Date, readonly horarios: number[]) {
     }
 }
