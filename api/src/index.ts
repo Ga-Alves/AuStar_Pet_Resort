@@ -161,7 +161,6 @@ app.get("/OrganizacaoSemana", async function (request: Request, response: Respon
     }
     const mostrarAlocacao = new MostrarAlocacao(repositorioAgenda);
     const alocacao = await mostrarAlocacao.execute({week: parseInt(week)});
-    console.log(alocacao);
     response.json(alocacao);
 })
 
