@@ -84,11 +84,6 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         return {week: week, day: day};
 
     }
-
-    async get_name (employeeID: number): Promise<string> {
-        const name = await this.conexao.query("select nome from app.Agenda where id_banhista = $1", [employeeID]);
-        return name;
-    }
     
     async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string): Promise<void> {
         let scheduledTime: number;
