@@ -22,6 +22,7 @@ import backend from "../services/BackEndAPI";
 function GerenciaAgenda() {
 
     const [week, setWeek] = useState(1)
+    const [resetData, setResetData] = useState(1)
 
 
     const [employees, setEmployees] = useState([])
@@ -41,16 +42,29 @@ function GerenciaAgenda() {
     
     // pega agenda da semana
     useEffect(() => {
-        backend.get(`OrganizacaoSemana?week=${week}`)
-        .then((res) => {            
-            const resData = JSON.parse(res.data)
-            setWeekScheedule(resData);
-            console.log(resData);
-            
+        if (resetData == 1) {
+            setWeekScheedule([]);
+        }
+        else {
+            backend.get(`OrganizacaoSemana?week=${week}`)
+            .then((res) => {            
+                const resData = JSON.parse(res.data)
+                
+                setWeekScheedule(resData);
+                
             })
             .catch((err) => {
                 console.log(err);
             })
+        }
+
+        setResetData(0);
+    }, [resetData])
+
+    useEffect(() => {
+        if (resetData == 0) {
+            setResetData(1)
+        }
     }, [week])
 
 
