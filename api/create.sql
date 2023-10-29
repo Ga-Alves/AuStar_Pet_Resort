@@ -34,9 +34,9 @@ CREATE TABLE app.Banhista (
 CREATE TABLE app.Agenda (
 	id_entrada  	serial primary key,
 	id_banhista		int,
+	nome			text,
 	dia				date,
-	horarios		int[],
-	data_banhista_unico UNIQUE (dia, id_banhista)
+	horarios		int[]
 );
 
 CREATE TABLE app.OrdemServico (

@@ -140,6 +140,7 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
 })
 
 app.get("/CachorrosTutor", async function (request: Request, response: Response){
+
     const id_tutor = request.query.id_tutor;
 
     if ( typeof id_tutor !== "string" ) {
