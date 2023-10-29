@@ -24,7 +24,7 @@ export default class RepositorioDadosUsers implements RepositorioUsers{
     }
     async getComId (id_user: number): Promise<string> {
         console.log(id_user)
-        const dadosUserCadastrado = await this.conexao.one("select id_tutor from app.User where id_tutor = $1", 
+        const dadosUserCadastrado = await this.conexao.one("select notifyToken from app.User where id_tutor = $1", 
         [id_user]); 
 		const usuarioCadastrado = new UserCadastrado(dadosUserCadastrado.id_user,dadosUserCadastrado.id_tutor);
 		return usuarioCadastrado.notifyToken;

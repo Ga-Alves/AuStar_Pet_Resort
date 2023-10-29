@@ -87,13 +87,13 @@ test.skip("Deve mostrar alocacao", async function() {
 	});
 	console.log(alocacao)
 });
-test.skip("Deve finalizar ordem de servico", async function() {
+test("Deve finalizar ordem de servico", async function() {
 	await axios({
 		url: "http://localhost:3030/FinalizaOrdemDeServico?id_ordem=2",
 		method: "get"
 	});
 });
-test("Deve testar ServiceOrders", async function() {
+test.skip("Deve testar ServiceOrders", async function() {
 	await axios({
 		url: "http://localhost:3030/ServiceOrders?week=1&day=seg&id_user=2",
 		method: "get",

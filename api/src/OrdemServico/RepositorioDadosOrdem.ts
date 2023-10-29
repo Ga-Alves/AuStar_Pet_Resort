@@ -110,9 +110,9 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
         await this.conexao.query("update app.OrdemServico set completo = true where id_ordem = $1", [id_ordem]);
         const id_pet = await this.conexao.query("select id_pet from app.OrdemServico where id_ordem = $1", [id_ordem])
 
-        const id_tutor = await this.conexao.query("select id_tutor from app.pet where id_pet = $1", [id_pet.id_pet])
+        const id_tutor = await this.conexao.query("select id_tutor from app.pet where id_pet = $1", [id_pet[0].id_pet])
 
-        return id_tutor.id_tutor
+        return id_tutor[0].id_tutor
            
     }
 }
