@@ -5,8 +5,7 @@ export default class AlocaBanhista {
     }
 
     async execute (input: Input): Promise<void> {
-        const name = await this.repositorioAgenda.get_name(input.employeeID);
-        await this.repositorioAgenda.add(input.week, input.day, input.employeeID, name);
+        await this.repositorioAgenda.add(input.week, input.day, input.employeeID);
     }
 }
 
