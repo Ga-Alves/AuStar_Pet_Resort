@@ -58,3 +58,48 @@ test.skip("Agendar banho", async function () {
 		}
 	});
 });
+
+test("Deve cadastrar banhista", async function () {
+	await axios({
+		url: "http://localhost:3030/CadastroBanhista",
+		method: "post",
+		data: {
+			nome: "Deborah"
+		}
+	});
+});
+
+test("Deve alocar banhista", async function () {
+	await axios({
+		url: "http://localhost:3030/AlocaBanhista",
+		method: "post",
+		data: {
+			week: 2,
+			day: 'qua',
+			employeeID: 1
+		}
+	});
+});
+
+test.skip("Deve mostrar horarios disponíveis", async function() {
+	await axios({
+		url: "http://localhost:3030/HorariosDisponiveisDia",
+		method: "get",
+		data: {
+			week: 2,
+			day: 'qua',
+			id_pet: 1
+		}
+	});
+});
+
+test("Deve mostrar alocacao", async function() {
+	const alocacao = await axios({
+		url: "http://localhost:3030/OrganizacaoSemana",
+		method: "get",
+		data: {
+			week: 2
+		}
+	});
+	console.log(alocacao);
+});

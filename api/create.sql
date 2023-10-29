@@ -34,9 +34,9 @@ CREATE TABLE app.Banhista (
 CREATE TABLE app.Agenda (
 	id_entrada  	serial primary key,
 	id_banhista		int,
+	nome			text,
 	dia				date,
-	horarios		int[],
-	data_banhista_unico UNIQUE (dia, id_banhista)
+	horarios		int[]
 );
 
 CREATE TABLE app.OrdemServico (
@@ -45,9 +45,10 @@ CREATE TABLE app.OrdemServico (
 	foreign key (id_pet) references app.Pet (id_pet),
 	id_banhista		int,
 	foreign key (id_banhista) references app.Banhista (id_banhista),
-	servicos 		text[],
-	total			text,
-	dia				date,
+	finalizacao 	int[],
+	servicos 		int[],
+	total			numeric(5, 2),
+	data			date,
 	horario 		text,
 	completo		boolean
 );
