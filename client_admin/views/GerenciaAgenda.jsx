@@ -49,9 +49,7 @@ function GerenciaAgenda() {
             backend.get(`OrganizacaoSemana?week=${week}`)
             .then((res) => {            
                 const resData = JSON.parse(res.data)
-                
                 setWeekScheedule(resData);
-                
             })
             .catch((err) => {
                 console.log(err);
