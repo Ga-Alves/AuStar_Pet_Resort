@@ -1,6 +1,4 @@
 import RepositorioAgenda from "./Repositorio";
-import BanhistaAlocado from "./BanhistaAlocado";
-import RepositorioDadosAgenda from "./RepositorioDadosAgenda";
 
 export default class MostrarAlocacao {
     constructor (readonly repositorioAgenda: RepositorioAgenda){
@@ -13,7 +11,12 @@ export default class MostrarAlocacao {
 
         for (const dia of semana) {
             const alocacaoDia = await this.repositorioAgenda.get(input.week, dia);
-            alocacao.push({day: dia, employees: alocacaoDia});
+            const alocados: Banhista[] = [];
+
+            for (const banhistaAlocado of alocacaoDia) {
+                alocados.push({id: banhistaAlocado.employeeID, name: banhistaAlocado.name});
+            }
+            alocacao.push({day: dia, employees: alocados});
         }
         return alocacao;
     }
@@ -25,5 +28,10 @@ type Input = {
 
 type Output = {
     day: string,
-    employees: BanhistaAlocado[]
+    employees: Banhista[]
+}
+
+type Banhista = {
+    id: number,
+    name: string
 }
