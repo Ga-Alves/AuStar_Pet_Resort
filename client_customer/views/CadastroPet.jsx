@@ -13,7 +13,9 @@ import { textStyle } from "../utils/textStyles";
 
 // API
 import backend from "../services/BackEndAPI";
-import axios from "axios";
+
+// storage
+import * as SecureStore from 'expo-secure-store'; 
 
 function CadastroPet({ navigation }) {
 
@@ -30,7 +32,8 @@ function CadastroPet({ navigation }) {
   // Pop-Up/Modal Control
   const [modalVisible, setModalVisible] = useState(false);
 
-  function createPet() {
+  async function createPet() {
+    const id = await SecureStore.getItemAsync('id');
     const body = {
       dogName,
       dogBreed,
@@ -46,7 +49,7 @@ function CadastroPet({ navigation }) {
       sexo: dogSex,
       cor: dogColor,
       porte: dogSize,
-      id: 1
+      id: id
     }
 
     // Deveria ser assincrono
