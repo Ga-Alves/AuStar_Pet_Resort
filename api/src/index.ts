@@ -6,7 +6,7 @@ import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
 import ServiceOrders from "./OrdemServico/ServiceOrders";
-import UserNotify from "./CadastroUser/notifyToken";
+import UserNotify from "./CadastroUser/NotificaUser";
 import AgendaBanho from "./Agenda/AgendaBanho";
 
 import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
