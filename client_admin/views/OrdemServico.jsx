@@ -47,7 +47,7 @@ function ServiceOrdemScreen(props) {
                         "data": "date",
                         "id_banhista": "id_employee",
                         "id_ordem": "id",  
-                        "nome_banhista": "resposable",
+                        "nome_banhista": "responsable",
                         "finalizacao": "finishing",
                         "nome_pet": "title",
                         "servicos": "services"
@@ -56,6 +56,7 @@ function ServiceOrdemScreen(props) {
             await backend.get(`ServiceOrders?day=${dia}&week=${week}`)
             .then((response) => {
                 back_res = response.data
+                console.log(back_res);
                 let serviceOrders = [];
                 back_res.forEach(element => {
                     SelectPatternOrder = renameKeys(element, newKeys);
