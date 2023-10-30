@@ -47,7 +47,7 @@ function ServiceOrdemScreen(props) {
                         "data": "date",
                         "id_banhista": "id_employee",
                         "id_ordem": "id",  
-                        "nome_banhista": "resposable",
+                        "nome_banhista": "responsable",
                         "finalizacao": "finishing",
                         "nome_pet": "title",
                         "servicos": "services"
