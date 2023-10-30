@@ -23,6 +23,8 @@ import backend from '../services/BackEndAPI'
 function AgendaBanhoPasso3(props) {
     const { form, setDate, setTime } = useContext(AgendaBanhoContext)
 
+    const [selectDateStr, setSelectDateStr] = useState("11/11/1111")
+
     const time = ["8:00", "8:50", "9:40", "10:30", "11:20", "13:10", "14:00", "14:50", "15:40"]
     const [ availableTime, setAvailableTime ] = useState([])
 
@@ -54,7 +56,7 @@ function AgendaBanhoPasso3(props) {
             }
             return [0, 0];
         }
-        const [week, day] = getWeekDayOf(form.dia);
+        const [week, day] = getWeekDayOf(selectDateStr);
 
         const strDay = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 
@@ -63,15 +65,14 @@ function AgendaBanhoPasso3(props) {
                 setAvailableTime(res.data);
             })
             .catch((res) => {
-                
-                // console.log(JSON.stringify(res));
                 console.log(res);
             })
+    }, [selectDateStr])
 
-        
-        
-        
-    }, [form.dia])
+    function handleSubmit() {
+        setDate(selectDateStr);
+        props.navigation.push('AgendaBanhoPasso4')
+    }
 
 
     return (
@@ -88,7 +89,7 @@ function AgendaBanhoPasso3(props) {
                             <Text style={[textStyle.subtitle, textStyle.textColor]}>Dia</Text>
                         </View>
 
-                        <Calendar setSelectedDate={setDate}/>
+                        <Calendar setSelectedDate={setSelectDateStr}/>
 
                         <View style={styles.subtitle}>
                             <AntDesign name="clockcircle" size={23} color={textStyle.textColor.color} />
@@ -99,7 +100,7 @@ function AgendaBanhoPasso3(props) {
                         <View style={{alignItems: 'flex-start', width: '100%', gap: 5}}>
                             <SelectTimeBath selectedTime={form.horario} setSelectTime={setTime} times={time} availableTimes={availableTime}></SelectTimeBath>    
                         </View>
-                        <OrangeButton onPress={() => props.navigation.push('AgendaBanhoPasso4')} text='Próximo Passo !'/>
+                        <OrangeButton onPress={handleSubmit} text='Próximo Passo !'/>
                     </View>
                 </GradientBorder>
                 <Text>
