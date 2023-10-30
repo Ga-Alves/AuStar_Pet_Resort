@@ -14,10 +14,11 @@ Versão 1 do aplicativo mobile para agendamento de horários para banho de cães
 - Linguagem de Programação: JavaScript (Front), TypeScript (Back)
 - React Native
 - Expo
-- axios
+- Axios
 - NPM
-- express
-- SQLite
+- Express
+- PostgreSQL
+- PGP
 - Postman
 - <a href="https://www.figma.com/file/bfAug0nLIeBicvswALIcbl/AuStart-Pet?type=design&node-id=0%3A1&mode=design&t=1KRBqUzKLzfJFAde-1" target="_blank">Figma</a>
 </div><br/>
@@ -228,4 +229,69 @@ Status (concluído ou não)
 </details>  
 </br>
 
+## Arquitetura Hexagonal
 
+Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda e Ordem de Serviço. Adotamos essa arquitetura porque essas são as entidades mais visualizadas para os usuários do sistema, que são o cliente e o administrador da loja. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
+
+///// FALAR SOBRE PORTAS DE ENTRADA!!! \\\\ 
+
+O adaptador para todas as portas de saída (ou seja, armazenamento no banco de dados) de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PGP (Pretty Good Privacy).
+
+```typescript
+export default class Adaptador implements Conexao{
+    conexao: any;
+    constructor(){
+	this.conexao = pgp() ("postgres://postgres:rapha@localhost:5432/app") 
+    }
+    query(statement: string, params: any): Promise<any> {  
+	return this.conexao.query(statement, params);
+    }
+    one(statement: string, params: any): Promise<any> {
+	return this.conexao.one(statement, params);
+    }
+    close(): Promise<void>{
+	return this.conexao.$pool.end();
+    }
+}
+```
+Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
+
+As portas de saída para as classes Banhista, Pet e Usuário são seus respectivos cadastros. Na estrutura de diretórios do back end do sistema, cada um desses domínios tem a sua própria pasta. Isso significa que cada entidade tem sua própria implementação de repositório. Os repositórios de cada classe contêm as queries que fazem inserções e atualizações nos bancos de dados. Um exemplo de repositório é o de um banhista cadastrado:
+
+```typescript
+export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
+    constructor (readonly conexao: Conexao) {
+    }
+
+    async save(banhistaCadastrado: BanhistaCadastrado): Promise<void> {
+	await this.conexao.query("insert into app.Banhista (nome) values ($1)", [banhistaCadastrado.nome]);
+    }
+    async list(): Promise<any[]> {
+	const banhistasCadastrados = await this.conexao.query("select * from app.Banhista", 0);
+	return banhistasCadastrados
+    }
+}
+```
+
+As funções acima fazem queries para salvar um novo funcionário no banco de dados e para listar os que já existem no banco.
+
+A classe de Agenda, por sua vez, é usada para alocar funcionários da seguinte maneira: cada entrada da agenda corresponde a um dia de trabalho de um funcionário. Um exemplo no banco de dados:
+
+	app=# select * from app.agenda;
+	 id_entrada | id_banhista | nome |    dia     |      horarios       
+	------------+-------------+------+------------+---------------------
+	         22 |           1 | Samu | 2023-11-10 | {0,1,2,3,4,6,7,8,9}
+	         20 |           1 | Samu | 2023-11-08 | {0,2,3,4,6,7,8,9}
+	         21 |           1 | Samu | 2023-11-09 | {2,3,4,6,7,8,9}
+	(3 registros)
+
+Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet. A porta de entrada é uma requisição por parte do administrador do negócio, que escolhe um dia em que um funcionário que está cadastrado irá trabalhar. A primeira porta de saída é o próprio armazenamento da entrada da agenda. Dentro do sistema, além de mostrar quantos e quais funcionários vão trabalhar em um dia, essa tabela é utilizada para dois outros fins: para mostrar horários disponíveis para banho e para agendar um banho. Para mostrar horários disponíveis, a tabela é consultada para ver se há um funcionário disponível e para agendar um banho a tabela é modificada para retirar um dos horários disponíveis de um banhista. Logo, temos três operações de saída: um armazenamento, uma consulta e uma atualização.
+
+Por fim, uma instância da classe Ordem de Serviço é gerada quando um cliente agenda um banho. Para gerar uma, é necessário consultar várias outras tabelas seguindo as informações que o cliente fornece no front end. Segue abaixo um exemplo de uma ordem de serviço:
+
+	app=# select * from app.ordemservico;
+	 id_ordem | id_pet | id_banhista | finalizacao | servicos | total  |    data    | horario | completo 
+	----------+--------+-------------+-------------+----------+--------+------------+---------+----------
+        	1 |      1 |           1 | {1,2}       | {1,2}    | 100.00 | 2023-11-08 | 8:00    | f
+
+A identificação do funcionário (id_banhista) é encontrado automaticamente por uma função que retorna um funcionário que está disponível na data e no horário escolhidos. O preço total é calculado ao consultar as tabelas de finalizações e de serviços de upselling, que têm valores fixos no sistema. Por fim, só foi possível marcar essa data e horário para o banho porque existe uma função que consulta a tabela Agenda para ver horários disponíveis.
