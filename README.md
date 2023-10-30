@@ -254,11 +254,6 @@ export default class Adaptador implements Conexao{
 ```
 Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
 
-
-
-As portas de saída para as classes Banhista, Pet e Usuário são seus respectivos cadastros. Na estrutura de diretórios do back end do sistema, cada um desses domínios tem a sua própria pasta. Isso significa que cada entidade tem sua própria implementação de repositório. Os repositórios de cada classe contêm as queries que fazem inserções e atualizações nos bancos de dados. Um exemplo de repositório é o de um banhista cadastrado:
-
-
 O seguinte código é um exmplo de uma porta de entrada, no caso, para a classe Banhista:
 
 ```typescript
@@ -287,6 +282,8 @@ export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
 
 As funções acima fazem queries para salvar um novo funcionário no banco de dados e para listar os que já existem no banco.
 
+A seguir, exemplos de tabelas e do funcionamento do sistema.
+
 A classe Agenda, por sua vez, é usada para alocar funcionários da seguinte maneira: cada entrada da agenda corresponde a um dia de trabalho de um funcionário. Um exemplo no banco de dados:
 
 	app=# select * from app.agenda;
@@ -297,7 +294,7 @@ A classe Agenda, por sua vez, é usada para alocar funcionários da seguinte man
 	         21 |           1 | Samu | 2023-11-09 | {2,3,4,6,7,8,9}
 	(3 registros)
 
-Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet. A porta de entrada é uma requisição por parte do administrador do negócio, que escolhe um dia em que um funcionário que está cadastrado irá trabalhar. A primeira porta de saída é o próprio armazenamento da entrada da agenda. Dentro do sistema, além de mostrar quantos e quais funcionários vão trabalhar em um dia, essa tabela é utilizada para dois outros fins: para mostrar horários disponíveis para banho e para agendar um banho. Para mostrar horários disponíveis, a tabela é consultada para ver se há um funcionário disponível, e para agendar um banho a tabela é modificada para retirar um dos horários disponíveis de um banhista. Logo, temos três operações de saída: um armazenamento, uma consulta e uma atualização.
+Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet.
 
 Por fim, uma instância da classe Ordem de Serviço é gerada quando um cliente agenda um banho. Para gerar uma, é necessário consultar várias outras tabelas seguindo as informações que o cliente fornece no front end. Segue abaixo um exemplo de uma ordem de serviço:
 
