@@ -5,12 +5,12 @@ export default class AlocaBanhista {
     }
 
     async execute (input: Input): Promise<void> {
-        await this.repositorioAgenda.add(input.week, input.day, input.employeeID);
+        await this.repositorioAgenda.add(input.week, input.day, input.id_banhista);
     }
 }
 
 type Input = {
     week: number,
     day: string,
-    employeeID: number
+    id_banhista: number
 }

@@ -90,6 +90,9 @@ INSERT INTO app.Banhista (nome) VALUES ('Deborah');
 INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{1,2,3}', '{1,2,3}', 50, '2023-10-30', '8:00', false);
 INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{3}', '{1,3}', 50, '2023-10-30', '8:50', false);
 INSERT INTO app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) VALUES (1, 1, '{1}', '{2,3}', 50, '2023-10-30', '9:40', false);
+INSERT INTO app.agenda (id_banhista, nome, dia, horarios) VALUES (1, "Deborah", "2023-10-30", "{0,1,2,3,4,6,7,8,9}");
+INSERT INTO app.agenda (id_banhista, nome, dia, horarios) VALUES (1, "Deborah", "2023-10-29", "{0,1,2,3,4,6,7,8,9}");
+
 
 
 /*

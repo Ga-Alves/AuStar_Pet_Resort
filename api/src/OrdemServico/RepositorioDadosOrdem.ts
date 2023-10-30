@@ -8,7 +8,7 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
     }
     
     async save (ordemServico: OrdemServico): Promise<void> {
-        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) values ($1, $2, $3, $4, $5, $6, $7)",
+        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) values ($1, $2, $3, $4, $5, $6, $7, $8)",
         [ordemServico.id_pet, ordemServico.id_banhista, ordemServico.finalizacoes, ordemServico.servicos, ordemServico.total, ordemServico.data, ordemServico.horario, ordemServico.completo]);
     }
     
@@ -93,12 +93,14 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
 
         for (const id of finalizacoes) {
             const preco = await this.conexao.query("select preco from app.Finalizacoes where id_finalizacao = $1", [id]);
-            preco_finalizacoes.push(preco);
+            const preco_float = parseFloat(preco[0].preco);
+            preco_finalizacoes.push(preco_float);
         }
 
         for (const id of servicos) {
-            const preco = await this.conexao.query("select preco from app.ServicosUpselling where id_finalizacao = $1", [id]);
-            preco_finalizacoes.push(preco);
+            const preco = await this.conexao.query("select preco from app.ServicosUpselling where id_upselling = $1", [id]);
+            const preco_float = parseFloat(preco[0].preco);
+            preco_finalizacoes.push(preco_float);
         }
 
         const total_finalizacoes = preco_finalizacoes.reduce((accumulator, currentValue) => accumulator + currentValue, 0);

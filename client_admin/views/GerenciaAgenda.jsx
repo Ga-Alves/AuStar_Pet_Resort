@@ -12,11 +12,12 @@ import { RoundButton } from "../components/RoundButton";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-//mock
-import { employeesMock, weekScheeduleMock } from "../mock/GerenciaAgendaMock";
-
 //api
 import backend from "../services/BackEndAPI";
+
+
+// service
+import { renameKeys } from "../services/renameObjKeys";
 
 
 function GerenciaAgenda() {
@@ -37,7 +38,16 @@ function GerenciaAgenda() {
 
     // pega todos os funcionarios
     useEffect(() => {
-        setEmployees(employeesMock)
+        backend.get('RetornaBanhistas')
+        .then((res) => {
+            const resData = res.data.banhistasCadastrados;
+            const dataPattern = resData.map((obj) => renameKeys(obj, {"id_banhista": "id", "nome": "name"}))
+            setEmployees(dataPattern)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
     }, [])
     
     // pega agenda da semana

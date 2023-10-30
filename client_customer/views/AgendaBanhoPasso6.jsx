@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -10,10 +10,20 @@ import { GradientBorder } from "../components/GradientBorder"
 // global styles
 import { textStyle } from "../utils/textStyles";
 
+//context
+import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
+
 function AgendaBanhoPasso6  (props) {
     const windowWidth = Dimensions.get('window').width;
+    const {form, resetFormValues} = useContext(AgendaBanhoContext);
 
     const [scheduledTime, setScheduledTime] = useState('')
+
+    function handleSubmit(){
+        resetFormValues();
+        props.navigation.push('Home');
+    }
+
 
     useEffect(() => {
         // simulando uma requisição de 3s de delay
@@ -48,8 +58,8 @@ function AgendaBanhoPasso6  (props) {
                                     <Text style={textStyle.sublime}>Tudo cer</Text>tinho(a) ?
                                 </Text>
                                 <Text style={[textStyle.subtitle, styles.titleMargin, {color: 'white'}]}>
-                                    Estamos te esperando às
-                                    <Text style={{fontWeight: 'bold'}}> 11:20</Text>
+                                    Estamos te esperando às 
+                                    <Text style={{fontWeight: 'bold'}}>{form.horario}</Text>
                                     .
                                 </Text>
                             </View> 
@@ -59,7 +69,7 @@ function AgendaBanhoPasso6  (props) {
                     
                 </GradientBorder>
                 <View style={{alignSelf: 'center', marginTop: 30}}>
-                    <OrangeButton onPress={() => props.navigation.push('Home')} text='Ir para Menu'/>
+                    <OrangeButton onPress={handleSubmit} text='Ir para Menu'/>
                 </View>
             </View>
         </View>

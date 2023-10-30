@@ -32,9 +32,6 @@ useEffect(() => {
                 dica: response.data.servicoOferecidoDicas['dica'],
                 servicos: response.data.servicoOferecidoUpselling
             }
-
-            console.log(back_response);
-            
             setUpSelling(back_response);
         })
         .catch(function (error) {

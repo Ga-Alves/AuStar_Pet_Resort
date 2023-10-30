@@ -1,4 +1,3 @@
-import BanhistaCadastrado from "../CadastroBanhista/BanhistaCadastrado";
 import Conexao from "../conexao";
 import BanhistaAlocado from "./BanhistaAlocado";
 import RepositorioAgenda from "./Repositorio";
@@ -11,23 +10,16 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [banhistaAlocado.id_banhista, banhistaAlocado.nome, banhistaAlocado.dia, banhistaAlocado.horarios]);
     }
 
-    async add (week: number, day: string, employeeID: number): Promise<void> {
+    async add (week: number, day: string, id_banhista: number): Promise<void> {
         const schedule: number[] = [0, 1, 2, 3, 4, 6, 7, 8, 9];
         const date = await this.get_date_from_week_day(week, day);
-        const employee = await this.conexao.one("select nome from app.Banhista where id_banhista = $1", [employeeID]);
+        const employee = await this.conexao.one("select nome from app.Banhista where id_banhista = $1", [id_banhista]);
         const name: string = employee.nome;
-        await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [employeeID, name, date, schedule]);
+        await this.conexao.query("insert into app.Agenda (id_banhista, nome, dia, horarios) values ($1, $2, $3, $4)", [id_banhista, name, date, schedule]);
     }
     
-    async get (week: number, day: string): Promise<BanhistaAlocado[]> {
-        const today = new Date();
-        const start_day = new Date();
-        start_day.setDate(today.getDate() - today.getDay()); // Domingo da semana atual
-        
-        const start_week = week - 1;
-        
+    async get (week: number, day: string): Promise<BanhistaAlocado[]> {        
         const date = await this.get_date_from_week_day(week, day);
-        
         const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1", [date]);
         return banhistaAlocadoDados;
     }
@@ -89,25 +81,25 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
 
     }
     
-    async schedule (date: Date, employeeID: number, scheduledIndex: number, size: string): Promise<void> {
-        let scheduledTime: number;
-        if (scheduledIndex < 5) {
-            scheduledTime = scheduledIndex
+    async schedule (dia: Date, id_banhista: number, horarioIndex: number, porte: string): Promise<void> {
+        let horarioId: number;
+        if (horarioIndex < 5) {
+            horarioId = horarioIndex
         } else {
-            scheduledTime = scheduledIndex + 1
+            horarioId = horarioIndex + 1
         }
 
-        const scheduled: number[] = []
-        scheduled.push(scheduledTime);
+        const marcado: number[] = []
+        marcado.push(horarioId);
         
-        if (size === "G" || size === "XL") {
-            scheduled.push(scheduledTime + 1)
+        if (porte === "G" || porte === "XL") {
+            marcado.push(horarioId + 1)
         }
 
-        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1 and id_banhista = $2", [date, employeeID]);
-        const newSchedule: number[] = banhistaAlocadoDados.schedule.filter((t: number) => !scheduled.includes(t));
-        await this.conexao.query("delete from app.Agenda where id_entrada = $1", [banhistaAlocadoDados.entryID]);
-        await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [banhistaAlocadoDados.date, employeeID, newSchedule]);
+        const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1 and id_banhista = $2", [dia, id_banhista]);
+        const novoHorarios: number[] = banhistaAlocadoDados[0].horarios.filter((t: number) => !marcado.includes(t));
+        
+        await this.conexao.query("update app.Agenda set horarios = $1 where id_banhista = $2 and dia = $3", [novoHorarios, id_banhista, dia]);
     }
     
     horaStrToIndex(horario: string): number{
@@ -125,17 +117,20 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         if(horario =='10:30'){
             horaIndex = 3
         }
-        if(horario =='13:10'){
+        if(horario =='11:20'){
             horaIndex = 4
         }
-        if(horario =='14:00'){
+        if(horario =='13:10'){
             horaIndex = 5
         }
-        if(horario =='14:50'){
+        if(horario =='14:00'){
             horaIndex = 6
         }
-        if(horario =='15:40'){
+        if(horario =='14:50'){
             horaIndex = 7
+        }
+        if(horario =='15:40'){
+            horaIndex = 8
         }
         return horaIndex
     }

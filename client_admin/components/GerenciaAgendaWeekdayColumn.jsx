@@ -20,7 +20,7 @@ function GerenciaAgendaWeekdayColumn({week, weekDayName, scheeduledEmployes, add
             const body = {
                 week: week,
                 day: weekDayName,
-                employeeID: addEmployee.id
+                id_banhista: addEmployee.id
             }
             console.log(body);
             backend.post("/AlocaBanhista", body)

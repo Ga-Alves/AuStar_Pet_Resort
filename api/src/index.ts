@@ -66,7 +66,7 @@ app.post("/CadastroBanhista", async function (request: Request, response: Respon
 
 app.post("/AlocaBanhista", async function (request: Request, response: Response){
     const alocaBanhista = new AlocaBanhista(repositorioAgenda);
-    await alocaBanhista.execute({week: request.body.week, day: request.body.day, employeeID: request.body.employeeID});
+    await alocaBanhista.execute({week: request.body.week, day: request.body.day, id_banhista: request.body.id_banhista});
     response.end();
 })
 
@@ -95,7 +95,7 @@ app.get("/HorariosDisponiveisDia", async function (request: Request, response: R
     const week = request.query.week;
     const day = request.query.day;
     const id_pet = request.query.id_pet;
-
+    
     if ( typeof week !== "string") {
         response.status(500).json({ error: 'Invalid week' });
         return;
