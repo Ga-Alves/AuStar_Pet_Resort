@@ -63,8 +63,8 @@ function AgendaBanhoPasso5  (props) {
         .then(function (response) {
             const servicos = response.data.servicoOferecidoUpselling;
 
-            const servicosRequisitados = []
-            let total = 0;
+            const servicosRequisitados = [{service: 'Banho', value: 50}]
+            let total = 50;
 
             servicos.forEach((servico) => {
                 if (form.servicos.has(servico.id_upselling)) {
