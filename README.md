@@ -233,7 +233,7 @@ Status (concluído ou não)
 
 Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda e Ordem de Serviço. Adotamos essa arquitetura porque essas são as entidades mais visualizadas para os usuários do sistema, que são o cliente e o administrador da loja. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
 
-///// FALAR SOBRE PORTAS DE ENTRADA!!! \\\\ 
+A interface do front end utilizada foi REST. Na porta de entrada, foi utilizada a tecnologia Express.
 
 O adaptador para todas as portas de saída (ou seja, armazenamento no banco de dados) de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PGP (Pretty Good Privacy).
 
