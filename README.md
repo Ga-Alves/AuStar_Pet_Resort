@@ -233,9 +233,7 @@ Status (concluído ou não)
 
 Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda, Ordem de Serviço e Serviços de Upselling. Adotamos essa arquitetura porque essas são as entidades mais importantes para os usuários do sistema, que são o cliente e o administrador da loja. A classe de Serviços de Upselling retorna todos os serviços que podem se aplicar ao pet cujo banho está sendo agendado. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento e gerenciamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
 
-A interface do front end utilizada foi REST. Na porta de entrada, foi utilizada a tecnologia Express.
-
-O adaptador para todas as portas de saída (ou seja, armazenamento no banco de dados) de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PGP (Pretty Good Privacy).
+O adaptador para o banco de dados de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PG-Promise.
 
 ```typescript
 export default class Adaptador implements Conexao{
@@ -256,7 +254,21 @@ export default class Adaptador implements Conexao{
 ```
 Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
 
+
+
 As portas de saída para as classes Banhista, Pet e Usuário são seus respectivos cadastros. Na estrutura de diretórios do back end do sistema, cada um desses domínios tem a sua própria pasta. Isso significa que cada entidade tem sua própria implementação de repositório. Os repositórios de cada classe contêm as queries que fazem inserções e atualizações nos bancos de dados. Um exemplo de repositório é o de um banhista cadastrado:
+
+
+O seguinte código é um exmplo de uma porta de entrada, no caso, para a classe Banhista:
+
+```typescript
+export default interface RepositorioBanhistas{
+    save (banhistaCadastrado: BanhistaCadastrado): Promise<void>
+    list (): Promise<any[]>
+}
+```
+
+A seguir, um adaptador para a classe banhista:
 
 ```typescript
 export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
