@@ -55,7 +55,7 @@ function AgendaBanhoPasso3(props) {
 
         const strDay = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 
-        backend.get(`/HorariosDisponiveisDia?week=${week + 1}&day=${strDay[day]}&id_pet=${form.id_pet}`)
+        backend.get(`/HorariosDisponiveisDia?week=${week + 1}&day=ter&id_pet=${form.id_pet}`)
             .then((res) => {
                 setAvailableTime(res.data);
             })

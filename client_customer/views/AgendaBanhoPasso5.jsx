@@ -36,7 +36,6 @@ function AgendaBanhoPasso5  (props) {
     const [totalValue, setTotalValue] = useState(0)
 
     function handleSubmit(){
-        props.navigation.push('AgendaBanhoPasso6')
         
         const body = {
             id_pet: form.id_pet,
@@ -49,12 +48,14 @@ function AgendaBanhoPasso5  (props) {
         backend.post('/AgendarBanho', body)
             .then((res) => {
                 console.log("certo");
+                // props.navigation.push('AgendaBanhoPasso6')
+                // resetFormValues();
             })
             .catch((err) => {
+                console.log("errrrrr");
                 console.log(err);
             })
-
-        resetFormValues();
+                
         
     }
 
