@@ -93,12 +93,14 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
 
         for (const id of finalizacoes) {
             const preco = await this.conexao.query("select preco from app.Finalizacoes where id_finalizacao = $1", [id]);
-            preco_finalizacoes.push(preco);
+            const preco_float = parseFloat(preco[0].preco);
+            preco_finalizacoes.push(preco_float);
         }
 
         for (const id of servicos) {
             const preco = await this.conexao.query("select preco from app.ServicosUpselling where id_upselling = $1", [id]);
-            preco_finalizacoes.push(preco);
+            const preco_float = parseFloat(preco[0].preco);
+            preco_finalizacoes.push(preco_float);
         }
 
         const total_finalizacoes = preco_finalizacoes.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
