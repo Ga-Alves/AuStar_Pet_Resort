@@ -41,7 +41,7 @@ function AgendaBanhoPasso1(props) {
         async function fetchData(){
             const id = await SecureStore.getItemAsync('id');
             
-            backend.get(`CachorrosTutor?id_tutor=${1}`)
+            backend.get(`CachorrosTutor?id_tutor=${id}`)
             .then(function (res) {
                 const resData = res.data.res
                 const SelectPatternPets = resData.map((obj) => renameKeys(obj, {"id_pet": "id", "nome": "label"}))
