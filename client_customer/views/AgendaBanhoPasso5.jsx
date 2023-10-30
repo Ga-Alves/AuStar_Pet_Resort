@@ -30,7 +30,7 @@ function AgendaBanhoPasso5  (props) {
         )
     }
 
-    const {form, resetFormValues} = useContext(AgendaBanhoContext)
+    const {form} = useContext(AgendaBanhoContext)
 
     const [services, setServices] = useState([])
     const [totalValue, setTotalValue] = useState(0)

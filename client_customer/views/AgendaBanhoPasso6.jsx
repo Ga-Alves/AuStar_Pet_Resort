@@ -15,7 +15,7 @@ import { AgendaBanhoContext } from "../context/AgendaBanhoContext";
 
 function AgendaBanhoPasso6  (props) {
     const windowWidth = Dimensions.get('window').width;
-    const {form} = useContext(AgendaBanhoContext);
+    const {form, resetFormValues} = useContext(AgendaBanhoContext);
 
     const [scheduledTime, setScheduledTime] = useState('')
 
