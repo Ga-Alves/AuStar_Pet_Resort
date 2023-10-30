@@ -48,8 +48,7 @@ function AgendaBanhoPasso5  (props) {
         backend.post('/AgendarBanho', body)
             .then((res) => {
                 console.log("certo");
-                // props.navigation.push('AgendaBanhoPasso6')
-                // resetFormValues();
+                props.navigation.push('AgendaBanhoPasso6')
             })
             .catch((err) => {
                 console.log("errrrrr");
