@@ -55,11 +55,11 @@ function ServiceOrdemScreen(props) {
         console.log(dia, week);
             await backend.get(`ServiceOrders?day=${dia}&week=${week}`)
             .then((response) => {
-                console.log(response.data);
-                
+                const back_res = response.data
                 let serviceOrders = [];
                 back_res.forEach(element => {
-                    const SelectPatternOrder = renameKeys(element, newKeys);
+                    SelectPatternOrder = renameKeys(element, newKeys);
+                    SelectPatternOrder['services'] = [...SelectPatternOrder['services'], ...SelectPatternOrder['finishing']];
                     serviceOrders.push(SelectPatternOrder);
                 });
                 setServiceOrdersData(serviceOrders);
