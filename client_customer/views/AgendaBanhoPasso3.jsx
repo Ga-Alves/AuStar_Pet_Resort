@@ -29,11 +29,15 @@ function AgendaBanhoPasso3(props) {
     useEffect(() => {
         function getWeekDayOf(strDate){
             const splitDate = strDate.split('/')
-            const selectDate = new Date(splitDate[2], parseInt(splitDate[1]), splitDate[0])
+            const selectDate = new Date(splitDate[2], parseInt(splitDate[1]) - 1, splitDate[0])
     
             const today = new Date()
             const firstMondayOfThisWeek = new Date(today)
             firstMondayOfThisWeek.setDate(today.getDate() - today.getDay() + 1)
+
+            // console.log(today.getDate(), today.getMonth(), today.getFullYear());
+            // console.log(firstMondayOfThisWeek.getDate(), firstMondayOfThisWeek.getMonth(), firstMondayOfThisWeek.getFullYear());
+            
     
             const currentDate = new Date(firstMondayOfThisWeek)
             for (let i = 0; i < 4; i++) {
@@ -52,10 +56,9 @@ function AgendaBanhoPasso3(props) {
         }
         const [week, day] = getWeekDayOf(form.dia);
 
-
         const strDay = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 
-        backend.get(`/HorariosDisponiveisDia?week=${week + 1}&day=ter&id_pet=${form.id_pet}`)
+        backend.get(`/HorariosDisponiveisDia?week=${week + 1}&day=${strDay[day]}&id_pet=${form.id_pet}`)
             .then((res) => {
                 setAvailableTime(res.data);
             })

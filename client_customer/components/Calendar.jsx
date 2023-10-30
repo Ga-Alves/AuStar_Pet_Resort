@@ -9,7 +9,7 @@ function Calendar({setSelectedDate}) {
     firstMondayOfThisWeek.setDate(today.getDate() - today.getDay() + 1)
     
     const [calendarIndx, setCalendarIndx] = useState(today.getDay() == 0 ? 0 : today.getDay() - 1)
-
+    
     const days = getCalendarDays()
 
     // função para gerar um array de todos os dias do calendario
@@ -28,8 +28,7 @@ function Calendar({setSelectedDate}) {
 
     // função utilizada para renderizar um unico dia no calendário
     function renderDay(day, indx) {
-        if (indx < today.getDay() && indx < 6) {
-            
+        if (indx < today.getDay() - 1 && indx < 6) {
             return(
                 <View key={indx} style={[styles.day, styles.disable]}>
                     <Text>
