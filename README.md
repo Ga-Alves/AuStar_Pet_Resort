@@ -231,7 +231,7 @@ Status (concluído ou não)
 
 ## Arquitetura Hexagonal
 
-Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda e Ordem de Serviço. Adotamos essa arquitetura porque essas são as entidades mais visualizadas para os usuários do sistema, que são o cliente e o administrador da loja. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
+Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda, Ordem de Serviço e Serviços de Upselling. Adotamos essa arquitetura porque essas são as entidades mais importantes para os usuários do sistema, que são o cliente e o administrador da loja. A classe de Serviços de Upselling retorna todos os serviços que podem se aplicar ao pet cujo banho está sendo agendado. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento e gerenciamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
 
 A interface do front end utilizada foi REST. Na porta de entrada, foi utilizada a tecnologia Express.
 
@@ -275,7 +275,7 @@ export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
 
 As funções acima fazem queries para salvar um novo funcionário no banco de dados e para listar os que já existem no banco.
 
-A classe de Agenda, por sua vez, é usada para alocar funcionários da seguinte maneira: cada entrada da agenda corresponde a um dia de trabalho de um funcionário. Um exemplo no banco de dados:
+A classe Agenda, por sua vez, é usada para alocar funcionários da seguinte maneira: cada entrada da agenda corresponde a um dia de trabalho de um funcionário. Um exemplo no banco de dados:
 
 	app=# select * from app.agenda;
 	 id_entrada | id_banhista | nome |    dia     |      horarios       
@@ -285,7 +285,7 @@ A classe de Agenda, por sua vez, é usada para alocar funcionários da seguinte 
 	         21 |           1 | Samu | 2023-11-09 | {2,3,4,6,7,8,9}
 	(3 registros)
 
-Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet. A porta de entrada é uma requisição por parte do administrador do negócio, que escolhe um dia em que um funcionário que está cadastrado irá trabalhar. A primeira porta de saída é o próprio armazenamento da entrada da agenda. Dentro do sistema, além de mostrar quantos e quais funcionários vão trabalhar em um dia, essa tabela é utilizada para dois outros fins: para mostrar horários disponíveis para banho e para agendar um banho. Para mostrar horários disponíveis, a tabela é consultada para ver se há um funcionário disponível e para agendar um banho a tabela é modificada para retirar um dos horários disponíveis de um banhista. Logo, temos três operações de saída: um armazenamento, uma consulta e uma atualização.
+Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet. A porta de entrada é uma requisição por parte do administrador do negócio, que escolhe um dia em que um funcionário que está cadastrado irá trabalhar. A primeira porta de saída é o próprio armazenamento da entrada da agenda. Dentro do sistema, além de mostrar quantos e quais funcionários vão trabalhar em um dia, essa tabela é utilizada para dois outros fins: para mostrar horários disponíveis para banho e para agendar um banho. Para mostrar horários disponíveis, a tabela é consultada para ver se há um funcionário disponível, e para agendar um banho a tabela é modificada para retirar um dos horários disponíveis de um banhista. Logo, temos três operações de saída: um armazenamento, uma consulta e uma atualização.
 
 Por fim, uma instância da classe Ordem de Serviço é gerada quando um cliente agenda um banho. Para gerar uma, é necessário consultar várias outras tabelas seguindo as informações que o cliente fornece no front end. Segue abaixo um exemplo de uma ordem de serviço:
 
@@ -294,4 +294,4 @@ Por fim, uma instância da classe Ordem de Serviço é gerada quando um cliente 
 	----------+--------+-------------+-------------+----------+--------+------------+---------+----------
         	1 |      1 |           1 | {1,2}       | {1,2}    | 100.00 | 2023-11-08 | 8:00    | f
 
-A identificação do funcionário (id_banhista) é encontrado automaticamente por uma função que retorna um funcionário que está disponível na data e no horário escolhidos. O preço total é calculado ao consultar as tabelas de finalizações e de serviços de upselling, que têm valores fixos no sistema. Por fim, só foi possível marcar essa data e horário para o banho porque existe uma função que consulta a tabela Agenda para ver horários disponíveis.
+Na tela de agendar o banho, só é possível marcar os horários que estão disponíveis e, para isso, é necessário consultar a tabela Agenda. A rota de Serviços de Upselling retorna os serviços adequados para o pet. A identificação do funcionário (id_banhista) é encontrado automaticamente por uma função que retorna um funcionário que está disponível na data e no horário escolhidos. O preço total é calculado ao consultar as tabelas de finalizações e de serviços de upselling, que têm valores fixos no sistema. Por fim, quando o banho do pet é concluído, a função de finalizar a ordem de serviço muda o campo "completo" para "true".
