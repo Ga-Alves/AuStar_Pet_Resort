@@ -12,8 +12,8 @@ export default class RepositorioDadosPets implements RepositorioPets{
         await this.conexao.query("insert into app.Pet (nome, raca, sexo, cor, porte, id_tutor) values ($1, $2, $3, $4, $5, $6) ",
         [petCadastrado.nomePet, petCadastrado.raca, petCadastrado.sexo, petCadastrado.cor, petCadastrado.porte, petCadastrado.id]); // resolver dps
     }
-    async get (pet_id: number): Promise<PetCadastrado>{
-        const dadosPetCadastrado = await this.conexao.one("select * from app.Pet where id_pet = $1", pet_id)
+    async get (id_pet: number): Promise<PetCadastrado>{
+        const dadosPetCadastrado = await this.conexao.one("select * from app.Pet where id_pet = $1", id_pet)
         const petCadastrado = new PetCadastrado(dadosPetCadastrado.nomePet, dadosPetCadastrado.raca, dadosPetCadastrado.sexo, dadosPetCadastrado.cor,
             dadosPetCadastrado.porte, dadosPetCadastrado.id);
 		return petCadastrado;

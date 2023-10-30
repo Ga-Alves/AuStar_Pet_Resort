@@ -8,7 +8,7 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
     }
     
     async save (ordemServico: OrdemServico): Promise<void> {
-        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) values ($1, $2, $3, $4, $5, $6, $7)",
+        await this.conexao.query("insert into app.OrdemServico (id_pet, id_banhista, finalizacao, servicos, total, data, horario, completo) values ($1, $2, $3, $4, $5, $6, $7, $8)",
         [ordemServico.id_pet, ordemServico.id_banhista, ordemServico.finalizacoes, ordemServico.servicos, ordemServico.total, ordemServico.data, ordemServico.horario, ordemServico.completo]);
     }
     
@@ -97,14 +97,14 @@ export default class RepositorioDadosOrdem implements RepositorioOrdem {
         }
 
         for (const id of servicos) {
-            const preco = await this.conexao.query("select preco from app.ServicosUpselling where id_finalizacao = $1", [id]);
+            const preco = await this.conexao.query("select preco from app.ServicosUpselling where id_upselling = $1", [id]);
             preco_finalizacoes.push(preco);
         }
 
         const total_finalizacoes = preco_finalizacoes.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         const total_servicos = preco_servicos.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         const total = banho + total_finalizacoes + total_servicos;
-        return total;
+        return 50;
     }
     async finalizaServico(id_ordem: number): Promise<number> {
         await this.conexao.query("update app.OrdemServico set completo = true where id_ordem = $1", [id_ordem]);

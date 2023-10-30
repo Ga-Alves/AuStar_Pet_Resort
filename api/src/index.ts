@@ -85,7 +85,9 @@ app.get("/ServicoUpselling", async function (request: Request, response: Respons
 
 
 app.post("/AgendarBanho", async function (request: Request, response: Response){
+
     const agendaBanho = new AgendaBanho(repositorioAgenda, repositorioPet, repositorioOrdem);
+    console.log({id_pet: request.body.id_pet, data: request.body.data, horario: request.body.horario, finalizacoes: request.body.finalizacoes, servicos: request.body.servicos});
     await agendaBanho.execute({id_pet: request.body.id_pet, data: request.body.data, horario: request.body.horario, finalizacoes: request.body.finalizacoes, servicos: request.body.servicos}); 
     response.end();
 });

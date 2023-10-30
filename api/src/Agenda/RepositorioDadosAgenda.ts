@@ -105,7 +105,8 @@ export default class RepositorioDadosAgenda implements RepositorioAgenda {
         }
 
         const banhistaAlocadoDados = await this.conexao.query("select * from app.Agenda where dia = $1 and id_banhista = $2", [date, employeeID]);
-        const newSchedule: number[] = banhistaAlocadoDados.schedule.filter((t: number) => !scheduled.includes(t));
+        const newSchedule: number[] = banhistaAlocadoDados[0].horarios.filter((t: number) => !scheduled.includes(t));
+        
         await this.conexao.query("delete from app.Agenda where id_entrada = $1", [banhistaAlocadoDados.entryID]);
         await this.conexao.query("insert into app.Agenda (dia, id_banhista, horarios) values ($1, $2, $3)", [banhistaAlocadoDados.date, employeeID, newSchedule]);
     }
