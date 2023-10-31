@@ -1,6 +1,6 @@
 import RepositorioOrdem from "./Repositorio";
 
-export default class ServiceOrders {
+export default class OrdensServico {
     constructor (readonly repositorioOrdem: RepositorioOrdem) {
     }
 

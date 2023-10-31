@@ -1,4 +1,3 @@
-import BanhistaAlocado from "./BanhistaAlocado";
 import RepositorioAgenda from "./Repositorio";
 
 export default class MostrarAlocacao {

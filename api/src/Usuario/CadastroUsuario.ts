@@ -1,8 +1,8 @@
-import RepositorioUsers from "./Repositorio";
-import userCadastrado from "./userCadastrado";
+import RepositorioUsuarios from "./Repositorio";
+import userCadastrado from "./UserCadastrado";
 
 export default class CadastraUser {
-    constructor (readonly repositorioUsers: RepositorioUsers){
+    constructor (readonly repositorioUsers: RepositorioUsuarios){
     }
     async execute (input: Input): Promise<Output>{
 

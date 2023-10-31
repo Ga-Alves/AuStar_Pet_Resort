@@ -1,25 +1,25 @@
 import express, {Request, Response}  from "express";
-import CadastraPet from "./CadastroPet/CadastroPet";
-import RetornaPet from "./CadastroPet/RetornaPets";
-import CadastraUser from "./CadastroUser/CadastroUser";
-import CadastraBanhista from "./CadastroBanhista/CadastraBanhista";
+import CadastraPet from "./Pet/CadastroPet";
+import RetornaPet from "./Pet/RetornaPets";
+import CadastraUser from "./Usuario/CadastroUsuario";
+import CadastraBanhista from "./Banhista/CadastraBanhista";
 import AlocaBanhista from "./Agenda/AlocaBanhista";
 import HorariosDisponiveisDia from "./Agenda/HorariosDisponiveisDia";
-import ServiceOrders from "./OrdemServico/ServiceOrders";
-import UserNotify from "./CadastroUser/NotificaUser";
-import AgendaBanho from "./Agenda/AgendaBanho";
+import OrdensServico from "./OrdemServico/OrdensServico";
+import UserNotify from "./Usuario/NotificaUsuario";
+import AgendaBanho from "./OrdemServico/AgendaBanho";
 import FinalizaOrdemDeServico from "./OrdemServico/FinalizaOrdemDeServico";
-import RetornaBanhistas from "./CadastroBanhista/RetornaBanhistas"
-import RepositorioDadosPets from "./CadastroPet/RepositorioDadosPets";
-import RepositorioDadosUsers from "./CadastroUser/RepositorioDadosUser";
-import RepositorioDadosBanhistas from "./CadastroBanhista/RepositorioDadosBanhistas"
-import RepositorioDadosServicos from "./servicosUpselling/RepositorioDadosServicos";
+import RetornaBanhistas from "./Banhista/RetornaBanhistas"
+import RepositorioDadosPets from "./Pet/RepositorioDadosPets";
+import RepositorioDadosUsuarios from "./Usuario/RepositorioDadosUsuario";
+import RepositorioDadosBanhistas from "./Banhista/RepositorioDadosBanhistas"
+import RepositorioDadosServicos from "./ServicosUpselling/RepositorioDadosServicos";
 import RepositorioDadosAgenda from "./Agenda/RepositorioDadosAgenda";
 import RepositorioDadosOrdem from "./OrdemServico/RepositorioDadosOrdem";
 
 import Adaptador from "./Adaptador";
 import AdaptadorNotificacao from "./AdaptadorNotificacao";
-import OfereceServico from "./servicosUpselling/ofereceServico";
+import OfereceServico from "./ServicosUpselling/OfereceServico";
 import MostrarAlocacao from "./Agenda/MostrarAlocacao";
 const app = express();
 const cors = require('cors');
@@ -37,7 +37,7 @@ const conexao = new Adaptador();
 const conexaoNotifica = new AdaptadorNotificacao();
 
 const repositorioPet = new RepositorioDadosPets(conexao);
-const repositorioUser = new RepositorioDadosUsers(conexao, conexaoNotifica);
+const repositorioUser = new RepositorioDadosUsuarios(conexao, conexaoNotifica);
 const repositorioBanhista = new RepositorioDadosBanhistas(conexao);
 const repositorioUpselling = new RepositorioDadosServicos(conexao);
 const repositorioAgenda = new RepositorioDadosAgenda(conexao);
@@ -71,7 +71,6 @@ app.post("/AlocaBanhista", async function (request: Request, response: Response)
 })
 
 app.get("/ServicoUpselling", async function (request: Request, response: Response){
-    // console.log(request.query.id_dog)
     const id_dog = request.query.id_dog;
     if ( typeof id_dog !== "string" ) {
         response.status(500).json({ error: 'Invalid id_dog' });
@@ -114,10 +113,9 @@ app.get("/HorariosDisponiveisDia", async function (request: Request, response: R
     response.json(horarios);
 })
 
-app.get("/ServiceOrders", async function (request: Request, response: Response){
+app.get("/OrdensServico", async function (request: Request, response: Response){
     const week = request.query.week;
     const day = request.query.day;
-    // const id_user = request.query.id_user;
 
     if ( typeof week !== "string") {
         response.status(500).json({ error: 'Invalid week' });
@@ -127,18 +125,9 @@ app.get("/ServiceOrders", async function (request: Request, response: Response){
         response.status(500).json({ error: 'Invalid day' });
         return;
     }
-    // if (typeof id_user !== "string") {
-    //     response.status(500).json({ error: 'Invalid id_user' });
-    //     return;
-    // }
-    const serviceOrders = new ServiceOrders(repositorioOrdem);
-    //const userNotify = new UserNotify(repositorioUser);
-    const orders = await serviceOrders.execute({week: parseInt(week), day: day});
-    // eu acho q isso é aqui
 
-    //console.log(parseInt(id_user))
-    //await userNotify.execute({id_user : parseInt(id_user)});
-    //console.log(orders);
+    const serviceOrders = new OrdensServico(repositorioOrdem);
+    const orders = await serviceOrders.execute({week: parseInt(week), day: day});
     response.json(orders);
 })
 

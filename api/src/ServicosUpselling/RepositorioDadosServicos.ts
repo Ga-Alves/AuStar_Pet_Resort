@@ -1,6 +1,6 @@
-import Conexao from "../conexao";
-import ServicoOferecido from "./servicoOferecido";
-import Dicas from "./dicas";
+import Conexao from "../Conexao";
+import ServicoOferecido from "./ServicoOferecido";
+import Dicas from "./Dicas";
 import RepositorioServicos from "./Repositorio";
 
 export default class RepositorioDadosServicos implements RepositorioServicos{

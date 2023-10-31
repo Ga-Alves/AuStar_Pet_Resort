@@ -1,4 +1,4 @@
-import Conexao from "../conexao";
+import Conexao from "../Conexao";
 import BanhistaCadastrado from "./BanhistaCadastrado";
 import RepositorioBanhistas from "./Repositorio";
 

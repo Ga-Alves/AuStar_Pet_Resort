@@ -1,5 +1,4 @@
 export default class Dicas{
-
     constructor (readonly dica: any[]){
         }
 
@@ -7,6 +6,4 @@ export default class Dicas{
         var keys = Object.keys(this.dica).length;
         return this.dica[Math.floor(Math.random() * (keys))];
     }   
-    
-    // colocar funcoes relacionadas a operacoes/regras de negocio aqui
 }   

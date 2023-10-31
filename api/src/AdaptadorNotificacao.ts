@@ -1,4 +1,4 @@
-import NotifyToken from "./CadastroUser/notifyToken";
+import NotifyToken from "./Usuario/NotifyToken";
 import ConexaoNotificacao from "./ConexaoNotificacao";
 import { Expo } from 'expo-server-sdk';
 

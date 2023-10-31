@@ -1,8 +1,8 @@
-import RepositorioAgenda from "./Repositorio";
-import RepositorioOrdem from "../OrdemServico/Repositorio";
-import RepositorioPets from "../CadastroPet/RepositorioDadosPets";
-import BanhistaAlocado from "./BanhistaAlocado";
-import OrdemServico from "../OrdemServico/OrdemServico";
+import RepositorioAgenda from "../Agenda/Repositorio";
+import RepositorioOrdem from "./Repositorio";
+import RepositorioPets from "../Pet/RepositorioDadosPets";
+import BanhistaAlocado from "../Agenda/BanhistaAlocado";
+import OrdemServico from "./OrdemServico";
 
 export default class AgendaBanho {
     constructor (readonly repositorioAgenda: RepositorioAgenda, readonly repositorioPets: RepositorioPets, readonly repositorioOrdem: RepositorioOrdem){

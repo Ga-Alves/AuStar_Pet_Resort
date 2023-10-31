@@ -1,7 +1,7 @@
 import RepositorioAgenda from "./Repositorio";
-import RepositorioPet from "../CadastroPet/Repositorio";
+import RepositorioPet from "../Pet/Repositorio";
 import BanhistaAlocado from "./BanhistaAlocado";
-import petCadastrado from "../CadastroPet/petCadastrado";
+import petCadastrado from "../Pet/PetCadastrado";
 
 export default class HorariosDisponiveisDia {
     constructor (readonly repositorioAgenda: RepositorioAgenda, readonly repositorioPet: RepositorioPet) {
