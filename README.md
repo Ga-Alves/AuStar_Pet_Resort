@@ -263,11 +263,12 @@ export default class Adaptador implements Conexao{
     }
 }
 ```
+Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
+
 A porta para o Expo está no arquivo AdaptadorNotificacao e o adaptador está no arquivo AdaptadorNotificacao, ambos no diretorio api/src.
 
-Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
-# Portas e Adaptadores de Entrada
-Cada domínio possue um arquivo com uma porta de entrada em seu diretório. O nome desse arquivo é sempre Repositorio.
+### Portas e Adaptadores de Entrada
+Cada classe do domínio possue um arquivo com uma porta de entrada em seu diretório. O nome desse arquivo é sempre Repositorio.
 
 O seguinte código é um exemplo de uma porta de entrada, no caso, para a classe Banhista:
 
