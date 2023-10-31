@@ -230,10 +230,10 @@ Status (concluído ou não)
 </br>
 
 ## Arquitetura Hexagonal
-# Domínio
+### Domínio
 Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda, Ordem de Serviço e Serviços de Upselling. Adotamos essa arquitetura porque essas são as entidades mais importantes para os usuários do sistema, que são o cliente e o administrador da loja. A classe de Serviços de Upselling retorna todos os serviços que podem se aplicar ao pet cujo banho está sendo agendado. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento e gerenciamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
 
-# Portas e adaptadores de Saída
+### Portas e adaptadores de Saída
 Há duas portas de saída e dois adaptadores, um para o banco de dados e um para o Expo (tecnologia que gera notificações).
 Segue o um exemplo da interface da porta para o banco de dados, esse script se encontra no arquivo api/src/conexao:
 ```typescript
@@ -244,6 +244,7 @@ export default interface Conexao{
 }
 ```
 O adaptador para o banco de dados de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PG-Promise.
+Segue o exemplo de código desse adaptador:
 
 ```typescript
 export default class Adaptador implements Conexao{
@@ -261,8 +262,9 @@ export default class Adaptador implements Conexao{
 	return this.conexao.$pool.end();
     }
 }
-A porta para o Expo está no arquivo AdaptadorNotificacao e o adaptador está no arquivo AdaptadorNotificacao, ambos no diretorio api/src.
 ```
+A porta para o Expo está no arquivo AdaptadorNotificacao e o adaptador está no arquivo AdaptadorNotificacao, ambos no diretorio api/src.
+
 Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
 # Portas e Adaptadores de Entrada
 Cada domínio possue um arquivo com uma porta de entrada em seu diretório. O nome desse arquivo é sempre Repositorio.
