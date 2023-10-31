@@ -1,12 +1,11 @@
 import RepositorioServicos from "./Repositorio";
-import servicoOferecido from "./servicoOferecido";
+import servicoOferecido from "./ServicoOferecido";
 
 export default class OfereceServico {
     constructor (readonly repositorioServicos: RepositorioServicos){
     }
     async execute (input: Input): Promise<Output>{
         const [servicoOferecidoUpselling, servicoOferecidoDicas] = await this.repositorioServicos.get(input.id_dog)
-        //const dicas = new Dicas(servicoOferecidoDicas.dica);
 
         const dica: string = servicoOferecidoDicas.getRandom()
 

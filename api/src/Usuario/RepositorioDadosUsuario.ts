@@ -1,12 +1,11 @@
-import Conexao from "../conexao";
+import Conexao from "../Conexao";
 import ConexaoNotificacao from "../ConexaoNotificacao";
 
-import UserCadastrado from "./userCadastrado";
-import RepositorioUsers from "./Repositorio";
-import NotifyToken from "./notifyToken";
-//import pgp from "pg-promise";
+import UserCadastrado from "./UserCadastrado";
+import RepositorioUsuarios from "./Repositorio";
+import NotifyToken from "./NotifyToken";
 
-export default class RepositorioDadosUsers implements RepositorioUsers{
+export default class RepositorioDadosUsuarios implements RepositorioUsuarios{
 
     constructor(readonly conexao: Conexao, readonly conexaoNotificacao : ConexaoNotificacao){
     }
@@ -29,7 +28,7 @@ export default class RepositorioDadosUsers implements RepositorioUsers{
 		const usuarioCadastrado = new UserCadastrado(dadosUserCadastrado.id_user,dadosUserCadastrado.id_tutor);
 		return usuarioCadastrado.notifyToken;
     }
-    async notificaUser (notifyToken: string, dadosNotificacao: NotifyToken): Promise<void> {
+    async notificaUsuario (notifyToken: string, dadosNotificacao: NotifyToken): Promise<void> {
         await this.conexaoNotificacao.notifica(notifyToken, dadosNotificacao);
 
     }

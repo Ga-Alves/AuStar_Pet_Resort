@@ -1,7 +1,6 @@
-import Conexao from "../conexao";
+import Conexao from "../Conexao";
 import RepositorioOrdem from "./Repositorio";
 import OrdemServico from "./OrdemServico";
-import Finalizacao from "./Finalizacao";
 
 export default class RepositorioDadosOrdem implements RepositorioOrdem {
     constructor (readonly conexao: Conexao) {

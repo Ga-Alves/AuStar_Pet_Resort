@@ -1,5 +1,4 @@
 import RepositorioOrdem from "./Repositorio";
-//import servicoOferecido from "./servicoOferecido";
 
 export default class FinalizaOrdemDeServico {
     constructor (readonly repositorioOrdem: RepositorioOrdem){

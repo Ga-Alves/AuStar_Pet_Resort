@@ -1,5 +1,4 @@
 import RepositorioPets from "./Repositorio";
-import PetCadastrado from "./petCadastrado";
 
 export default class CadastraPet {
     constructor (readonly repositorioPets: RepositorioPets){

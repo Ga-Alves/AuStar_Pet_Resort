@@ -1,4 +1,4 @@
-import Conexao from "./conexao";
+import Conexao from "./Conexao";
 import pgp from "pg-promise"
 
 
