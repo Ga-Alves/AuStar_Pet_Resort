@@ -230,9 +230,19 @@ Status (concluído ou não)
 </br>
 
 ## Arquitetura Hexagonal
-
+# Domínio
 Nossas classes de domínio foram separadas entre Usuário, Pet, Banhista, Agenda, Ordem de Serviço e Serviços de Upselling. Adotamos essa arquitetura porque essas são as entidades mais importantes para os usuários do sistema, que são o cliente e o administrador da loja. A classe de Serviços de Upselling retorna todos os serviços que podem se aplicar ao pet cujo banho está sendo agendado. A classe Agenda reúne tudo o que é preciso para administrar os funcionários da loja, enquanto as Ordens de Serviço são as responsáveis pelo agendamento e gerenciamento de banhos. No mais, é trivial ver porque Usuário, Pet e Banhista (funcionário) são entidades importantes.
 
+# Portas e adaptadores de Saída
+Há duas portas de saída e dois adaptadores, um para o banco de dados e um para o Expo (tecnologia que gera notificações).
+Segue o um exemplo da interface da porta para o banco de dados, esse script se encontra no arquivo api/src/conexao:
+```typescript
+export default interface Conexao{
+    query(statement: string, params: any): Promise<any>;
+    one(statement: string, params: any): Promise<any>
+    close() : Promise<void>
+}
+```
 O adaptador para o banco de dados de todas as classes de domínio foi implementado em um arquivo Adaptador.ts que define as funções para realizar queries para um banco de dados PostgreSQL, usando também a tecnologia PG-Promise.
 
 ```typescript
@@ -251,10 +261,13 @@ export default class Adaptador implements Conexao{
 	return this.conexao.$pool.end();
     }
 }
+A porta para o Expo está no arquivo AdaptadorNotificacao e o adaptador está no arquivo AdaptadorNotificacao, ambos no diretorio api/src.
 ```
 Note que as funções implementadas definem como o repositório irá interagir com o banco de dados. Por exemplo, a função "query" receberá o texto e os parâmetros para realizar uma query no banco de dados com a sintaxe correta de PostgreSQL.
+# Portas e Adaptadores de Entrada
+Cada domínio possue um arquivo com uma porta de entrada em seu diretório. O nome desse arquivo é sempre Repositorio.
 
-O seguinte código é um exmplo de uma porta de entrada, no caso, para a classe Banhista:
+O seguinte código é um exemplo de uma porta de entrada, no caso, para a classe Banhista:
 
 ```typescript
 export default interface RepositorioBanhistas{
@@ -262,8 +275,8 @@ export default interface RepositorioBanhistas{
     list (): Promise<any[]>
 }
 ```
-
-A seguir, um adaptador para a classe banhista:
+Cada domínio possue um arquivo com um adaptador de entrada em seu diretório. O nome desse arquivo é sempre RepositorioDados<Domínio>.
+A seguir, um adaptador para a classe banhista, que se encontra no arquivo RepositorioDadosBanhista:
 
 ```typescript
 export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
@@ -280,27 +293,3 @@ export default class RepositorioDadosBanhistas implements RepositorioBanhistas {
 }
 ```
 
-As funções acima fazem queries para salvar um novo funcionário no banco de dados e para listar os que já existem no banco.
-
-A seguir, exemplos de tabelas e do funcionamento do sistema.
-
-A classe Agenda, por sua vez, é usada para alocar funcionários da seguinte maneira: cada entrada da agenda corresponde a um dia de trabalho de um funcionário. Um exemplo no banco de dados:
-
-	app=# select * from app.agenda;
-	 id_entrada | id_banhista | nome |    dia     |      horarios       
-	------------+-------------+------+------------+---------------------
-	         22 |           1 | Samu | 2023-11-10 | {0,1,2,3,4,6,7,8,9}
-	         20 |           1 | Samu | 2023-11-08 | {0,2,3,4,6,7,8,9}
-	         21 |           1 | Samu | 2023-11-09 | {2,3,4,6,7,8,9}
-	(3 registros)
-
-Essa tabela mostra que o funcionário Samu foi alocado nos dias 8, 9 e 10 de novembro. A coluna "horarios" indica quais horários ele ainda tem disponíveis para fazer o banho e a tosa de um pet.
-
-Por fim, uma instância da classe Ordem de Serviço é gerada quando um cliente agenda um banho. Para gerar uma, é necessário consultar várias outras tabelas seguindo as informações que o cliente fornece no front end. Segue abaixo um exemplo de uma ordem de serviço:
-
-	app=# select * from app.ordemservico;
-	 id_ordem | id_pet | id_banhista | finalizacao | servicos | total  |    data    | horario | completo 
-	----------+--------+-------------+-------------+----------+--------+------------+---------+----------
-        	1 |      1 |           1 | {1,2}       | {1,2}    | 100.00 | 2023-11-08 | 8:00    | f
-
-Na tela de agendar o banho, só é possível marcar os horários que estão disponíveis e, para isso, é necessário consultar a tabela Agenda. A rota de Serviços de Upselling retorna os serviços adequados para o pet. A identificação do funcionário (id_banhista) é encontrado automaticamente por uma função que retorna um funcionário que está disponível na data e no horário escolhidos. O preço total é calculado ao consultar as tabelas de finalizações e de serviços de upselling, que têm valores fixos no sistema. Por fim, quando o banho do pet é concluído, a função de finalizar a ordem de serviço muda o campo "completo" para "true".
