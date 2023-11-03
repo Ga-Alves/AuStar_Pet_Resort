@@ -165,9 +165,9 @@ app.get("/FinalizaOrdemDeServico", async function (request: Request, response: R
         return;
     }
     const ordemServico = new FinalizaOrdemDeServico(repositorioOrdem)
-    const id_user = await ordemServico.execute({id_ordem: parseInt(id_ordem)});
-    const userNotify = new UserNotify(repositorioUser);
-    await userNotify.execute({id_user : id_user.id_user});
+    //const id_user = await ordemServico.execute({id_ordem: parseInt(id_ordem)});
+    //const userNotify = new UserNotify(repositorioUser);
+    //await userNotify.execute({id_user : id_user.id_user});
 
 })
 
